@@ -27,22 +27,16 @@ require.config({
   shim: {
 
     zepto: {
-      exports: function() {
-        return this.Zepto;
-      }
+      exports:"Zepto"
     },
 
     backbone: {
       deps: [ 'lodash', 'zepto' ],
-      exports: function() {
-        return this.Backbone;
-      }
+      exports: "Backbone"
     },
 
     handlebars: {
-      exports: function() {
-        return this.Handlebars;
-      }
+      exports: "Handlebars"
     },
 
     'backbone-deepmodel': { deps: ['backbone'] },
@@ -53,3 +47,4 @@ require.config({
 });
 
 require(["main"]);
+
