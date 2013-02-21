@@ -2,6 +2,11 @@
 # configuration file, which you can learn more about here:
 # https://github.com/cowboy/grunt/blob/master/docs/configuring.md
 #
+path = require('path')
+lrSnippet = require('grunt-contrib-livereload/lib/utils').livereloadSnippet
+folderMount = (connect, point)->
+	connect.static(path.resolve(point))
+
 module.exports = (grunt) ->
 	grunt.initConfig
 		# The clean task ensures all files are removed from the dist/ directory so
@@ -50,6 +55,11 @@ module.exports = (grunt) ->
 		# 'grunt connect' will start both servers.
 		# The second one will block (keepalive) and keep grunt and the servers running
 		connect:
+			livereload:
+				options:
+					port: 9001
+					middleware: (connect, options) -> [lrSnippet, folderMount(connect, '.')]
+
 			debug:
 				options:
 					keepalive: false
@@ -57,9 +67,9 @@ module.exports = (grunt) ->
 			release:
 				options:
 					port: 8001
-					keepalive: true
+					#keepalive: true
 					base: 'dist'
-		
+			
 		requirejs:
 			compile:
 				options:
@@ -80,13 +90,22 @@ module.exports = (grunt) ->
 				src: ['app/**/*?.coffee']
 				dest: '.'
 				ext: '.js'
-		watch:
+		# watch:
+		# 	coffee:
+		# 		files: '**/*.coffee'
+		# 		tasks: ['coffee:everything']
+		# 		options:
+		# 			interrupt: true
+
+		regarde:
+			lr:
+				files: '**/*.js',
+				tasks: ['livereload']
 			coffee:
 				files: '**/*.coffee'
 				tasks: ['coffee:everything']
-				options:
-					interrupt: true
-
+			
+    
 	# load all required plugins the coffee-way
 	for plugin in [
 		'grunt-contrib-concat',
@@ -96,7 +115,9 @@ module.exports = (grunt) ->
 		'grunt-contrib-uglify',
 		'grunt-contrib-watch',
 		'grunt-contrib-coffee',
-		'grunt-contrib-connect'
+		'grunt-contrib-connect',
+		'grunt-regarde',
+		'grunt-contrib-livereload'
 		]
 		grunt.loadNpmTasks plugin
 
@@ -105,8 +126,8 @@ module.exports = (grunt) ->
 	# dist/debug/templates.js, compile all the application code into
 	# dist/debug/require.js, and then concatenate the require/define shim
 	# almond.js and dist/debug/templates.js into the require.js file.
-	grunt.registerTask "default", ["clean", "requirejs", "concat"]
-	
+	#grunt.registerTask "default", ["clean", "requirejs", "concat"]
+	grunt.registerTask('default', ['livereload-start', 'connect', 'regarde']);
 	# The debug task is simply an alias to default to remain consistent with
 	# debug/release.
 	#grunt.registerTask "debug", "default"
