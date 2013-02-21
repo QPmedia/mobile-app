@@ -1,0 +1,14 @@
+@import "globals";
+
+// Reset styles
+@import "normalize";
+@import "core/foundation";
+
+// Generic app styles
+@import "core/layout";
+@import "core/form";
+@import "core/list";
+
+// Import all of your modules in here
+@import "modules/detail";
+@import "modules/list";

@@ -1,0 +1,17 @@
+// Put all variables and mixins in here.
+// Import it from each SCSS file.
+
+$legacy-support-for-ie: false;
+$legacy-support-for-mozilla: false;
+
+$experimental-support-for-opera: false;
+$experimental-support-for-microsoft: false;
+
+@import "compass";
+
+// Configurables
+$headerbar-height: 44px;
+$headerbar-font-size: 20px;
+
+$footerbar-height: 44px;
+$footerbar-font-size: 20px;
