@@ -57,7 +57,7 @@ module.exports = (grunt) ->
 		connect:
 			livereload:
 				options:
-					port: 9001
+					port: 8000
 					middleware: (connect, options) -> [lrSnippet, folderMount(connect, '.')]
 
 			debug:
@@ -92,14 +92,15 @@ module.exports = (grunt) ->
 				ext: '.js'
 		# watch:
 		# 	coffee:
-		# 		files: '**/*.coffee'
+		# 		files: ['**/*.coffee','!node_modules/**/*.js']
 		# 		tasks: ['coffee:everything']
 		# 		options:
 		# 			interrupt: true
-
+		# TODO: maybe it is possible to only recompile changed files.
+		# livereload only sends new files, so it is possible somehow
 		regarde:
 			lr:
-				files: ['**/*.js','**/*.css']
+				files: ['**/*.js','**/*.css','!node_modules/**/*.js']
 				tasks: ['livereload']
 			coffee:
 				files: '**/*.coffee'
@@ -121,7 +122,7 @@ module.exports = (grunt) ->
 		'grunt-contrib-requirejs',
 		'grunt-jslint',
 		'grunt-contrib-uglify',
-		'grunt-contrib-watch',
+		#'grunt-contrib-watch',
 		'grunt-contrib-coffee',
 		'grunt-contrib-connect',
 		'grunt-regarde',
@@ -136,7 +137,7 @@ module.exports = (grunt) ->
 	# dist/debug/require.js, and then concatenate the require/define shim
 	# almond.js and dist/debug/templates.js into the require.js file.
 	#grunt.registerTask "default", ["clean", "requirejs", "concat"]
-	grunt.registerTask('default', ['livereload-start', 'connect', 'regarde']);
+	grunt.registerTask('default', ['livereload-start', 'connect:livereload', 'regarde']);
 	# The debug task is simply an alias to default to remain consistent with
 	# debug/release.
 	#grunt.registerTask "debug", "default"

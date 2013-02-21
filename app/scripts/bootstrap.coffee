@@ -9,7 +9,7 @@ require.config
     fastclick: "../../assets/js/libs/fastclick"
     recognizr: "../../assets/js/libs/recognizr-0.3.0"
     handlebars: "../../assets/js/libs/handlebars-1.0rc3"
-
+    swag: "../../assets/js/libs/swag.min"
     # Plugins
     text: "../../assets/js/plugins/text-1.0.7"
     "backbone-deepmodel": "../../assets/js/plugins/backbone-deepmodel-0.7.3"
