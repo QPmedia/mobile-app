@@ -99,13 +99,21 @@ module.exports = (grunt) ->
 
 		regarde:
 			lr:
-				files: '**/*.js',
+				files: ['**/*.js','**/*.css']
 				tasks: ['livereload']
 			coffee:
 				files: '**/*.coffee'
 				tasks: ['coffee:everything']
+			scss:
+				files: '**/*.scss'
+				tasks: ['compass']
 			
-    
+		compass:
+			dist:
+				options:
+					#bundleExec: true
+					config: 'config.rb'
+
 	# load all required plugins the coffee-way
 	for plugin in [
 		'grunt-contrib-concat',
@@ -117,7 +125,8 @@ module.exports = (grunt) ->
 		'grunt-contrib-coffee',
 		'grunt-contrib-connect',
 		'grunt-regarde',
-		'grunt-contrib-livereload'
+		'grunt-contrib-livereload',
+		'grunt-contrib-compass'
 		]
 		grunt.loadNpmTasks plugin
 
