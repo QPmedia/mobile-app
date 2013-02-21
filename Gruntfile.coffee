@@ -68,6 +68,25 @@ module.exports = (grunt) ->
 					out: "dist/debug/require.js"
 					name: "bootstrap"
 
+		coffee:
+			# compile:
+			# 	files:
+			# 	'path/to/result.js': 'path/to/source.coffee', 
+			# 	'path/to/another.js': ['path/to/sources/*.coffee', 'path/to/more/*.coffee'] 
+
+			everything:
+				expand: true
+				cwd: '.'
+				src: ['app/**/*?.coffee']
+				dest: '.'
+				ext: '.js'
+		watch:
+			coffee:
+				files: '**/*.coffee'
+				tasks: ['coffee:everything']
+				options:
+					interrupt: true
+
 	# load all required plugins the coffee-way
 	for plugin in [
 		'grunt-contrib-concat',
@@ -75,6 +94,8 @@ module.exports = (grunt) ->
 		'grunt-contrib-requirejs',
 		'grunt-jslint',
 		'grunt-contrib-uglify',
+		'grunt-contrib-watch',
+		'grunt-contrib-coffee',
 		'grunt-contrib-connect'
 		]
 		grunt.loadNpmTasks plugin
