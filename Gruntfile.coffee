@@ -9,27 +9,11 @@ folderMount = (connect, point)->
 
 module.exports = (grunt) ->
 	grunt.initConfig
-		# The clean task ensures all files are removed from the dist/ directory so
-		# that no files linger from previous builds.
+		# delete build folder
 		clean: ["build/"]
 
-		# The lint task will run the build configuration and the application
-		# JavaScript through JSHint and report any errors.  You can change the
-		# options for this task, by reading this:
-		# https://github.com/cowboy/grunt/blob/master/docs/task_lint.md
-		jslint:
-			files: ["app/**/*.js"]
-			directives:
-				#browser: true,
-				#unparam: true,
-				#todo: true,
-				white:true
-				vars: true
-				nomen:true
-				predef: ["define", "Backbone"]
-
-		# The concatenate task is used here to merge the almond require/define
-		# shim and the templates into the application code.
+		# this is run after the requirejs task bundeled the app.
+		# add the almond shim for require/define instead of full blown require.js
 		concat:
 			"build/release/app.js": ["vendor/js/libs/almond.js", "build/release/app.js"]
 
@@ -37,12 +21,12 @@ module.exports = (grunt) ->
 		# order and concatenate them into a single CSS file named index.css.  It
 		# also minifies all the CSS as well.  This is named app.css, because we
 		# only want to load one stylesheet in index.html.
-		mincss:
-			"build/release/app.css": ["assets/css/**/*.css"]
+		cssmin:
+			"build/release/css/index.css": ["build/dev/css/**/*.css"]
 
 		# Takes the built require.js file and minifies it for filesize benefits.
 		uglify:
-			"dist/release/require.js": ["dist/debug/require.js"]
+			"build/release/app.min.js": ["build/release/app.js"]
 
 		# 'grunt connect' will start both servers.
 		# The second one will block (keepalive) and keep grunt and the servers running
@@ -65,6 +49,8 @@ module.exports = (grunt) ->
 					mainConfigFile: "build/dev/app/scripts/bootstrap.js"
 					out: "build/release/app.js"
 					name: "bootstrap"
+					# can be 'uglify' 'uglify2' 'closure'
+					#optimize: "none"
 
 		coffee:
 			everything:
@@ -108,11 +94,16 @@ module.exports = (grunt) ->
 					config: 'config.rb'
 
 		# the subtasks are seperated so we can update specific files such as index via regarde-watcher
+		# TODO: favicon, images
 		copy:
 			api:
 				files: [
 					src: ['api/**']
 					dest: 'build/dev/'
+					expand: true
+				,
+					src: ['api/**']
+					dest: 'build/release/'
 					expand: true
 				]
 			vendor:
@@ -120,6 +111,9 @@ module.exports = (grunt) ->
 					src: ['vendor/**']
 					dest: 'build/dev/'
 					expand: true
+				,
+					src: ['vendor/js/modernizr-*.js']
+					dest: 'build/release/'
 				]
 			templates:
 				files: [
@@ -131,6 +125,9 @@ module.exports = (grunt) ->
 				files: [
 					src: 'index.html'
 					dest: 'build/dev/'
+				,
+					src: 'index.html'
+					dest: 'build/release/'
 				]
 			app:
 				# fake app.js, let requirejs load scripts
@@ -144,32 +141,21 @@ module.exports = (grunt) ->
 		'grunt-contrib-concat',
 		'grunt-contrib-clean',
 		'grunt-contrib-requirejs',
-		'grunt-jslint',
 		'grunt-contrib-uglify',
-		#'grunt-contrib-watch',
 		'grunt-contrib-coffee',
 		'grunt-contrib-connect',
 		'grunt-regarde',
 		'grunt-contrib-livereload',
 		'grunt-contrib-copy',
-		'grunt-contrib-compass'
+		'grunt-contrib-compass',
+		'grunt-contrib-cssmin'
 		]
 		grunt.loadNpmTasks plugin
 
-	# The default task will remove all contents inside the dist/ folder, lint
-	# all your code, precompile all the underscore templates into
-	# dist/debug/templates.js, compile all the application code into
-	# dist/debug/require.js, and then concatenate the require/define shim
-	# almond.js and dist/debug/templates.js into the require.js file.
-	#grunt.registerTask "default", ["clean", "requirejs", "concat"]
-	grunt.registerTask('default', ['clean', 'copy', 'coffee', 'compass', 'livereload-start', 'connect', 'regarde']);
-	# The debug task is simply an alias to default to remain consistent with
-	# debug/release.
-	#grunt.registerTask "debug", "default"
-
-	# The release task will run the debug tasks and then minify the
-	# dist/debug/require.js file and CSS files.
-	grunt.registerTask "release", ['clean', 'copy', 'coffee', 'compass', 'requirejs:release']
-
-	# The preflight task will lint and test your code, ready to be checked in to source control.
-	grunt.registerTask "preflight", ["jslint"]
+	
+	grunt.registerTask 'default', [
+		'clean', 'copy', 'coffee', 'compass', 
+		'livereload-start', 'connect', 'regarde'
+		]
+	
+	grunt.registerTask "release", ['clean', 'copy', 'coffee', 'compass', 'cssmin', 'requirejs:release', 'concat', 'uglify']
