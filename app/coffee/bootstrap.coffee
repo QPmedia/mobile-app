@@ -3,22 +3,18 @@ require.config
   paths:
 
     # Libraries
-    zepto: "../../assets/js/libs/zepto-1.0rc1"
-    lodash: "../../assets/js/libs/lodash-1.0.1"
-    backbone: "../../assets/js/libs/backbone-0.9.2"
-    fastclick: "../../assets/js/libs/fastclick"
-    recognizr: "../../assets/js/libs/recognizr-0.3.0"
-    handlebars: "../../assets/js/libs/handlebars-1.0rc3"
-    swag: "../../assets/js/libs/swag"
+    zepto: "../../vendor/js/libs/zepto-1.0rc1"
+    lodash: "../../vendor/js/libs/lodash-1.0.1"
+    underscore: "../../vendor/js/libs/lodash-1.0.1"
+    backbone: "../../vendor/js/libs/backbone-0.9.2"
+    fastclick: "../../vendor/js/libs/fastclick"
+    handlebars: "../../vendor/js/libs/handlebars-1.0rc3"
+    swag: "../../vendor/js/libs/swag"
     # Plugins
-    text: "../../assets/js/plugins/text-1.0.7"
-    "backbone-deepmodel": "../../assets/js/plugins/backbone-deepmodel-0.7.3"
-    "backbone-super": "../../assets/js/plugins/backbone-super"
-    "backbone-zombienation": "../../assets/js/plugins/backbone-zombienation-0.1.0"
+    text: "../../vendor/js/plugins/text-1.0.7"
+    "backbone-deepmodel": "../../vendor/js/plugins/backbone-deepmodel-0.7.3"
     templates: "../templates"
-    navigator: "core/navigator"
-    scaffold: "core/scaffold"
-    components: "core/components"
+    navigator: "utils/navigator"
 
   shim:
     zepto:
