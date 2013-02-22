@@ -8,7 +8,7 @@
       fastclick: "../../assets/js/libs/fastclick",
       recognizr: "../../assets/js/libs/recognizr-0.3.0",
       handlebars: "../../assets/js/libs/handlebars-1.0rc3",
-      swag: "../../assets/js/libs/swag.min",
+      swag: "../../assets/js/libs/swag",
       text: "../../assets/js/plugins/text-1.0.7",
       "backbone-deepmodel": "../../assets/js/plugins/backbone-deepmodel-0.7.3",
       "backbone-super": "../../assets/js/plugins/backbone-super",
@@ -37,6 +37,9 @@
       },
       "backbone-zombienation": {
         deps: ["backbone"]
+      },
+      "swag": {
+        deps: ["handlebars"]
       }
     }
   });

@@ -99,7 +99,7 @@ module.exports = (grunt) ->
 				files: '**/*.coffee'
 				tasks: ['coffee:everything']
 			scss:
-				files: '**/*.scss'
+				files: 'app/scss/**/*.scss'
 				tasks: ['compass']
 
 		compass:
