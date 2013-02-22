@@ -1,6 +1,6 @@
 # Require any additional compass plugins here.
-require 'compass-normalize'
 require 'zurb-foundation'
+require 'compass-normalize'
 
 # Set this to the root of your project when deployed:
 http_path = "/"
@@ -24,3 +24,5 @@ output_style = :expanded
 # preferred_syntax = :sass
 # and then run:
 # sass-convert -R --from scss --to sass sass scss && rm -rf sass && mv scss sass
+
+add_import_path "#{Gem.loaded_specs['zurb-foundation'].full_gem_path}/scss"
