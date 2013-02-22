@@ -40,4 +40,7 @@ require.config
     "backbone-zombienation":
       deps: ["backbone"]
 
+    "swag":
+      deps: ["handlebars"]
+
 require ["main"]

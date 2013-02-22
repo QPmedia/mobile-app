@@ -105,7 +105,7 @@ module.exports = (grunt) ->
 		compass:
 			dist:
 				options:
-					bundleExec: true
+					#bundleExec: true
 					config: 'config.rb'
 
 	# load all required plugins the coffee-way
