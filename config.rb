@@ -4,7 +4,7 @@ require 'compass-normalize'
 
 # Set this to the root of your project when deployed:
 http_path = "/"
-css_dir = "assets/css"
+css_dir = "build/dev/css"
 sass_dir = "app/scss"
 images_dir = "assets/img"
 javascripts_dir = "assets/js"

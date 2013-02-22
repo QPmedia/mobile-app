@@ -11,7 +11,7 @@ module.exports = (grunt) ->
 	grunt.initConfig
 		# The clean task ensures all files are removed from the dist/ directory so
 		# that no files linger from previous builds.
-		clean: ["dist/"]
+		clean: ["build/"]
 
 		# The lint task will run the build configuration and the application
 		# JavaScript through JSHint and report any errors.  You can change the
@@ -29,18 +29,16 @@ module.exports = (grunt) ->
 				predef: ["define", "Backbone"]
 
 		# The concatenate task is used here to merge the almond require/define
-		# shim and the templates into the application code.  It's named
-		# dist/debug/require.js, because we want to only load one script file in
-		# index.html.
+		# shim and the templates into the application code.
 		concat:
-			"dist/debug/require.js": ["assets/js/libs/almond.js","dist/debug/require.js"]
+			"build/release/app.js": ["vendor/js/libs/almond.js", "build/release/app.js"]
 
 		# This task uses the MinCSS Node.js project to take all your CSS files in
 		# order and concatenate them into a single CSS file named index.css.  It
 		# also minifies all the CSS as well.  This is named app.css, because we
 		# only want to load one stylesheet in index.html.
 		mincss:
-			"dist/release/index.css": ["assets/css/**/*.css"]
+			"build/release/app.css": ["assets/css/**/*.css"]
 
 		# Takes the built require.js file and minifies it for filesize benefits.
 		uglify:
@@ -51,62 +49,95 @@ module.exports = (grunt) ->
 		connect:
 			livereload:
 				options:
+					base: 'build/dev'
 					port: 8000
-					middleware: (connect, options) -> [lrSnippet, folderMount(connect, '.')]
-			debug:
-				options:
-					keepalive: false
-					port: 8000
+					middleware: (connect, options) -> [lrSnippet, folderMount(connect, options.base)]
 			release:
 				options:
 					port: 8001
 					#keepalive: true
-					base: 'dist'
+					base: 'build/release'
 
 		requirejs:
-			compile:
+			release:
 				options:
-					#baseUrl: "path/to/base",
-					mainConfigFile: "app/scripts/bootstrap.js"
-					out: "dist/debug/require.js"
+					#baseUrl: "build/dev",
+					mainConfigFile: "build/dev/app/scripts/bootstrap.js"
+					out: "build/release/app.js"
 					name: "bootstrap"
 
 		coffee:
-			# compile:
-			# 	files:
-			# 	'path/to/result.js': 'path/to/source.coffee',
-			# 	'path/to/another.js': ['path/to/sources/*.coffee', 'path/to/more/*.coffee']
-
 			everything:
 				expand: true
 				cwd: '.'
-				src: ['app/**/*?.coffee']
-				dest: '.'
+				src: ['app/scripts/**/*.coffee']
+				dest: 'build/dev/'
 				ext: '.js'
-		# watch:
-		# 	coffee:
-		# 		files: ['**/*.coffee','!node_modules/**/*.js']
-		# 		tasks: ['coffee:everything']
-		# 		options:
-		# 			interrupt: true
+
 		# TODO: maybe it is possible to only recompile changed files.
 		# livereload only sends new files, so it is possible somehow
 		regarde:
 			lr:
-				files: ['**/*.js','**/*.css','!node_modules/**/*.js']
+				files: [
+					'build/dev/**/*.js',
+					'build/dev/**/*.css',
+					'build/dev/**/*.html',
+					'build/dev/index.html',
+				]
 				tasks: ['livereload']
 			coffee:
-				files: '**/*.coffee'
+				files: ['app/scripts/**/*.coffee']
 				tasks: ['coffee:everything']
 			scss:
 				files: 'app/scss/**/*.scss'
 				tasks: ['compass']
+			index:
+				files: 'index.html'
+				tasks: ['copy:index']
+			vendor:
+				files: ['vendor/**']
+				tasks: ["copy:vendor"]
+			templates:
+				files: ['app/templates/**']
+				tasks: ["copy:templates"]
 
 		compass:
 			dist:
 				options:
 					#bundleExec: true
 					config: 'config.rb'
+
+		# the subtasks are seperated so we can update specific files such as index via regarde-watcher
+		copy:
+			api:
+				files: [
+					src: ['api/**']
+					dest: 'build/dev/'
+					expand: true
+				]
+			vendor:
+				files: [
+					src: ['vendor/**']
+					dest: 'build/dev/'
+					expand: true
+				]
+			templates:
+				files: [
+					src: ['app/templates/**']
+					dest: 'build/dev/'
+					expand: true
+				]
+			index:
+				files: [
+					src: 'index.html'
+					dest: 'build/dev/'
+				]
+			app:
+				# fake app.js, let requirejs load scripts
+				files: [
+					src: 'vendor/js/libs/require.js'
+					dest: 'build/dev/app.js'
+				]
 
 	# load all required plugins the coffee-way
 	for plugin in [
@@ -120,6 +151,7 @@ module.exports = (grunt) ->
 		'grunt-contrib-connect',
 		'grunt-regarde',
 		'grunt-contrib-livereload',
+		'grunt-contrib-copy',
 		'grunt-contrib-compass'
 		]
 		grunt.loadNpmTasks plugin
@@ -130,14 +162,14 @@ module.exports = (grunt) ->
 	# dist/debug/require.js, and then concatenate the require/define shim
 	# almond.js and dist/debug/templates.js into the require.js file.
 	#grunt.registerTask "default", ["clean", "requirejs", "concat"]
-	grunt.registerTask('default', ['livereload-start', 'connect:livereload', 'regarde']);
+	grunt.registerTask('default', ['clean', 'copy', 'coffee', 'compass', 'livereload-start', 'connect', 'regarde']);
 	# The debug task is simply an alias to default to remain consistent with
 	# debug/release.
 	#grunt.registerTask "debug", "default"
 
 	# The release task will run the debug tasks and then minify the
 	# dist/debug/require.js file and CSS files.
-	grunt.registerTask "release", "default min mincss"
+	grunt.registerTask "release", ['clean', 'copy', 'coffee', 'compass', 'requirejs:release']
 
 	# The preflight task will lint and test your code, ready to be checked in to source control.
 	grunt.registerTask "preflight", ["jslint"]

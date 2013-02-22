@@ -2,7 +2,6 @@
 .pydevproject
 .sass-cache/
 node_modules/
-dist/
-assets/css/*.css
-
+build/
+Gruntfile.js
 .DS_Store

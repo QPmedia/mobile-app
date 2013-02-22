@@ -1,18 +1,18 @@
 define (require) ->
 	$ = require("zepto")
 	app = require("app")
-	Scaffold = require("scaffold")
+	Backbone = require("backbone")
 	Handlebars = require("handlebars")
 	swag = require("swag")
 
-	class Model extends Scaffold.Model
+	class Model extends Backbone.Model
 		url: -> 
 			"/api/animals/" + @id + ".json"
 
-	class View extends Scaffold.View
+	class View extends Backbone.View
 		#template: _.template(require('text!templates/detail.jst')),
 		#TODO: precompile templates (grunt-contrib-handlebars)
-		template: Handlebars.compile(require("text!templates/detail.handlebars"))
+		template: Handlebars.compile(require("text!templates/detail.html"))
 		
 		# Respond to UI events, calling named functions in this object.
 		# These events will automatically be cleaned up when the view is hidden.
