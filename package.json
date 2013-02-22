@@ -6,7 +6,7 @@
     "grunt-contrib-concat": "~0.1.2",
     "grunt-contrib-handlebars": "~0.5.4",
     "grunt-contrib-jshint": "~0.1.1",
-    "grunt-contrib-cssmin": "~0.3.2",
+    "grunt-contrib-cssmin": "~0.4.1",
     "grunt-jslint": "~0.2.5",
     "grunt-contrib-clean": "~0.4.0",
     "grunt-contrib-requirejs": "~0.4.0",

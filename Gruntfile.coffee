@@ -91,7 +91,12 @@ module.exports = (grunt) ->
 			dist:
 				options:
 					#bundleExec: true
-					config: 'config.rb'
+					#config: 'config.rb'
+					sassDir: "app/scss"
+					cssDir: "build/dev/css"
+					require: ["zurb-foundation","compass-normalize"]
+					outputStyle: "expanded"
+					raw: '''add_import_path "#{Gem.loaded_specs[\'zurb-foundation\'].full_gem_path}/scss"'''
 
 		# the subtasks are seperated so we can update specific files such as index via regarde-watcher
 		# TODO: favicon, images
