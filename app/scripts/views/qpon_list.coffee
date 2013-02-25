@@ -12,7 +12,7 @@ define (require) ->
 		template: Handlebars.compile(require("text!templates/qpon_list.html"))
 		
 		initialize: (options) ->
-			@qpon = new Qpon()
+			#@qpon = new Qpon()
 
 			@qpons = new QponCollection()
 
@@ -38,7 +38,6 @@ define (require) ->
 			@$el.html @template({data : @qpons.toJSON()})
 			console.log 'objects: ' + @qpons
 
-			app.trigger "headerbar:update",
-			title: @qpon.get("headline")
-
+			#app.trigger "headerbar:update",
+			#title: @qpon.get("headline")
 			return this
