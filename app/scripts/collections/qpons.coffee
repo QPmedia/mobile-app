@@ -6,7 +6,10 @@ define (require) ->
 	swag = require("swag")
 	Qpon = require("models/qpon")
 
-	class Qpons extends Backbone.Collection
-	    initialize: ->
-	      @model = Qpon
-	      @url   = '/api/animals.json'
+	class QponCollection extends Backbone.Collection
+		initialize: ->
+			@model = Qpon
+			@url   = '/api/favoriteqpon.json'
+
+		parse: (response) ->
+			response.objects

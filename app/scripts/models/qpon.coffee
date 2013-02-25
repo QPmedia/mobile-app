@@ -7,4 +7,4 @@ define (require) ->
 
 	class Qpon extends Backbone.Model
 		url: -> 
-			"/api/animals/" + '1' + ".json"
+			"/api/favoriteqpon/" + @id + ".json"

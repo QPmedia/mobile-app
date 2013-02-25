@@ -1,2 +1,15 @@
-<h1>qponList</h1>
-<a href='#!/animals'>show animals</a>
+<div class="row">
+	<div class="large-12 columns">
+		<h1>Coupons</h1>
+		<hr>
+	</div>
+</div>
+<div class="row">
+	<div class="large-12 columns">
+		<ul class="side-nav">
+			{{#each data}}
+			<li><a href='#!/coupons/{{this.id}}'>{{this.headline}}</a></li>
+			{{/each}}
+		</ul>
+	</div>
+</div>
