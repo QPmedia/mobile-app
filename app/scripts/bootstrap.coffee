@@ -16,7 +16,7 @@ require.config
 		"backbone-zombienation":  "../../vendor/js/plugins/backbone-zombienation"
 		templates:                "../templates"
 		navigator:                "utils/navigator"
-		"foundation":             "../../vendor/js/libs/foundation"
+		foundation:             "../../vendor/js/libs/foundation"
 		"foundation-alerts":      "../../vendor/js/plugins/foundation.alerts"
 		"foundation-cookie":      "../../vendor/js/plugins/foundation.cookie"
 		"foundation-placeholder": "../../vendor/js/plugins/foundation.placeholder"
@@ -45,5 +45,23 @@ require.config
 
 		"swag":
 			deps: ["handlebars"]
+
+		foundation:
+			deps: ["zeptop"]
+
+		"foundation-alerts":
+			deps: ["foundation"]
+
+		"foundation-cookie":
+			deps: ["foundation"]
+
+		"foundation-placeholder":
+			deps: ["foundation"]
+
+		"foundation-section":
+			deps: ["foundation"]
+
+		"foundation-topbar":
+			deps: ["foundation"]
 
 require ["main"]
