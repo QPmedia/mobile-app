@@ -2,6 +2,7 @@ define (require) ->
 	nav = require("navigator")
 	List = require("views/list")
 	Detail = require("views/detail")
+	QponListView = require ("views/qpon_list")
 
 	# Defining the application router, you can attach sub routers here.
 	class Router extends Backbone.Router
@@ -11,10 +12,14 @@ define (require) ->
 		routes:
 			"!/animals": "list"
 			"!/animals/:id": "detail"
-			"*actions": "list"
+			"!/coupons": "qpon_list"
+			"*actions": "qpon_list"
 
 		list: ->
 			nav.changeView new List()
 
 		detail: (id) ->
 			nav.changeView new Detail(id: id)
+
+		qpon_list: ->
+			nav.changeView new QponListView()
