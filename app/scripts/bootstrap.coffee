@@ -16,6 +16,10 @@ require.config
 		"backbone-zombienation":"../../vendor/js/plugins/backbone-zombienation"
 		templates:				"../templates"
 		navigator:				"utils/navigator"
+		#models
+		qponModel:				"models/qpon"
+		#view
+		#qponListView:			"views/qponList"
 
 	shim:
 		zepto:
