@@ -2,6 +2,7 @@ define (require) ->
 	# Libs
 	$ = require("zepto")
 	FastClick = require("fastclick")
+	require("iscroll")
 
 	# Core, comment out bits you don't need
 	# Each registers with app events
@@ -41,6 +42,8 @@ define (require) ->
 
 		# Prevent 300ms tap delay
 		new FastClick($el.app[0])
+		#init iScroll
+		myScroll = new iScroll("wrapper")
 
 		# Uncomment to test components
 		# require('modules/devicetests');

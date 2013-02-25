@@ -22,6 +22,7 @@ require.config
 		"foundation-placeholder": "../../vendor/js/plugins/foundation.placeholder"
 		"foundation-section":     "../../vendor/js/plugins/foundation.section"
 		"foundation-topbar":      "../../vendor/js/plugins/foundation.topbar"
+		"iscroll":                "../../vendor/js/plugins/iscroll"
 
 	shim:
 		zepto:
