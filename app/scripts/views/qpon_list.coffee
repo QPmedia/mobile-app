@@ -5,7 +5,7 @@ define (require) ->
 	Handlebars = require("handlebars")
 	swag = require("swag")
 	Qpon = require("models/qpon")
-	Qpons = require("collections/qpons")
+	QponCollection = require("collections/qpons")
 
 	class QponListView extends Backbone.View
 
@@ -14,7 +14,7 @@ define (require) ->
 		initialize: (options) ->
 			@qpon = new Qpon()
 
-			@qpons = new Qpons()
+			@qpons = new QponCollection()
 
 
 			#app.trigger('headerbar:update', {
@@ -36,7 +36,7 @@ define (require) ->
 		modelFetched: ->
 			console.log 'changed'
 			@$el.html @template({data : @qpons.toJSON()})
-			console.log @qpons.toJSON()
+			console.log 'objects: ' + @qpons
 
 			app.trigger "headerbar:update",
 			title: @qpon.get("headline")
