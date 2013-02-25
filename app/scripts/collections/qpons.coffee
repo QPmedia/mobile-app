@@ -12,5 +12,4 @@ define (require) ->
 			@url   = '/api/favoriteqpon.json'
 
 		parse: (response) ->
-			console.log 'parse'
 			response.objects

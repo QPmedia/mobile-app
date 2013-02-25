@@ -27,8 +27,7 @@ define (require) ->
 
 		render: ->
 			#@qpon.fetch()
-			@qpons.fetch success: (data) ->
-				console.log data.toJSON()
+			@qpons.fetch()
 			return this
 
 		modelFetched: ->
