@@ -20,7 +20,6 @@ define (require) ->
 			#app.trigger('headerbar:update', {
 			#        title: 'Weapon selected...'
 			#      });
-			console.log 'bind'
 			#@bindTo @qpon, "change", @modelFetched
 
 			#fires when updating collenction
@@ -28,15 +27,12 @@ define (require) ->
 
 		render: ->
 			#@qpon.fetch()
-			console.log 'render'
 			@qpons.fetch success: (data) ->
 				console.log data.toJSON()
 			return this
 
 		modelFetched: ->
-			console.log 'changed'
 			@$el.html @template({data : @qpons.toJSON()})
-			console.log 'objects: ' + @qpons
 
 			#app.trigger "headerbar:update",
 			#title: @qpon.get("headline")
