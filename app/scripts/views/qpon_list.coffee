@@ -5,33 +5,39 @@ define (require) ->
 	Handlebars = require("handlebars")
 	swag = require("swag")
 	Qpon = require("models/qpon")
+	Qpons = require("collections/qpons")
 
 	class QponListView extends Backbone.View
-		#template: _.template(require('text!templates/detail.jst')),
-		#TODO: precompile templates (grunt-contrib-handlebars)
+
 		template: Handlebars.compile(require("text!templates/qpon_list.html"))
 		
-		# Respond to UI events, calling named functions in this object.
-		# These events will automatically be cleaned up when the view is hidden.
-		# Example:
-		# "click .check"              : "toggleDone",
-		# "dblclick div.todo-text"    : "edit"
-		events: {}
-
 		initialize: (options) ->
 			@qpon = new Qpon()
+
+			@qpons = new Qpons()
+
 
 			#app.trigger('headerbar:update', {
 			#        title: 'Weapon selected...'
 			#      });
-			@bindTo @qpon, "change", @modelFetched
+			console.log 'bind'
+			#@bindTo @qpon, "change", @modelFetched
+
+			#fires when updating collenction
+			@bindTo @qpons, "reset", @modelFetched
 
 		render: ->
-			@qpon.fetch()
+			#@qpon.fetch()
+			console.log 'render'
+			@qpons.fetch success: (data) ->
+				console.log data.toJSON()
 			return this
 
 		modelFetched: ->
-			@$el.html @template(@qpon.toJSON())
+			console.log 'changed'
+			@$el.html @template({data : @qpons.toJSON()})
+			console.log @qpons.toJSON()
+
 			app.trigger "headerbar:update",
 			title: @qpon.get("headline")
 
