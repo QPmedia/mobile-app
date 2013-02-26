@@ -8,8 +8,7 @@ require.config
 		underscore:               "../../vendor/js/libs/lodash-1.0.1"
 		backbone:                 "../../vendor/js/libs/backbone-0.9.2"
 		fastclick:                "../../vendor/js/libs/fastclick"
-		handlebars:               "../../vendor/js/libs/handlebars-1.0rc3"
-		swag:                     "../../vendor/js/libs/swag"
+		swig:                     "../../vendor/js/libs/swig"
 		# Plugins
 		text:                     "../../vendor/js/plugins/text-1.0.7"
 		"backbone-deepmodel":     "../../vendor/js/plugins/backbone-deepmodel-0.7.3"
@@ -32,8 +31,8 @@ require.config
 			deps: ["lodash", "zepto"]
 			exports: "Backbone"
 
-		handlebars:
-			exports: "Handlebars"
+		swig:
+			deps = ["lodash"]
 
 		"backbone-deepmodel":
 			deps: ["backbone"]
@@ -43,9 +42,6 @@ require.config
 
 		"backbone-zombienation":
 			deps: ["backbone"]
-
-		"swag":
-			deps: ["handlebars"]
 
 		foundation:
 			deps: ["zeptop"]

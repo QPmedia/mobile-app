@@ -3,15 +3,7 @@ define (require) ->
 	$ = require("zepto")
 	FastClick = require("fastclick")
 	require("iscroll")
-
-	# Core, comment out bits you don't need
-	# Each registers with app events
-	# require "core/device"
-	# require "core/remotedata"
-	# require "core/orientation"
-	# require "core/network"
-	# require "core/datastore"
-	# Toolbar = require("components/toolbar")
+	require("swig")
 
 	# App-specific
 	app = require("app")
@@ -28,23 +20,27 @@ define (require) ->
 			footerbar: $("#footerbar")
 			content: $("#content")
 
-		# Create the header and footer modules
-		# new Toolbar(
-		#   headerbar: $el.headerbar
-		#   footerbar: $el.footerbar
-		# )
 
-		# Define your master router on the application namespace and trigger all
-		# navigation from this instance.
-
-		# Define your container div where all content will be displayed.
 		app.router = new Router(container: $("#content"))
+
+		app.API_URL = "http://192.168.2.12:8000/m/api/v1/"
 
 		# Prevent 300ms tap delay
 		new FastClick($el.app[0])
 		#init iScroll
 		myScroll = new iScroll("wrapper")
 
+		swig.init
+			allowErrors: false,
+			autoescape: true,
+			cache: true,
+			encoding: 'utf8',
+			filters: {},
+			root: "/",
+			tags: {},
+			extensions: {},
+			tzOffset: 0
+		
 		# Uncomment to test components
 		# require('modules/devicetests');
 

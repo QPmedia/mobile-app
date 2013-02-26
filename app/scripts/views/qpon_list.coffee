@@ -2,14 +2,13 @@ define (require) ->
 	$ = require("zepto")
 	app = require("app")
 	Backbone = require("backbone")
-	Handlebars = require("handlebars")
-	swag = require("swag")
 	Qpon = require("models/qpon")
-	QponCollection = require("collections/qpons")
+	QponCollection = require("collections/qpon")
+	require("backbone-zombienation")
 
 	class QponListView extends Backbone.View
 
-		template: Handlebars.compile(require("text!templates/qpon_list.html"))
+		template : swig.compile(require("text!templates/qpon_list.html"), { filename: "qpon_list" })
 		
 		initialize: (options) ->
 			#@qpon = new Qpon()
@@ -31,7 +30,7 @@ define (require) ->
 			return this
 
 		modelFetched: ->
-			@$el.html @template({data : @qpons.toJSON()})
+			@$el.html @template({qpons : @qpons.toJSON()})
 
 			#app.trigger "headerbar:update",
 			#title: @qpon.get("headline")

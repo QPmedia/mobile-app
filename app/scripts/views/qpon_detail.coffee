@@ -2,13 +2,11 @@ define (require) ->
 	$ = require("zepto")
 	app = require("app")
 	Backbone = require("backbone")
-	Handlebars = require("handlebars")
-	swag = require("swag")
 	Qpon = require("models/qpon")
+	require("backbone-zombienation")
 
 	class QponDetailView extends Backbone.View
-
-		template: Handlebars.compile(require("text!templates/qpon_detail.html"))
+		template : swig.compile(require("text!templates/qpon_detail.html"), { filename: "qpon_detail" })
 
 		initialize: (options) ->
 			@model = new Qpon(id: options.id)
