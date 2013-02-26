@@ -1,18 +1,15 @@
 @import "compass/layout/stretching";
 
+$navigation-bar-height: 48px;
+
 // iScroll-styles. Need to be fixed soon
 #header {
-	font-family: "Roboto-Regular";
 	@include stretch-x;
 	z-index: 2;
 	top: 0;
 	//width: 100%;
-	height: 45px;
-	line-height: 45px;
-	//background-color: #ddd;
-	color: #999;
-	font-size: emCalc(20px);
-	//border-bottom: 2px solid #d2d2d2;
+	height: $topbar-height;
+	line-height: $topbar-height;
 }
 
 #footer {
@@ -20,13 +17,11 @@
 	z-index: 2;
 	bottom: 0;
 	//width: 100%;
-	height: 48px;
-	//background-color: #ddd;
-	//border-top: 2px solid #d2d2d2;
+	height: $navigation-bar-height;
 }
 
 #wrapper {
-	@include stretch-y($offset-top: 45px, $offset-bottom: 48px);
+	@include stretch-y($topbar-height, $navigation-bar-height);
 	z-index: 1;
 	left: 0;
 	width: 100%;
