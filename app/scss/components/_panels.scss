@@ -1,0 +1,11 @@
+@import "foundation/components/panels";
+
+//ToDO: use compass
+.start.panel.callout {
+	text-align: center;
+	background-image: -webkit-radial-gradient(cover, $primary-color, darken($primary-color, 10%));
+
+	h4 {
+		color: #ffffff;
+	}
+}
