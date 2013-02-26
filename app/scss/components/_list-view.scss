@@ -1,0 +1,21 @@
+//$list-view-vertical-padding: 10px !default;
+$list-view-horizontal-padding: 10px !default;
+$list-view-bg: $body-bg !default;
+
+ul.list-view {
+	@include side-nav-container;
+	padding: 0;
+
+	li {
+		background-color: $list-view-bg;
+		border-top: 1px solid #dfdfdf;
+		border-bottom: 1px solid #f9f9f9;
+		margin: 0;
+		padding: $list-view-horizontal-padding ($column-gutter / 2);
+		font-size: emCalc(14px);
+
+		// Remove top and bottom border from first and last list element.
+		&:first-child { border-top: 0; }
+		&:last-child { border-bottom: 0; }
+	}
+}
