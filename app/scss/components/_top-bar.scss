@@ -13,3 +13,9 @@ $topbar-link-weight: normal !default;
 	border-width: 1px 0 2px;
 	@include box-shadow(0px 0px 6px 0px rgba(0,0,0,0.1));
 }
+
+#footer {
+	background-color:#DDDDDD;
+	padding:0;
+	border-top:2px solid #D2D2D2;
+}
