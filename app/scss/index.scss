@@ -10,7 +10,6 @@
 @include font-face("Roboto-Medium", font-files("Roboto-Medium.ttf"));
 @include font-face("Roboto-Bold", font-files("Roboto-Bold.ttf"));
 
-
 // Normalize styles (this is needed by Foundation).
 @import "normalize";
 
@@ -33,10 +32,8 @@
 @import "foundation/components/split-buttons";
 //@import "foundation/components/flex-video";
 @import "foundation/components/section";
-
 //@import "foundation/components/top-bar";
 @import "components/top-bar";
-
 //@import "foundation/components/orbit";
 //@import "foundation/components/reveal";
 //@import "foundation/components/joyride";
@@ -63,4 +60,5 @@
 // Import custom components.
 @import "components/iscroll";
 @import "components/forms";
+@import "components/list-view";
 @import "components/actionbar-icons";
