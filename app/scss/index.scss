@@ -5,7 +5,10 @@
 @import "globals/settings";
 
 // Include needed fonts.
-@include font-face("Roboto", font-files("Roboto-Regular.ttf"));
+@include font-face("Roboto-Light", font-files("Roboto-Light.ttf"));
+@include font-face("Roboto-Regular", font-files("Roboto-Regular.ttf"));
+@include font-face("Roboto-Medium", font-files("Roboto-Medium.ttf"));
+@include font-face("Roboto-Bold", font-files("Roboto-Bold.ttf"));
 
 // Normalize styles (this is needed by Foundation).
 @import "normalize";
@@ -19,7 +22,8 @@
 @import "foundation/components/grid";
 @import "foundation/components/visibility";
 @import "foundation/components/block-grid";
-@import "foundation/components/type";
+//@import "foundation/components/type";
+@import "components/type";
 @import "foundation/components/buttons";
 @import "foundation/components/forms";
 @import "foundation/components/custom-forms";
@@ -28,7 +32,8 @@
 @import "foundation/components/split-buttons";
 //@import "foundation/components/flex-video";
 @import "foundation/components/section";
-@import "foundation/components/top-bar";
+//@import "foundation/components/top-bar";
+@import "components/top-bar";
 //@import "foundation/components/orbit";
 //@import "foundation/components/reveal";
 //@import "foundation/components/joyride";
@@ -56,3 +61,4 @@
 @import "components/iscroll";
 @import "components/forms";
 @import "components/list-view";
+@import "components/actionbar-icons";

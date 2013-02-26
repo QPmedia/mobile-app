@@ -1,0 +1,26 @@
+$topbar-bg: #222222 !default;
+$topbar-title-weight: normal;
+$topbar-link-color: #D2D2D2 !default;
+$topbar-link-weight: normal !default;
+
+
+@import "foundation/components/top-bar";
+
+.top-bar {
+	border-top-color: darken(#222222, 5%);
+	border-bottom-color: darken(#222222, 5%);
+	border-style: solid none;
+	border-width: 1px 0 2px;
+	@include box-shadow(0px 0px 6px 0px rgba(0,0,0,0.1));
+}
+
+#footer {
+	background-color:#828282;
+	padding:0;
+	border-top:2px solid darken(#828282, 5%);
+	color: #fff;
+
+	.inline-list {
+		font-size: 30px;
+	}
+}
