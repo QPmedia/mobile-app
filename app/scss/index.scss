@@ -5,7 +5,10 @@
 @import "globals/settings";
 
 // Include needed fonts.
+@include font-face("Roboto-Light", font-files("Roboto-Light.ttf"));
 @include font-face("Roboto-Regular", font-files("Roboto-Regular.ttf"));
+@include font-face("Roboto-Medium", font-files("Roboto-Medium.ttf"));
+@include font-face("Roboto-Bold", font-files("Roboto-Bold.ttf"));
 
 // Normalize styles (this is needed by Foundation).
 @import "normalize";
