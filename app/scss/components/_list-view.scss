@@ -12,7 +12,6 @@ ul.list-view {
 		border-bottom: 1px solid #f9f9f9;
 		margin: 0;
 		padding: $list-view-horizontal-padding ($column-gutter / 2);
-		font-size: emCalc(14px);
 
 		// Remove top and bottom border from first and last list element.
 		&:first-child { border-top: 0; }
