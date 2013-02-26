@@ -1,11 +1,10 @@
-// Put all variables and mixins in here.
-// Import it from each SCSS file.
-
+// Disable the whole legacy and experimental support except for WebKit.
 $legacy-support-for-ie: false;
 $legacy-support-for-mozilla: false;
-
+$experimental-support-for-mozilla: false;
 $experimental-support-for-opera: false;
 $experimental-support-for-microsoft: false;
+$support-for-original-webkit-gradients: false;
 
 @import "compass";
 
