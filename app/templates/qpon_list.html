@@ -2,7 +2,7 @@
 	{% for qpon in qpons %}
 		<li>
 			<a href='#!/coupons/{{qpon.id}}'>{{qpon.headline}}</a>
-			<p>{{qpon.validity_text}}</p>
+			<p><span class=" icon-navigation-next-item"></span>{{qpon.validity_text}}</p>
 		</li>
 	{% endfor %}
 </ul>

@@ -16,5 +16,26 @@ ul.list-view {
 		// Remove top and bottom border from first and last list element.
 		&:first-child { border-top: 0; }
 		&:last-child { border-bottom: 0; }
+
+		a {
+			color: $body-font-color;
+		}
+
+		p {
+			color: lighten($body-font-color, 25%);
+			font-size: 90%;
+		}
+	}
+	//for list-hover testing
+	li:active {
+		background-color: $primary-color;
+		a {
+			color: #ffffff;
+		}
+
+		p {
+			color: darken(#ffffff, 5%);
+			font-size: 90%;
+		}
 	}
 }
