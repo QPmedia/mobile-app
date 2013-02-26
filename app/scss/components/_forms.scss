@@ -1,0 +1,5 @@
+// Disable long tap to copy/paste, except on input fields.
+:not(input), :not(textarea), :not(select) {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+}

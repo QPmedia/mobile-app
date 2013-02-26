@@ -93,11 +93,14 @@ module.exports = (grunt) ->
 					#bundleExec: true
 					#config: 'config.rb'
 					sassDir: "app/scss"
-					fontDir: "app/fonts"
+					imagesDir: "build/dev/app/images"
+					fontsDir: "build/dev/app/fonts"
 					cssDir: "build/dev/css"
 					require: ["zurb-foundation","compass-normalize"]
 					outputStyle: "expanded"
-					raw: '''add_import_path "#{Gem.loaded_specs[\'zurb-foundation\'].full_gem_path}/scss"'''
+					relativeAssets: true
+					raw: '''fonts_dir = "build/dev/app/fonts"
+						add_import_path "#{Gem.loaded_specs[\'zurb-foundation\'].full_gem_path}/scss"'''
 
 		# the subtasks are seperated so we can update specific files such as index via regarde-watcher
 		# TODO: favicon, images
@@ -168,10 +171,10 @@ module.exports = (grunt) ->
 		]
 		grunt.loadNpmTasks plugin
 
-	
+
 	grunt.registerTask 'default', [
-		'clean', 'copy', 'coffee', 'compass', 
+		'clean', 'copy', 'coffee', 'compass',
 		'livereload-start', 'connect', 'regarde'
 		]
-	
+
 	grunt.registerTask "release", ['clean', 'copy', 'coffee', 'compass', 'cssmin', 'requirejs:release', 'concat', 'uglify']
