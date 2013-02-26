@@ -32,7 +32,7 @@ require.config
 			exports: "Backbone"
 
 		swig:
-			deps = ["lodash"]
+			deps: ["lodash"]
 
 		"backbone-deepmodel":
 			deps: ["backbone"]

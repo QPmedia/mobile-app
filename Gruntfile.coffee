@@ -39,6 +39,7 @@ module.exports = (grunt) ->
 			release:
 				options:
 					port: 8001
+					hostname: "192.168.2.12"
 					#keepalive: true
 					base: 'build/release'
 
