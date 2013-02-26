@@ -1,0 +1,38 @@
+// HACK: Import those two Compass mixins again to override Foundation.
+@import "compass/css3/box-sizing";
+@import "compass/css3/transition";
+
+// Override Foundation's "radius" mixin to use Compass
+@mixin radius($radius: $default-border-radius) {
+  @include border-radius($radius);
+}
+
+// Override Foundation's "side-radius" mixin to use Compass
+@mixin side-radius($side, $radius) {
+	@if $side in left, right {
+		@include border-corner-radius(top, $side, $radius);
+		@include border-corner-radius(bottom, $side, $radius);
+	}
+	@if $side in top, bottom {
+		@include border-corner-radius($side, left, $radius);
+		@include border-corner-radius($side, right, $radius);
+	}
+}
+
+// Override Foundation's "inset-shadow" mixin to use Compass.
+@mixin inset-shadow($active: true) {
+	@include box-shadow(inset $shiny-edge-size $shiny-edge-color);
+	@if $active {
+		&:active {
+			@include box-shadow(inset $shiny-edge-size $shiny-edge-active-color);
+		}
+	}
+}
+
+// Hack Foundation's "clearfix" mixin to use @extend for generating less CSS.
+%clearfix {
+	@include pie-clearfix;
+}
+@mixin clearfix() {
+	@extend %clearfix;
+}
