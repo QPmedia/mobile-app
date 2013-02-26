@@ -1,12 +1,12 @@
 GIT
   remote: git://github.com/chriseppstein/compass.git
-  revision: a6df610446e6d28e343a224c99ea607f308fab6e
-  branch: stable
+  revision: 99b59b660885a57c68d1155d658055918011fc94
+  branch: master
   specs:
-    compass (0.12.2.a6df610)
+    compass (0.13.alpha.2.99b59b6)
       chunky_png (~> 1.2)
-      fssm (>= 0.2.7)
-      sass (~> 3.1)
+      listen (<= 0.9.9)
+      sass (~> 3.2.5)
 
 GIT
   remote: git://github.com/zurb/foundation.git
@@ -23,7 +23,7 @@ GEM
     chunky_png (1.2.7)
     compass-normalize (1.4.2)
       compass (>= 0.12.0)
-    fssm (0.2.10)
+    listen (0.7.3)
     rake (10.0.3)
     sass (3.2.6)
 
