@@ -4,10 +4,13 @@
 @import "normalize";
 @import "foundation";
 
+@include font-face("Roboto-Regular", font-files("Roboto-Regular.ttf"));
+
 
 //iScroll-styles. need to be fixed soon
 
 #header {
+	font-family: "Roboto-Regular";
 	position:absolute; 
 	z-index:2;
 	top:0; left:0;
@@ -22,9 +25,9 @@
 }
 
 #header a {
+	font-family: "Roboto-Regular";
 	color:#333;
 	text-decoration:none;
-	font-weight:bold;
 }
 
 #footer {

@@ -93,6 +93,7 @@ module.exports = (grunt) ->
 					#bundleExec: true
 					#config: 'config.rb'
 					sassDir: "app/scss"
+					fontDir: "app/fonts"
 					cssDir: "build/dev/css"
 					require: ["zurb-foundation","compass-normalize"]
 					outputStyle: "expanded"
@@ -133,6 +134,16 @@ module.exports = (grunt) ->
 				,
 					src: 'index.html'
 					dest: 'build/release/'
+				]
+			fonts:
+				files: [
+					src: ['app/fonts/**']
+					dest: 'build/dev/'
+					expand: true
+				,
+					src: ['app/fonts/**']
+					dest: 'build/release/'
+					expand: true
 				]
 			app:
 				# fake app.js, let requirejs load scripts
