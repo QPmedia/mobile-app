@@ -31,6 +31,7 @@ define (require) ->
 		scroll = new iScroll "wrapper",
 			#momentum: false
 			bounce: false
+			scrollbarClass: "scrollbar"
 
 		app.registerModule("view", {
         	'update': scroll.refresh
@@ -45,7 +46,7 @@ define (require) ->
 			tags: {},
 			extensions: {},
 			tzOffset: 0
-		
+
 		# Uncomment to test components
 		# require('modules/devicetests');
 

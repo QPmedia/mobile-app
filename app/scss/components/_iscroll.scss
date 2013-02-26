@@ -36,3 +36,28 @@ $navigation-bar-height: 48px;
 	//-webkit-touch-callout: none;
 	-webkit-tap-highlight-color:rgba(#000, 0);
 }
+
+.scrollbarV {
+	@include stretch-y(2px, 2px);
+	right: 1px;
+	width: 6px;
+	div { width: 100%; }
+}
+
+.scrollbarH {
+	@include stretch-x(2px, 2px);
+	bottom: 1px;
+	height: 6px;
+	div { height: 100%; }
+}
+
+.scrollbarV, .scrollbarH {
+	z-index: 100;
+
+	div {
+		position: absolute;
+		background: rgba(#000, 0.3);
+		@include background-clip(padding-box);
+		border: 1px solid rgba(#fff, 0.1);
+	}
+}

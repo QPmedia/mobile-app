@@ -1,18 +1,17 @@
 $topbar-height: 48px;
-
 $topbar-bg: #222 !default;
-$topbar-title-weight: normal;
-
+$topbar-title-weight: normal !default;
+$topbar-title-font-size: emCalc(16px) !default;
 $topbar-link-color: #d2d2d2 !default;
 $topbar-link-weight: normal !default;
 
 @import "foundation/components/top-bar";
 
 .top-bar {
-	border-top-color: darken(#222, 5%);
-	border-bottom-color: darken(#222, 5%);
-	border-style: solid none;
-	border-width: 1px 0 2px;
+	border-top: 1px solid lighten($topbar-bg, 4.2%);
+	//border-top-color: rgba(#fff, 0.042);
+	border-bottom: 2px solid darken($topbar-bg, 2.6%);
+	//border-bottom-color: rgba(#000, 0.26);
 	@include box-shadow(0 0 6px rgba(#000, 0.1));
 }
 
