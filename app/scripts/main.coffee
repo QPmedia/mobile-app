@@ -28,8 +28,13 @@ define (require) ->
 		# Prevent 300ms tap delay
 		new FastClick($el.app[0])
 		#init iScroll
-		myScroll = new iScroll("wrapper")
+		scroll = new iScroll "wrapper",
+			#momentum: false
+			bounce: false
 
+		app.registerModule("view", {
+        	'update': scroll.refresh
+      	}, scroll);
 		swig.init
 			allowErrors: false,
 			autoescape: true,

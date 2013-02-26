@@ -22,6 +22,7 @@ define (require) ->
 
 		modelFetched: ->
 			@$el.html @template({data: @model.toJSON()})
+			app.trigger "view:update", {}
 			#app.trigger "headerbar:update",
 			#title: @model.get("name")
 

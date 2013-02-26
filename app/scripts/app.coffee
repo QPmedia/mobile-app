@@ -10,7 +10,7 @@ define (require) ->
         # Add an event listener on this function which
         # can be accessed via app.trigger() at any time
         app.on namespace + ":" + key, ->
-          item.apply context, arguments_
+          item.apply context, arguments
 
 
   _.extend

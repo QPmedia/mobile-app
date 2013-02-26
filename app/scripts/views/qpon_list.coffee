@@ -25,13 +25,12 @@ define (require) ->
 			@bindTo @qpons, "reset", @modelFetched
 
 		render: ->
-			#@qpon.fetch()
 			@qpons.fetch()
 			return this
 
 		modelFetched: ->
 			@$el.html @template({qpons : @qpons.toJSON()})
 
-			#app.trigger "headerbar:update",
+			app.trigger "view:update", {}
 			#title: @qpon.get("headline")
 			return this
