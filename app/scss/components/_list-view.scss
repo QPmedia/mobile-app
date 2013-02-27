@@ -14,12 +14,8 @@ ul.list-view {
 		background-color: $list-item-bg;
 		border-top: 1px solid darken($list-item-bg, 11%);
 		margin: 0;
-		padding: 0;
+		padding: $list-item-padding;
 
-		a {
-			display: block;
-			padding: $list-item-padding;
-		}
 		h5 {
 			font-size: remCalc(16px);
 			line-height: 20px;
@@ -32,7 +28,7 @@ ul.list-view {
 		}
 	}
 	//for list-hover testing
-	li a:active {
+	li.selected {
 		background-color: $primary-color;
 	}
 }

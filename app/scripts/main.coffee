@@ -1,7 +1,6 @@
 define (require) ->
 	# Libs
 	$ = require("zepto")
-	FastClick = require("fastclick")
 	require("iscroll")
 	require("swig")
 
@@ -34,8 +33,8 @@ define (require) ->
 		app.router = new Router(container: $("#content"))
 		app.API_URL = "http://192.168.2.12:8000/m/api/v1/"
 
-		# Prevent 300ms tap delay
-		new FastClick($el.app[0])
+		#new Hammer($el.app[0])
+
 		# Init iScroll
 		scroll = new iScroll "wrapper",
 			bounce: false
