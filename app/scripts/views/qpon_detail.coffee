@@ -6,11 +6,10 @@ define (require) ->
 	require("backbone-zombienation")
 
 	class QponDetailView extends Backbone.View
-		template : swig.compile(require("text!templates/qpon_detail.html"), { filename: "qpon_detail" })
-
+		
 		initialize: (options) ->
 			@model = new Qpon(id: options.id)
-
+			@template = swig.compile(require("text!templates/qpon_detail.html"), { filename: "qpon_detail" })
 			#app.trigger('headerbar:update', {
 			#        title: 'Weapon selected...'
 			#      });

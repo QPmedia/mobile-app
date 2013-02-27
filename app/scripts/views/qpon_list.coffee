@@ -5,14 +5,12 @@ define (require) ->
 	Qpon = require("models/qpon")
 	QponCollection = require("collections/qpon")
 	require("backbone-zombienation")
-
 	class QponListView extends Backbone.View
 
-		template : swig.compile(require("text!templates/qpon_list.html"), { filename: "qpon_list" })
-		
-		initialize: (options) ->
-			#@qpon = new Qpon()
 
+		initialize: (options) ->
+			@template = swig.compile(require("text!templates/qpon_list.html"), { filename: "qpon_list" })
+		
 			@qpons = new QponCollection()
 
 
