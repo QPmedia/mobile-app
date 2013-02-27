@@ -32,20 +32,21 @@ define (require) ->
 			tzOffset: 0
 
 		app.router = new Router(container: $("#content"))
-
 		app.API_URL = "http://192.168.2.12:8000/m/api/v1/"
 
 		# Prevent 300ms tap delay
 		new FastClick($el.app[0])
-		#init iScroll
+		# Init iScroll
 		scroll = new iScroll "wrapper",
+			bounce: false
 			scrollbarClass: "scrollbar"
+			hideScrollbar: true
 
 		app.registerModule("view", {
         	'update': scroll.refresh
       	}, scroll);
 
-      	# Uncomment to test components
+		# Uncomment to test components
 		# require('modules/devicetests');
 
 		# Trigger the initial route
