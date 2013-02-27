@@ -3,8 +3,11 @@ $topbar-bg: #222 !default;
 $topbar-dropdown-bg: $topbar-bg !default;
 $topbar-title-weight: normal !default;
 $topbar-title-font-size: emCalc(16px) !default;
-$topbar-link-color: #d2d2d2 !default;
+$topbar-link-color: #eeeeee !default;
 $topbar-link-weight: normal !default;
+$topbar-menu-link-weight: normal !default;
+
+
 
 $small: 'only screen';
 
@@ -28,6 +31,27 @@ $small: 'only screen';
 
 		.icon {
 			font-size: 120%;
+		}
+		.dropdown li {
+			min-width: 170px;
+		}
+		.dropdown li a {
+			line-height: 48px;
+			padding: 0 16px;
+			height: 48px;
+			border-top: 1px solid lighten($topbar-dropdown-bg,10%);
+		}
+
+		.has-dropdown > a::after {
+			border-style: solid;
+			border-width: 0 0 10px 10px;
+			border-color: transparent transparent rgba(255, 255, 255, 0.5) transparent;
+			margin-top: emCalc(10px);
+		}
+		.right {
+			.has-dropdown > a::after {
+			border-width: 0;
+			}
 		}
 	}
 
