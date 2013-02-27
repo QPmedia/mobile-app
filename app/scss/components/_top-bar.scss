@@ -1,23 +1,41 @@
-$topbar-bg: #222222 !default;
-$topbar-title-weight: normal;
-$topbar-link-color: #D2D2D2 !default;
+$topbar-height: 48px;
+$topbar-bg: #222 !default;
+$topbar-dropdown-bg: $topbar-bg !default;
+$topbar-title-weight: normal !default;
+$topbar-title-font-size: emCalc(16px) !default;
+$topbar-link-color: #d2d2d2 !default;
 $topbar-link-weight: normal !default;
-
+$small: 'only screen';
 
 @import "foundation/components/top-bar";
 
 .top-bar {
-	border-top-color: darken(#222222, 5%);
-	border-bottom-color: darken(#222222, 5%);
-	border-style: solid none;
-	border-width: 1px 0 2px;
-	@include box-shadow(0px 0px 6px 0px rgba(0,0,0,0.1));
+	//border-top: 1px solid lighten($topbar-bg, 4.2%);
+	//border-top-color: rgba(#fff, 0.042);
+	border-bottom: 2px solid darken($topbar-bg, 2.6%);
+	//border-bottom-color: rgba(#000, 0.26);
+	@include box-shadow(0 0 6px rgba(#000, 0.1));
+
+	img {
+		width: 32px;
+		display: inline;
+		vertical-align: middle;
+	}
+
+	.top-bar-section {
+		li {
+			a {
+				padding-left: 0;
+				padding-right: 0;
+			}
+		}
+	}
 }
 
 #footer {
-	background-color:#828282;
-	padding:0;
-	border-top:2px solid darken(#828282, 5%);
+	background-color: #828282;
+	padding: 0;
+	border-top: 2px solid darken(#828282, 5%);
 	color: #fff;
 
 	.inline-list {

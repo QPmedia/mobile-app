@@ -1,15 +1,14 @@
-
 define (require) ->
 	# Libs
 	$ = require("zepto")
 	FastClick = require("fastclick")
-	Router = require("router")
 	require("iscroll")
 	require("swig")
+
 	# App-specific
 	app = require("app")
-	
-	
+	Router = require("router")
+
 	# Treat the jQuery ready function as the entry point to the application.
 	# Inside this function, kick-off all initialization, everything up to this
 	# point should be definitions.
@@ -39,16 +38,14 @@ define (require) ->
 		# Prevent 300ms tap delay
 		new FastClick($el.app[0])
 		#init iScroll
-		scroll = new iScroll "wrapper"
+		scroll = new iScroll "wrapper",
+			scrollbarClass: "scrollbar"
 
 		app.registerModule("view", {
         	'update': scroll.refresh
       	}, scroll);
-      
-		# document.addEventListener "menubutton", ->
-		# 	alert "foo"
-		# , false
-		# Uncomment to test components
+
+      	# Uncomment to test components
 		# require('modules/devicetests');
 
 		# Trigger the initial route

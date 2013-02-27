@@ -149,6 +149,16 @@ module.exports = (grunt) ->
 					dest: 'build/release/'
 					expand: true
 				]
+			images:
+				files: [
+					src: ['app/images/**']
+					dest: 'build/dev/'
+					expand: true
+				,
+					src: ['app/images/**']
+					dest: 'build/release/'
+					expand: true
+				]
 			app:
 				# fake app.js, let requirejs load scripts
 				files: [

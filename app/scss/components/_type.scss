@@ -10,6 +10,8 @@ $h5-font-size: emCalc(18px) !default;
 $h6-font-size: emCalc(18px) !default;
 
 $small-font-size: emCalc(14px) !default;
-$paragraph-font-size: emCalc(18px) !default;
+
+$paragraph-font-size: emCalc(16px) !default;
+$paragraph-margin-bottom: 0;
 
 @import "foundation/components/type";

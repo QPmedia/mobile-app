@@ -29,10 +29,7 @@
 	}
 }
 
-// Hack Foundation's "clearfix" mixin to use @extend for generating less CSS.
-%clearfix {
-	@include pie-clearfix;
-}
+// Override Foundation's "clearfix" mixin to use Compass.
 @mixin clearfix() {
-	@extend %clearfix;
+	@include pie-clearfix;
 }
