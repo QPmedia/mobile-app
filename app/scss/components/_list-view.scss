@@ -3,7 +3,7 @@ $list-view-horizontal-padding: 10px !default;
 $list-view-bg: $body-bg !default;
 
 ul.list-view {
-	@include side-nav-container;
+	@include side-nav($divider-color: #dfdfdf, $font-size: emCalc(16px));
 	padding: 0;
 
 	li {

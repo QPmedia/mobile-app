@@ -15,7 +15,7 @@
 
 // Include all of the global elements that are needed by Foundation.
 // FIXME: SOON TO BECOME _foundation-global.scss
-@import "foundation/settings";
+@import "foundation/foundation-global";
 @import "globals/mixins";
 
 // Import needed Foundation components.
@@ -43,7 +43,6 @@
 @import "foundation/components/keystrokes";
 @import "foundation/components/labels";
 @import "foundation/components/inline-lists";
-@import "foundation/components/microformats";
 @import "foundation/components/pagination";
 //@import "foundation/components/panels";
 @import "components/panels";
