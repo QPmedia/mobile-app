@@ -1,8 +1,10 @@
 <ul class="list-view">
 	{% for qpon in qpons %}
-		<li data-href="#!/coupons/{{ qpon.id }}">
-			<h5>{{ qpon.headline }}</h5>
-			<p>{{ qpon.validity_text }}</p>
+		<li>
+			<a href="#!/coupons/{{ qpon.id }}">
+				<h5>{{ qpon.headline }}</h5>
+				<p>{{ qpon.validity_text }}</p>
+			</a>
 		</li>
 	{% endfor %}
 </ul>
