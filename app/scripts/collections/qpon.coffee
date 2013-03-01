@@ -7,7 +7,7 @@ define (require) ->
 	class QponCollection extends Backbone.Collection
 		initialize: ->
 			@model = Qpon
-			@url   = "#{app.API_URL}qpon/?format=jsonp&callback=?"
+			@url   = "#{app.API_URL}qpon/?format=jsonp&callback=?&username=mboehme&api_key=foo"
 
 		parse: (response) ->
 			response.objects

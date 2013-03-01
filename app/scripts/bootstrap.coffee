@@ -15,6 +15,7 @@ require.config
 		text:                     "../../vendor/js/plugins/text-1.0.7"
 		"backbone-deepmodel":     "../../vendor/js/plugins/backbone-deepmodel-0.7.3"
 		"backbone-zombienation":  "../../vendor/js/plugins/backbone-zombienation"
+		"backbone-fetch-cache":   "../../vendor/js/plugins/backbone-fetch-cache"
 		"jquery-hammer":          "../../vendor/js/plugins/jquery.hammer"
 		templates:                "../templates"
 		navigator:                "utils/navigator"
@@ -47,6 +48,9 @@ require.config
 			deps: ["backbone"]
 
 		"backbone-zombienation":
+			deps: ["backbone"]
+
+		"backbone-fetch-cache":
 			deps: ["backbone"]
 
 		"jquery-hammer":
