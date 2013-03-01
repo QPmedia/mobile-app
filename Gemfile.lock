@@ -1,19 +1,19 @@
 GIT
   remote: git://github.com/chriseppstein/compass.git
-  revision: 99b59b660885a57c68d1155d658055918011fc94
+  revision: 7970ebd6e634d5b486148ed21aef2f8b43f9ffae
   branch: master
   specs:
-    compass (0.13.alpha.2.99b59b6)
+    compass (0.13.alpha.2.7970ebd)
       chunky_png (~> 1.2)
       listen (<= 0.9.9)
       sass (~> 3.2.5)
 
 GIT
   remote: git://github.com/zurb/foundation.git
-  revision: d87efcd761cc19946add83afc9ac5a90b097df55
-  branch: 4.0-wip
+  revision: f65311450ca07f018272f34376481333a366b38d
+  branch: master
   specs:
-    zurb-foundation (4.0.0.alpha)
+    zurb-foundation (4.0.2)
       rake
       sass (>= 3.2.0)
 

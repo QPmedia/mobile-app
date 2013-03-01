@@ -36,6 +36,12 @@ module.exports = (grunt) ->
 					base: 'build/dev'
 					port: 8000
 					middleware: (connect, options) -> [lrSnippet, folderMount(connect, options.base)]
+			eike:
+				options:
+					base: 'build/dev'
+					port: 8002
+					hostname: "192.168.2.55"
+					#keepalive: true
 			release:
 				options:
 					port: 8001
@@ -101,6 +107,7 @@ module.exports = (grunt) ->
 					outputStyle: "expanded"
 					relativeAssets: true
 					raw: '''fonts_dir = "build/dev/app/fonts"
+						sass_options = {:debug_info => true}
 						add_import_path "#{Gem.loaded_specs[\'zurb-foundation\'].full_gem_path}/scss"'''
 
 		# the subtasks are seperated so we can update specific files such as index via regarde-watcher

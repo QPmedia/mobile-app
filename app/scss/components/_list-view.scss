@@ -14,8 +14,13 @@ ul.list-view {
 		background-color: $list-item-bg;
 		border-top: 1px solid darken($list-item-bg, 11%);
 		margin: 0;
-		padding: $list-item-padding;
+		padding: 0;
 
+		a {
+			display: block;
+			padding: $list-item-padding;
+			-webkit-tap-highlight-color: rgba($primary-color, 0.9) !important;
+		}
 		h5 {
 			font-size: remCalc(16px);
 			line-height: 20px;
@@ -26,9 +31,5 @@ ul.list-view {
 			font-size: remCalc(14px);
 			line-height: 18px;
 		}
-	}
-	//for list-hover testing
-	li.selected {
-		background-color: $primary-color;
 	}
 }
