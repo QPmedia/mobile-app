@@ -30,12 +30,6 @@ define (require) ->
 			@$el.html @template({qpons : @qpons.toJSON()})
 
 			hammertime = $(".list-view").hammer()
-			hammertime.on "tap", "> li", (e) ->
-				$(this).addClass "selected"
-			#hammertime.on "release", "> li", (e) ->
-				#$(this).removeClass "selected"
-			hammertime.on "dragstart", ->
-				$(this).find("li").removeClass "selected"
 
 			app.trigger "view:update", {}
 			#title: @qpon.get("headline")

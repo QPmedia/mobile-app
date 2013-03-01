@@ -1,7 +1,6 @@
 define (require) ->
 	# Libs
 	$ = require("zepto")
-	require("iscroll")
 	require("swig")
 
 	# App-specific
@@ -34,12 +33,6 @@ define (require) ->
 		app.API_URL = "http://192.168.2.12:8000/m/api/v1/"
 
 		#new Hammer($el.app[0])
-
-		# Init iScroll
-		scroll = new iScroll "wrapper",
-			bounce: false
-			scrollbarClass: "scrollbar"
-			hideScrollbar: true
 
 		app.registerModule("view", {
         	'update': scroll.refresh
