@@ -1,41 +1,35 @@
-//$list-view-vertical-padding: 10px !default;
-$list-view-horizontal-padding: 10px !default;
-$list-view-bg: $body-bg !default;
+$list-padding: 0 !default;
+
+$list-item-bg: $body-bg !default;
+$list-item-padding: 12px ($column-gutter / 2) !default;
 
 ul.list-view {
-	@include side-nav($divider-color: #dfdfdf, $font-size: emCalc(16px));
-	padding: 0;
+	display: block;
+	margin: 0;
+	padding: $list-padding;
+	list-style-type: none;
+	list-style-position: inside;
 
 	li {
-		background-color: $list-view-bg;
-		border-top: 1px solid #dfdfdf;
-		border-bottom: 1px solid #f9f9f9;
+		background-color: $list-item-bg;
+		border-top: 1px solid darken($list-item-bg, 11%);
 		margin: 0;
-		padding: $list-view-horizontal-padding ($column-gutter / 2);
-
-		// Remove top and bottom border from first and last list element.
-		&:first-child { border-top: 0; }
-		&:last-child { border-bottom: 0; }
+		padding: 0;
 
 		a {
-			color: $body-font-color;
+			display: block;
+			padding: $list-item-padding;
+			-webkit-tap-highlight-color: rgba($primary-color, 0.9) !important;
 		}
-
+		h5 {
+			font-size: remCalc(16px);
+			line-height: 20px;
+			margin-bottom: 2px;
+		}
 		p {
-			color: lighten($body-font-color, 25%);
-			font-size: 90%;
-		}
-	}
-	//for list-hover testing
-	li:active {
-		background-color: $primary-color;
-		a {
-			color: #ffffff;
-		}
-
-		p {
-			color: darken(#ffffff, 5%);
-			font-size: 90%;
+			color: lighten($body-font-color, 35%);
+			font-size: remCalc(14px);
+			line-height: 18px;
 		}
 	}
 }

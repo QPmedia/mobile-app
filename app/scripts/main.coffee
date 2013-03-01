@@ -1,8 +1,6 @@
 define (require) ->
 	# Libs
 	$ = require("zepto")
-	FastClick = require("fastclick")
-	require("iscroll")
 	require("swig")
 	require("utils/remotedata")
 	require("backbone-tastypie")
@@ -44,17 +42,13 @@ define (require) ->
 				key: app.user.get("api_key")
 		app.API_URL = "http://192.168.2.12:8000/m/api/v1/"
 
-		# Prevent 300ms tap delay
-		new FastClick($el.app[0])
-		#init iScroll
-		scroll = new iScroll "wrapper",
-			scrollbarClass: "scrollbar"
+		#new Hammer($el.app[0])
 
 		app.registerModule("view", {
         	'update': scroll.refresh
       	}, scroll);
 
-      	# Uncomment to test components
+		# Uncomment to test components
 		# require('modules/devicetests');
 
 		# Trigger the initial route

@@ -1,6 +1,7 @@
 $header-font-family: "Roboto-Regular", "Droid Sans", Arial, Helvetica, sans-serif !default;
 $header-font-weight: normal !default;
-$header-font-color: #0a0a0a !default;
+$header-font-color: #333333 !default;
+$header-line-height: 1.8 !default;
 
 $h1-font-size: emCalc(44px) !default;
 $h2-font-size: emCalc(37px) !default;
@@ -12,6 +13,7 @@ $h6-font-size: emCalc(18px) !default;
 $small-font-size: emCalc(14px) !default;
 
 $paragraph-font-size: emCalc(16px) !default;
+$paragraph-line-height: emCalc(19px) !default;
 $paragraph-margin-bottom: 0;
 
 @import "foundation/components/type";
