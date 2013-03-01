@@ -6,6 +6,7 @@ define (require) ->
 	Qpon = require("models/qpon")
 	QponCollection = require("collections/qpon")
 	require("backbone-zombienation")
+	require("backbone-fetch-cache")
 
 	class QponListView extends Backbone.View
 		template : swig.compile(require("text!templates/qpon_list.html"), { filename: "qpon_list" })
@@ -23,7 +24,8 @@ define (require) ->
 			@bindTo @qpons, "reset", @modelFetched
 
 		render: ->
-			@qpons.fetch()
+			@qpons.fetch
+				cache: true
 			return this
 
 		modelFetched: ->
