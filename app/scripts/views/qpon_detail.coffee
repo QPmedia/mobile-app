@@ -17,6 +17,7 @@ define (require) ->
 
 		render: ->
 			@model.fetch()
+			
 			return this
 
 		modelFetched: ->

@@ -4,7 +4,11 @@ define (require) ->
 	FastClick = require("fastclick")
 	require("iscroll")
 	require("swig")
+	require("utils/remotedata")
+	require("backbone-tastypie")
+	
 
+	User = require("models/user")
 	# App-specific
 	app = require("app")
 	Router = require("router")
@@ -32,7 +36,12 @@ define (require) ->
 			tzOffset: 0
 
 		app.router = new Router(container: $("#content"))
-
+		app.user = new User({api_key:"foo",username:"mboehme"})
+		
+		Backbone.Tastypie = 
+			apiKey:
+				username: app.user.get("username"),
+				key: app.user.get("api_key")
 		app.API_URL = "http://192.168.2.12:8000/m/api/v1/"
 
 		# Prevent 300ms tap delay
