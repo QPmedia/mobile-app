@@ -4,6 +4,7 @@ define (require) ->
 	require("swig")
 	require("utils/remotedata")
 	require("backbone-tastypie")
+	FooterView = require("views/footer")
 	
 
 	User = require("models/user")
@@ -34,7 +35,7 @@ define (require) ->
 			tzOffset: 0
 
 		app.router = new Router(container: $("#content"))
-		app.user = new User({api_key:"foo",username:"mboehme"})
+		app.user = new User({api_key:"qpmedia",username:"t.boehme@qpmedia.de"})
 		
 		Backbone.Tastypie = 
 			apiKey:
@@ -55,11 +56,15 @@ define (require) ->
 		# At this point, all dependencies required above will be loaded
 		# This means all event modules will be registered and ready to be triggered
 		Backbone.history.start()
+		footer = new FooterView()
+
 
 	# All navigation that is relative should be passed through the navigate
 	# method, to be processed by the router.  If the link has a data-bypass
 	# attribute, bypass the delegation completely.
 	$(document).on "click", "a[href]:not([data-bypass])", (evt) ->
+		
+		app.trigger "footer:update"
 		# Get the absolute anchor href.
 		href =
 			prop: $(this).prop("href")
