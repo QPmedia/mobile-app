@@ -1,16 +1,5 @@
 define (require) ->
 	$ = require("zepto")
-	# jquery plugins
-
-	# initialize backbone plugins here instead of where Backbone is used
-	# main is loaded first anyway
-	require("backbone-tastypie")
-	require("backbone-zombienation")
-	require("backbone-fetch-cache")
-	# there is a bug in -mediator with requirejs, it will recursively do shit and hang everything... line 63
-	#require("backbone-mediator")
-
-	# App-specific
 	app = require("app")
 	Router = require("router")
 
@@ -18,30 +7,24 @@ define (require) ->
 	# Inside this function, kick-off all initialization, everything up to this
 	# point should be definitions.
 	$ ->
-		# Cache the DOM elements for later use
-		$el =
-			app: $("#app")
-			headerbar: $("#headerbar")
-			footerbar: $("#footerbar")
-			content: $("#content")
-
-		
+		# # Cache the DOM elements for later use
+		# $el =
+		# 	app: $("#app")
+		# 	headerbar: $("#headerbar")
+		# 	footerbar: $("#footerbar")
+		# 	content: $("#content")
 
 		app.router = new Router(container: $("#content"))
 		
-		
 
-	
 		# Trigger the initial route
-		# At this point, all dependencies required above will be loaded
-		# This means all event modules will be registered and ready to be triggered
 		Backbone.history.start()
 
 	# All navigation that is relative should be passed through the navigate
 	# method, to be processed by the router.  If the link has a data-bypass
 	# attribute, bypass the delegation completely.
 	$(document).on "click", "a[href]:not([data-bypass])", (evt) ->
-		#app.user.set("api_key","fooooo")
+		app.trigger("alert","fooooo")
 		# Get the absolute anchor href.
 		href =
 			prop: $(this).prop("href")

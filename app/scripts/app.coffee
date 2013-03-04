@@ -1,8 +1,10 @@
-define (require) ->
-	User = require("models/user")
-
-	# initialize swig, add our custom filters
-	swig = require("swig")
+define ["models/user",
+		"swig",
+		"backbone",
+		"backbone-tastypie",
+		"backbone-zombienation",
+		"backbone-fetch-cache"]
+		,(User, swig, Backbone) ->
 	swig.init
 		filters: require("utils/filter")
 
@@ -10,9 +12,13 @@ define (require) ->
 		API_URL: "http://192.168.2.12:8000/m/api/v1/"
 
 		constructor: ->
+			# events mix-in; not a real class so we can't use 'extends'
+			_.extend @, Backbone.Events
+
 			@user = new User({api_key:"foo",username:"mboehme"})
 			
-
+			@on "alert", (msg) ->
+				alert(msg)
 			# set authentication stuff now and when user changed
 			@setup_tastypie()
 			@user.on "change", @setup_tastypie
