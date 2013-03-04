@@ -12,6 +12,7 @@ define (require) ->
         'click #login' : 'login'
 
 		initialize: (options) ->
+			
 			@render
 
 		render: ->

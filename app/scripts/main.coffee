@@ -2,6 +2,17 @@ define (require) ->
 	# Libs
 	$ = require("zepto")
 	require("swig")
+	swig.init
+		allowErrors: false
+		autoescape: true
+		cache: true
+		encoding: 'utf8'
+		filters: require("utils/filter")
+		root: "/"
+		tags:  {}
+		extensions: {}
+		tzOffset: 0
+		
 	require("utils/remotedata")
 	require("backbone-tastypie")
 	FooterView = require("views/footer")
@@ -22,17 +33,6 @@ define (require) ->
 			headerbar: $("#headerbar")
 			footerbar: $("#footerbar")
 			content: $("#content")
-
-		swig.init
-			allowErrors: false
-			autoescape: true
-			cache: true
-			encoding: 'utf8'
-			filters: require("utils/filter")
-			root: "/"
-			tags:  {}
-			extensions: {}
-			tzOffset: 0
 
 		app.router = new Router(container: $("#content"))
 		app.user = new User({api_key:"qpmedia",username:"t.boehme@qpmedia.de"})
