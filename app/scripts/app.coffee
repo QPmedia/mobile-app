@@ -18,13 +18,15 @@ define (require) ->
 			@user.on "change", @setup_tastypie
 			console.log("app initialized")
 
-		setup_tastypie: ->
+		setup_tastypie: =>
 			console.log("setting up tastypie")
 			console.log @user
-			Backbone.Tastypie=
+			user = @user.get("username")
+			key  = @user.get("api_key")
+			Backbone.Tastypie =
 				apiKey:
-					username: @user.get("username"),
-					key: @user.get("api_key")
+					username:user,
+					key: key
 			return
 	# this is a singleton class
 	# thanks to requirejs we always get the same object when using app = require(app)
