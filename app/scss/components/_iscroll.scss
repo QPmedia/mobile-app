@@ -1,6 +1,12 @@
 @import "compass/layout/stretching";
+@import "foundation/components/pagination";
 
 $navigation-bar-height: 48px;
+$pagination-li-font-size: emCalc(24px);
+$pagination-li-font-color: #fff;
+$centered: true;
+$base-styles: true;
+
 
 // iScroll-styles. Need to be fixed soon
 #header {
@@ -18,6 +24,18 @@ $navigation-bar-height: 48px;
 	bottom: 0;
 	//width: 100%;
 	height: $navigation-bar-height;
+
+	.action-bar {
+		@include pagination($centered, $base-styles); 
+
+		line-height: $navigation-bar-height;
+
+		li {
+			float: none; 
+			display: inline-block;
+			width: 15%;
+		}
+	}
 }
 
 #wrapper {
