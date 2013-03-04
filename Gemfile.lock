@@ -10,10 +10,10 @@ GIT
 
 GIT
   remote: git://github.com/zurb/foundation.git
-  revision: f65311450ca07f018272f34376481333a366b38d
+  revision: f8f4ed9b19d2bd8e36176d012065e7e9218350ef
   branch: master
   specs:
-    zurb-foundation (4.0.2)
+    zurb-foundation (4.0.3)
       rake
       sass (>= 3.2.0)
 
