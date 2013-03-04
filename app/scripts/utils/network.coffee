@@ -1,6 +1,6 @@
 define (require) ->
   #TODO: mboehme: remove this
-  $ = require("zepto")
+  $ = require("jquery")
   app = require("app")
   namespace = "network"
   _status = (if window.navigator and window.navigator.onLine then "online" else "offline")

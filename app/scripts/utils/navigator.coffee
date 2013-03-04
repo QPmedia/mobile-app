@@ -1,8 +1,7 @@
 ###
 Controls the navigation of the pages within the app.
 ###
-define (require) ->
-  $ = require("zepto")
+define ["jquery"], ($) ->
   init: (options) ->
     
     # We must set a base container element where we attach all views to.

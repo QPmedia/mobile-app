@@ -15,7 +15,7 @@ define ["models/user",
 			# events mix-in; not a real class so we can't use 'extends'
 			_.extend @, Backbone.Events
 
-			@user = new User({api_key:"foo",username:"mboehme"})
+			@user = new User({API_URL:@API_URL})
 
 
 			# Setup App Events
@@ -33,7 +33,7 @@ define ["models/user",
 
 		setup_tastypie: =>
 			console.log("setting up tastypie")
-			console.log @user
+			console.debug @user
 			user = @user.get("username")
 			key  = @user.get("api_key")
 			Backbone.Tastypie =

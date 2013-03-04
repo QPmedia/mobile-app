@@ -3,7 +3,7 @@ require.config
 	paths:
 
 		# Libraries
-		zepto:                    "../../vendor/js/libs/jquery"
+		jquery:                    "../../vendor/js/libs/jquery"
 		lodash:                   "../../vendor/js/libs/lodash-1.0.1"
 		underscore:               "../../vendor/js/libs/lodash-1.0.1"
 		backbone:                 "../../vendor/js/libs/backbone-0.9.2"
@@ -27,15 +27,15 @@ require.config
 		"foundation-topbar":      "../../vendor/js/plugins/foundation.topbar"
 
 	shim:
-		zepto:
+		jquery:
 			exports: "jQuery"
 
 		hammer:
-			deps: ["zepto"]
+			deps: ["jquery"]
 			exports: "Hammer"
 
 		backbone:
-			deps: ["lodash", "zepto"]
+			deps: ["lodash", "jquery"]
 			exports: "Backbone"
 
 		swig:
@@ -58,10 +58,10 @@ require.config
 			deps: ["backbone"]
 
 		"jquery-hammer":
-			deps: ["zepto", "hammer"]
+			deps: ["jquery", "hammer"]
 
 		foundation:
-			deps: ["zepto"]
+			deps: ["jquery"]
 
 		"foundation-alerts":
 			deps: ["foundation"]

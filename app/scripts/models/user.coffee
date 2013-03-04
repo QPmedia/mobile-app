@@ -1,13 +1,12 @@
-define (require) ->
-	Backbone = require("backbone")
-
+define ["backbone"], (Backbone) ->
 	class User extends Backbone.Model
 		defaults:
 			username: ""
 			api_key: false
 
-		#initialize:(options) ->
-		#	@foo = options.api_key
+		initialize:(options) ->
+			# avoid circular dependency on app
+			@API_URL = options.API_URL
 
 		authenticate: (username,password) ->
 			console.log username,password

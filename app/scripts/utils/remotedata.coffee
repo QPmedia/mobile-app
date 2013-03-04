@@ -1,7 +1,7 @@
 ###
 ###
 define (require) ->
-  $ = require("zepto")
+  $ = require("jquery")
   app = require("app")
   noop = ->
 

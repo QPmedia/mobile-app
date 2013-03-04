@@ -1,21 +1,10 @@
-define (require) ->
-	$ = require("zepto")
-	app = require("app")
-	Router = require("router")
+define ["jquery","app","router"], ($, app, Router) ->
 
 	# Treat the jQuery ready function as the entry point to the application.
 	# Inside this function, kick-off all initialization, everything up to this
 	# point should be definitions.
 	$ ->
-		# # Cache the DOM elements for later use
-		# $el =
-		# 	app: $("#app")
-		# 	headerbar: $("#headerbar")
-		# 	footerbar: $("#footerbar")
-		# 	content: $("#content")
-
 		app.router = new Router(container: $("#content"))
-		
 
 		# Trigger the initial route
 		Backbone.history.start()
