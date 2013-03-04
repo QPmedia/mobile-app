@@ -7,6 +7,7 @@ define (require) ->
 	class LoginView extends Backbone.View
 		template : swig.compile(require("text!templates/login.html"), { filename: "login" })
 
+
 		events:
         'click #login' : 'login'
 
@@ -19,4 +20,7 @@ define (require) ->
 			return this
 
 		login: ->
-			alert 'foo'
+			alert @$('#username').val()
+			alert @$('#password').val()
+			
+			#userAuth here
