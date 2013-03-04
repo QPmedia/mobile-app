@@ -13,5 +13,4 @@ define (require) ->
 
 		render: ->
 			@$el.html @template()
-			app.trigger "view:update", {}
 			return this

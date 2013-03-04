@@ -1,7 +1,6 @@
 define (require) ->
-	#$ = require("zepto")
-	app = require("app")
+	app      = require("app")
 	Backbone = require("backbone")
 
 	class Favorite extends Backbone.Model
-		urlRoot:->"#{app.API_URL}qpon/"
+		urlRoot:->"#{app.API_URL}favorite/"

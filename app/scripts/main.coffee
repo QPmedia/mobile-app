@@ -1,12 +1,15 @@
 define (require) ->
-	# Libs
 	$ = require("zepto")
-	require("swig")
-	require("utils/remotedata")
-	require("backbone-tastypie")
-	
+	# jquery plugins
 
-	User = require("models/user")
+	# initialize backbone plugins here instead of where Backbone is used
+	# main is loaded first anyway
+	require("backbone-tastypie")
+	require("backbone-zombienation")
+	require("backbone-fetch-cache")
+	# there is a bug in -mediator with requirejs, it will recursively do shit and hang everything... line 63
+	#require("backbone-mediator")
+
 	# App-specific
 	app = require("app")
 	Router = require("router")
@@ -22,35 +25,13 @@ define (require) ->
 			footerbar: $("#footerbar")
 			content: $("#content")
 
-		swig.init
-			allowErrors: false
-			autoescape: true
-			cache: true
-			encoding: 'utf8'
-			filters: require("utils/filter")
-			root: "/"
-			tags:  {}
-			extensions: {}
-			tzOffset: 0
+		
 
 		app.router = new Router(container: $("#content"))
-		app.user = new User({api_key:"foo",username:"mboehme"})
 		
-		Backbone.Tastypie = 
-			apiKey:
-				username: app.user.get("username"),
-				key: app.user.get("api_key")
-		app.API_URL = "http://192.168.2.12:8000/m/api/v1/"
+		
 
-		#new Hammer($el.app[0])
-
-		app.registerModule("view", {
-        	'update': scroll.refresh
-      	}, scroll);
-
-		# Uncomment to test components
-		# require('modules/devicetests');
-
+	
 		# Trigger the initial route
 		# At this point, all dependencies required above will be loaded
 		# This means all event modules will be registered and ready to be triggered
@@ -60,6 +41,7 @@ define (require) ->
 	# method, to be processed by the router.  If the link has a data-bypass
 	# attribute, bypass the delegation completely.
 	$(document).on "click", "a[href]:not([data-bypass])", (evt) ->
+		app.user.set("api_key","fooooo")
 		# Get the absolute anchor href.
 		href =
 			prop: $(this).prop("href")

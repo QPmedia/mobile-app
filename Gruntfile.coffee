@@ -192,7 +192,7 @@ module.exports = (grunt) ->
 
 	grunt.registerTask 'default', [
 		'clean', 'copy', 'coffee', 'compass',
-		'livereload-start', 'connect', 'regarde'
+		'livereload-start', 'connect:livereload','connect:release', 'regarde'
 		]
 
 	grunt.registerTask "release", ['clean', 'copy', 'coffee', 'compass', 'cssmin', 'requirejs:release', 'concat', 'uglify']

@@ -1,6 +1,5 @@
 define (require) ->
 	Backbone = require("backbone")
-	require("backbone-tastypie")
 
 	class User extends Backbone.Model
 		defaults:

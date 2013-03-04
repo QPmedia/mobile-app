@@ -10,13 +10,13 @@ require.config
 		fastclick:                "../../vendor/js/libs/fastclick"
 		hammer:                   "../../vendor/js/libs/hammer"
 		swig:                     "../../vendor/js/libs/swig"
-		foundation:             "../../vendor/js/libs/foundation"
+		foundation:               "../../vendor/js/libs/foundation"
 		# Plugins
 		text:                     "../../vendor/js/plugins/text-1.0.7"
+		"jquery-hammer":          "../../vendor/js/plugins/jquery.hammer"
 		"backbone-deepmodel":     "../../vendor/js/plugins/backbone-deepmodel-0.7.3"
 		"backbone-zombienation":  "../../vendor/js/plugins/backbone-zombienation"
 		"backbone-fetch-cache":   "../../vendor/js/plugins/backbone-fetch-cache"
-		"jquery-hammer":          "../../vendor/js/plugins/jquery.hammer"
 		"backbone-tastypie":      "../../vendor/js/plugins/backbone-tastypie"
 		templates:                "../templates"
 		navigator:                "utils/navigator"
@@ -41,6 +41,7 @@ require.config
 
 		swig:
 			deps: ["lodash"]
+			exports: "swig"
 
 		"backbone-deepmodel":
 			deps: ["backbone"]

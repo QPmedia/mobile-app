@@ -1,9 +1,8 @@
 define (require) ->
-	$ = require("zepto")
-	app = require("app")
+	$        = require("zepto")
+	app      = require("app")
 	Backbone = require("backbone")
-	Qpon = require("models/qpon")
-	require("backbone-zombienation")
+	Qpon     = require("models/qpon")
 
 	class QponDetailView extends Backbone.View
 		
@@ -14,6 +13,7 @@ define (require) ->
 			#        title: 'Weapon selected...'
 			#      });
 			@bindTo @model, "change", @modelFetched
+			console.log(app)
 
 		render: ->
 			@model.fetch()
@@ -22,8 +22,4 @@ define (require) ->
 
 		modelFetched: ->
 			@$el.html @template({data: @model.toJSON()})
-			app.trigger "view:update", {}
-			#app.trigger "headerbar:update",
-			#title: @model.get("name")
-
 			return this

@@ -1,30 +1,31 @@
 define (require) ->
-  _ = require("lodash")
-  Backbone = require("backbone")
-  
-  # Convenience function for registering a method as an event
-  _registerWith = (app, namespace, context) ->
-    (item, key) ->
-      if _.isFunction(item)
-        
-        # Add an event listener on this function which
-        # can be accessed via app.trigger() at any time
-        app.on namespace + ":" + key, ->
-          item.apply context, arguments
+	User = require("models/user")
 
+	# initialize swig, add our custom filters
+	swig = require("swig")
+	swig.init
+		filters: require("utils/filter")
 
-  _.extend
-    publish: (key) ->
+	class App
+		API_URL: "http://192.168.2.12:8000/m/api/v1/"
 
-    
-    # A way to regiter modules for application-wide events.
-    registerModule: (namespace, module, context) ->
-      that = this
-      context = module  unless context
-      
-      # Register each function in the module
-      # as an event that can be called
-      # via app.trigger() at a later date
-      _.each module, _registerWith(this, namespace, context)
-  , Backbone.Events
+		constructor: ->
+			@user = new User({api_key:"foo",username:"mboehme"})
+			
 
+			# set authentication stuff now and when user changed
+			@setup_tastypie()
+			@user.on "change", @setup_tastypie
+			console.log("app initialized")
+
+		setup_tastypie: ->
+			console.log("setting up tastypie")
+			console.log @user
+			Backbone.Tastypie=
+				apiKey:
+					username: @user.get("username"),
+					key: @user.get("api_key")
+			return
+	# this is a singleton class
+	# thanks to requirejs we always get the same object when using app = require(app)
+	return new App()

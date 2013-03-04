@@ -1,15 +1,14 @@
 define (require) ->
-	$ = require("zepto")
-	app = require("app")
-	Backbone = require("backbone")
-	Hammer = require("hammer")
-	Qpon = require("models/qpon")
+	$              = require("zepto")
+	app            = require("app")
+	Backbone       = require("backbone")
+	Hammer         = require("hammer")
+	Qpon           = require("models/qpon")
 	QponCollection = require("collections/qpon")
-	require("backbone-zombienation")
 	require("backbone-fetch-cache")
 
 	class QponListView extends Backbone.View
-		template : swig.compile(require("text!templates/qpon_list.html"), { filename: "qpon_list" })
+		#template : swig.compile(require("text!templates/qpon_list.html"), { filename: "qpon_list" })
 
 		initialize: (options) ->
 			@template = swig.compile(require("text!templates/qpon_list.html"), { filename: "qpon_list" })
@@ -33,7 +32,6 @@ define (require) ->
 
 			hammertime = $(".list-view").hammer()
 
-			app.trigger "view:update", {}
 			#title: @qpon.get("headline")
 
 			return this

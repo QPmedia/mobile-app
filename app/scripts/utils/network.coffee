@@ -1,4 +1,5 @@
 define (require) ->
+  #TODO: mboehme: remove this
   $ = require("zepto")
   app = require("app")
   namespace = "network"
