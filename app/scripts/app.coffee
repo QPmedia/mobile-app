@@ -19,11 +19,19 @@ define ["models/user",
 
 
 			# Setup App Events
-			@on "alert", (msg) ->
+			@on "alert", (msg) =>
 				console.log(msg)
+				r = confirm("UNAUTHORIZED")
+				if r is true
+  					@router.navigate('!/start', {trigger: true})
+				else
+  					console.log('try again')
+				
 
 			$(document).ajaxError (event, jqxhr, settings, exception) =>
-				@trigger("alert", exception)
+				if exception is "UNAUTHORIZED"
+					@trigger("alert", exception)
+					
 
 
 			# set authentication stuff now and when user changed

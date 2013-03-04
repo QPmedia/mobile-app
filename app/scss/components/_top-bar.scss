@@ -6,10 +6,8 @@ $topbar-title-font-size: emCalc(16px) !default;
 $topbar-link-color: #eeeeee !default;
 $topbar-link-weight: normal !default;
 $topbar-menu-link-weight: normal !default;
+$topbar-breakpoint: emCalc(1px); 
 
-
-
-$small: 'only screen';
 
 @import "foundation/components/top-bar";
 	.top-bar {
