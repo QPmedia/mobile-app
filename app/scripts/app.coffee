@@ -16,9 +16,16 @@ define ["models/user",
 			_.extend @, Backbone.Events
 
 			@user = new User({api_key:"foo",username:"mboehme"})
-			
+
+
+			# Setup App Events
 			@on "alert", (msg) ->
-				alert(msg)
+				console.log(msg)
+
+			$(document).ajaxError (event, jqxhr, settings, exception) =>
+				@trigger("alert", exception)
+
+
 			# set authentication stuff now and when user changed
 			@setup_tastypie()
 			@user.on "change", @setup_tastypie
