@@ -1,4 +1,4 @@
-/*! http://mths.be/placeholder v2.0.7 by @mathias 
+/*! http://mths.be/placeholder v2.0.7 by @mathias
 	Modified to work with Zepto.js by ZURB
 */
 ;(function(window, document, $) {

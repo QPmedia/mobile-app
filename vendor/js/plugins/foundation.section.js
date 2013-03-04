@@ -1,27 +1,21 @@
 /*jslint unparam: true, browser: true, indent: 2 */
 
-
-/* TODO:
-  - Allow sections with no .content to have active links
-  - Add event listeners.
-*/
-
 ;(function ($, window, document, undefined) {
   'use strict';
 
   Foundation.libs.section = {
     name: 'section',
 
-    version : '4.0.0.alpha',
+    version : '4.0.3',
 
     settings : {
-      deep_linking: true,
-      one_up: false,
+      deep_linking: false,
+      one_up: true,
       callback: function (){}
     },
 
     init : function (scope, method, options) {
-      this.scope = this.scope || scope;
+      this.scope = scope || this.scope;
       Foundation.inherit(this, 'throttle data_options');
 
       if (typeof method === 'object') {
@@ -47,7 +41,7 @@
 
       $(window).on('resize.fndtn.section', self.throttle(function () {
         self.resize.call(this);
-      }, 75)).trigger('resize');
+      }, 30)).trigger('resize');
 
       this.settings.init = true;
     },
@@ -55,23 +49,37 @@
     toggle_active : function (e, self) {
       var $this = $(this),
           section = $this.closest('section, .section'),
-          content = section.find('.content');
+          content = section.find('.content'),
+          parent = section.closest('[data-section]'),
+          self = Foundation.libs.section;
 
       if (!self.settings.deep_linking && content.length > 0) {
-          e.preventDefault();
+        e.preventDefault();
       }
 
       if (section.hasClass('active')) {
-        if ($(this.scope).width() < 769) {
-          section.removeClass('active');
+        if (self.small(parent)
+          || self.is_vertical(parent)
+          || self.is_accordion(parent)) {
+          section
+            .removeClass('active')
+            .attr('style', '');
         }
       } else {
-        if ($(this.scope).width() > 768 || self.settings.one_up) {
+        if (self.small(parent) || self.settings.one_up) {
           $this
             .closest('[data-section]')
             .find('section, .section')
-            .removeClass('active');
+            .removeClass('active')
+            .attr('style', '');
+
+          section.css('padding-top', self.outerHeight(section.find('.title')) - 1);
         }
+
+        if (self.small(parent)) {
+          section.attr('style', '');
+        }
+
         section.addClass('active');
       }
 
@@ -79,43 +87,91 @@
     },
 
     resize : function () {
-      var sections = $('[data-section]');
+      var sections = $('[data-section]'),
+          self = Foundation.libs.section;
 
-        sections.each(function() {
-          var active_section = $(this).find('section.active, .section.active');
-          if (active_section.length > 1) {
-            active_section.not(':first').removeClass('active');
-          } else if (active_section.length < 1) {
-            $(this).find('section, .section').first().addClass('active');
+      sections.each(function() {
+        var $this = $(this),
+            active_section = $this.find('section.active, .section.active');
+        if (active_section.length > 1) {
+          active_section
+            .not(':first')
+            .removeClass('active')
+            .attr('style', '');
+        } else if (active_section.length < 1
+          && !self.is_vertical($this)
+          && !self.is_accordion($this)) {
+          var first = $this.find('section, .section').first();
+          first.addClass('active');
+
+          if (self.small($this)) {
+            first.attr('style', '');
+          } else {
+            first.css('padding-top', self.outerHeight(first.find('.title')) - 1);
           }
-          Foundation.libs.section.position_titles($(this));
-        });
+        }
+
+        if (self.small($this)) {
+          active_section.attr('style', '');
+        } else {
+          active_section.css('padding-top', self.outerHeight(active_section.find('.title')) - 1);
+        }
+        self.position_titles($this);
+      });
+    },
+
+    is_vertical : function (el) {
+      return el.hasClass('vertical-nav');
+    },
+
+    is_accordion : function (el) {
+      return el.hasClass('accordion');
     },
 
     set_active_from_hash : function () {
-      var hash = window.location.hash.substring(1);
+      var hash = window.location.hash.substring(1),
+          sections = $('[data-section]'),
+          self = this;
 
-      if (hash.length > 0 && this.settings.deep_linking) {
-        $(this.scope)
-          .find('[data-section]')
-          .find('.content[data-slug=' + hash + ']')
-          .closest('section, .section')
-          .addClass('active');
-      }
+      sections.each(function () {
+        var section = $(this);
+        $.extend(true, self.settings, self.data_options(section));
+
+        if (hash.length > 0 && self.settings.deep_linking) {
+          section
+            .find('.content[data-slug="' + hash + '"]')
+            .closest('section, .section')
+            .addClass('active');
+        }
+      });
     },
 
     position_titles : function (section, off) {
       var titles = section.find('.title'),
-          previous_width = 0;
+          previous_width = 0,
+          self = this;
 
       if (typeof off === 'boolean') {
         titles.attr('style', '');
       } else {
         titles.each(function () {
           $(this).css('left', previous_width);
-          previous_width += $(this).width();
+          previous_width += self.outerWidth($(this));
         });
       }
+    },
+
+    small : function (el) {
+      if (el && this.is_accordion(el)) {
+        return true;
+      }
+      if ($('html').hasClass('lt-ie9')) {
+        return true;
+      }
+      if ($('html').hasClass('ie8compat')) {
+        return true;
+      }
+      return $(this.scope).width() < 768;
     },
 
     off : function () {

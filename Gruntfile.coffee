@@ -36,12 +36,6 @@ module.exports = (grunt) ->
 					base: 'build/dev'
 					port: 8000
 					middleware: (connect, options) -> [lrSnippet, folderMount(connect, options.base)]
-			eike:
-				options:
-					base: 'build/dev'
-					port: 8002
-					hostname: "192.168.2.55"
-					#keepalive: true
 			release:
 				options:
 					port: 8001
