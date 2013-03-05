@@ -1,13 +1,17 @@
 define ["backbone", "jquery"], (Backbone, $) ->
 	class User extends Backbone.Model
 		defaults:
-			username: ""
-			api_key: false
+			username: localStorage.getItem("username")
+			api_key: localStorage.getItem("api_key")
 
 		initialize:(options) ->
 			# avoid circular dependency on app
 			@API_URL = options.API_URL
 
+			@on "change", ->
+				localStorage.setItem("username",@get("username"))
+				localStorage.setItem("api_key",@get("api_key"))
+				
 		authenticate: (username, password) =>
 			console.log username,password
 			url = @API_URL + "user/login/?format=json&username=#{username}&password=#{password}"

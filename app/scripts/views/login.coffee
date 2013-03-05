@@ -9,18 +9,18 @@ define (require) ->
 
 
 		events:
-        'click #login' : 'login'
+			'submit form#loginform': 'login' 
 
 		initialize: (options) ->
-			
 			@render
 
-		render: ->
-			@$el.html @template()
+		render: =>
+			@$el.append @template({user:app.user.toJSON()})
 			return this
 
 		login: ->
-			alert @$('#username').val()
-			alert @$('#password').val()
-			
-			#userAuth here
+			username = @$('#username').val()
+			pw = @$('#password').val()
+			console.log(username)
+			# make auth accept a callback with status etc.
+			app.user.authenticate username, pw
