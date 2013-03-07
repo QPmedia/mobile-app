@@ -24,11 +24,12 @@ define (require) ->
 
 		render: ->
 			@qpons.fetch
-				cache: true
+				cache: false
 			return this
 
 		modelFetched: ->
 			@$el.html @template({qpons : @qpons.toJSON()})
+			console.log @qpons
 
 			hammertime = $(".list-view").hammer()
 

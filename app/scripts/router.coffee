@@ -4,6 +4,7 @@ define (require) ->
 	QponDetailView = require ("views/qpon_detail")
 	StartView = require("views/start")
 	LoginView = require("views/login")
+	FavoriteListView = require("views/favorite_list")
 
 	# Defining the application router, you can attach sub routers here.
 	class Router extends Backbone.Router
@@ -15,6 +16,7 @@ define (require) ->
 			"!/login": "login"
 			"!/coupons": "qpon_list"
 			"!/coupons/:id": "qpon_detail"
+			"!/favorites": "favorite_list"
 			"*actions": "start"
 
 		start: ->
@@ -28,3 +30,6 @@ define (require) ->
 
 		qpon_detail: (id) ->
 			nav.changeView new QponDetailView(id: id)
+
+		favorite_list: ->
+			nav.changeView new FavoriteListView()
