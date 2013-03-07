@@ -140,6 +140,11 @@ module.exports = (grunt) ->
 					src: 'index.html'
 					dest: 'build/release/'
 				]
+			config:
+				files: [
+					src: 'config.xml'
+					dest: 'build/release/'
+				]
 			fonts:
 				files: [
 					src: ['app/fonts/**']
