@@ -20,11 +20,23 @@ $topbar-breakpoint: emCalc(1px);
 		img {
 			width: 32px;
 			display: inline;
-			vertical-align: middle;
+			margin-top: 8px;
 		}
 
 		ul {
 			line-height: 48px;
+		}
+
+		.title-area {
+			padding-right: 10px;
+		}
+		.title-area:active {
+			background-color: $primary-color;
+		}
+
+		.name {
+			float: left;
+			color: $topbar-link-color;
 		}
 
 		.icon {

@@ -6,7 +6,7 @@ define (require) ->
 	require("backbone-zombienation")
 
 	class QponDetailView extends Backbone.View
-		swig.compile(require("text!templates/login.html"), { filename: "login" })
+		#swig.compile(require("text!templates/login.html"), { filename: "login" })
 
 		template : swig.compile(require("text!templates/start.html"), { filename: "start" })
 
