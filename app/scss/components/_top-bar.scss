@@ -28,7 +28,7 @@ $topbar-breakpoint: emCalc(1px);
 		}
 
 		.title-area {
-			padding-right: 10px;
+			padding: 0 10px;
 		}
 		.title-area:active {
 			background-color: $primary-color;
@@ -37,6 +37,10 @@ $topbar-breakpoint: emCalc(1px);
 		.name {
 			float: left;
 			color: $topbar-link-color;
+
+			.icon {
+				margin-left: -8px;
+			}
 		}
 
 		.icon {
