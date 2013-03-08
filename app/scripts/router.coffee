@@ -1,9 +1,9 @@
 define (require) ->
-	nav = require("navigator")
-	QponListView = require ("views/qpon_list")
-	QponDetailView = require ("views/qpon_detail")
-	StartView = require("views/start")
-	LoginView = require("views/login")
+	nav              = require("navigator")
+	QponListView     = require("views/qpon_list")
+	QponDetailView   = require("views/qpon_detail")
+	StartView        = require("views/start")
+	LoginView        = require("views/login")
 	FavoriteListView = require("views/favorite_list")
 
 	# Defining the application router, you can attach sub routers here.

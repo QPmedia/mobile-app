@@ -40,6 +40,7 @@ $base-styles: true;
 }
 
 #wrapper {
+	background-color: white;
 	@include stretch-y($topbar-height, $navigation-bar-height);
 	z-index: 1;
 	left: 0;
@@ -52,6 +53,19 @@ $base-styles: true;
 	-webkit-backface-visibility: hidden;
 }
 
+#menu {
+background-color: black;
+	@include stretch-y($topbar-height, $navigation-bar-height);
+	z-index: 0;
+	left: 0;
+	width: 100%;
+	overflow: auto;
+	-webkit-overflow-scrolling: touch;
+
+	-webkit-transition: -webkit-transform 0s;
+	//transition-timing-function: ease;
+	-webkit-backface-visibility: hidden;
+}
 
 #scroller {
 	position: absolute;

@@ -34,12 +34,12 @@ module.exports = (grunt) ->
 			livereload:
 				options:
 					base: 'build/dev'
-					port: 8000
+					port: 8001
 					hostname: '0.0.0.0'
 					middleware: (connect, options) -> [lrSnippet, folderMount(connect, options.base)]
 			release:
 				options:
-					port: 8001
+					port: 8002
 					#hostname: "192.168.2.12"
 					#keepalive: true
 					base: 'build/release'

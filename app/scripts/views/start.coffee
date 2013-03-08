@@ -15,14 +15,14 @@ define (require) ->
 			'click #scan': 'scan' 
 
 		position : 0
-
 		initialize: (options) ->
-			self = this
-			hammertime = Hammer("#wrapper", {prevent_default: false}).on("dragleft dragright dragend", (ev) ->
-				self.handleHammer ev
-			)
+			hammertime = Hammer("#main",).on "swipe drag dragend dragstart", (ev) =>
+				@handleHammer ev
+			
 
 			@position = 0
+			@max_pos = 150
+			@swiping = false
 			@render
 
 		scan: ->
@@ -46,43 +46,67 @@ define (require) ->
 			return this
 
 		handleHammer: (ev) ->
-
-			self = this
-			
-			dx = ev.gesture.deltaX * 0.3
+			# FIXME: in qpon_list, start dragging right and then bot.
+			# menu will be left half open
+			return unless ev.gesture.direction in ["right", "left"]
+			console.log ev.type
+			console.log ev.gesture.velocityX
+			# too bad the swipe event if fired after all drag events...
+			# kind of useless, maybe a second Hammer instance...
+			# if ev.type is "swipe"
+			# 	console.log ev.gesture.direction
+			# 	if ev.gesture.direction is "right"
+			# 		@translate_to = 200
+			# 	else
+			# 		@translate_to = 0
+			# 	@swiping = true
+			# 	#return
 			switch ev.type
+				when "dragstart"
+					$('#wrapper').css("-webkit-transition", "-webkit-transform 0s")
 
 				when "dragend"
-					if dx >= 50
-						self.updateSlide 200
-						@position = 200
+					threshold = @max_pos*0.5
+					$('#wrapper').css("-webkit-transition", "-webkit-transform 0.8s")
+					
+					#go fast if user went fast as well
+					if ev.gesture.velocityX > 1.2
+						$('#wrapper').css("-webkit-transition", "-webkit-transform 0.01s")
+						if ev.gesture.direction is "right"
+							threshold = -1#200*0.15
 
-					else if dx <= 50
-						self.updateSlide 0
-						@position = 0
+						else
+							threshold = @max_pos
 
-
-
-				when "dragright"
-					if dx <= 200
-						@position = dx
+					@position = @translate_to
+					# snap at 60%
+					# threshold = 200*0.6
+					# if ev.gesture.direction is "right"
+					# 	if @position > threshold
+					# 		@translate_to = 200
+					# 	else
+					# 		@translate_to = 0
+					# else if ev.gesture.direction is "left"
+					# 	if @position <= threshold
+					# 		@translate_to = 200
+					# 	else
+					# 		@translate_to = 0
+					# else
+					# 	alert "dafuq!, neither 'left' nor 'right'"
+					
+					if @position > threshold
+						@translate_to = @max_pos
 					else
-						@position = 200
+						@translate_to = 0
 
-					@position = Math.min(dx, 200)
-					console.log @position
-					self.updateSlide(@position)
+					$('#wrapper').css('-webkit-transform', 'translate3d(' + @translate_to + 'px,0,0) scale3d(1,1,1)')
+					@position = @translate_to
 
-				when "dragleft"
-					console.log('start-left-pos: ' + @position)
-					@position = 200 + dx
-					
-					@position = Math.max(0, @position)
-					console.log @position
-					self.updateSlide(@position)
+				when "drag"# and not @swiping
+					# 0<pos<200
+					# youtube uses 1:1 drag -> move...
+					dx = ev.gesture.deltaX #* 0.4
+					@translate_to = Math.min(Math.max(0, @position + dx), @max_pos)
+					$('#wrapper').css('-webkit-transform', 'translate3d(' + @translate_to + 'px,0,0) scale3d(1,1,1)')
+
 			return
-					
-
-		updateSlide: (width) ->
-			$('#wrapper').css('-webkit-transform', 'translate3d(' + width + 'px,0,0) scale3d(1,1,1)')
-			#$('#wrapper').css('left', width)
