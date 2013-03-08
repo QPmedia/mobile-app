@@ -46,7 +46,12 @@ $base-styles: true;
 	width: 100%;
 	overflow: auto;
 	-webkit-overflow-scrolling: touch;
+
+	-webkit-transition: -webkit-transform 0s;
+	//transition-timing-function: ease;
+	-webkit-backface-visibility: hidden;
 }
+
 
 #scroller {
 	position: absolute;

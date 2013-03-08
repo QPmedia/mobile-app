@@ -35,6 +35,7 @@ module.exports = (grunt) ->
 				options:
 					base: 'build/dev'
 					port: 8000
+					hostname: '0.0.0.0'
 					middleware: (connect, options) -> [lrSnippet, folderMount(connect, options.base)]
 			release:
 				options:
