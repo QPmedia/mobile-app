@@ -20,7 +20,7 @@ define (require) ->
 			
 
 			@position = 0
-			@max_pos = 150
+			@max_pos = 200
 			@swiping = false
 			@render
 
