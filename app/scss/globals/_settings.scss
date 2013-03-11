@@ -1,7 +1,7 @@
 // Disable the whole legacy and experimental support except for WebKit.
 $legacy-support-for-ie: false;
 $legacy-support-for-mozilla: false;
-$experimental-support-for-mozilla: false;
+$experimental-support-for-mozilla: true;
 $experimental-support-for-opera: false;
 $experimental-support-for-microsoft: false;
 $support-for-original-webkit-gradients: false;
@@ -10,6 +10,8 @@ $support-for-original-webkit-gradients: false;
 
 // Global Foundation settings
 $include-print-styles: false;
+
+$column-gutter: 20px;
 
 // Configurables
 $body-bg: #fbfbfb;

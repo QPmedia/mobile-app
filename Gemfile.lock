@@ -10,10 +10,10 @@ GIT
 
 GIT
   remote: git://github.com/zurb/foundation.git
-  revision: 09d1de0101399b6ea3658b5e5694b72e041fc971
+  revision: 0865884bd91bdee85792aed37e740ce2d1463089
   branch: master
   specs:
-    zurb-foundation (4.0.4)
+    zurb-foundation (4.0.5)
       sass (>= 3.2.0)
 
 GEM
@@ -23,7 +23,7 @@ GEM
     compass-normalize (1.4.2)
       compass (>= 0.12.0)
     listen (0.7.3)
-    sass (3.2.6)
+    sass (3.2.7)
 
 PLATFORMS
   ruby

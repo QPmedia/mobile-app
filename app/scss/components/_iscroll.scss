@@ -2,77 +2,84 @@
 @import "foundation/components/pagination";
 
 $navigation-bar-height: 48px;
-$pagination-li-font-size: emCalc(24px);
-$pagination-li-font-color: #fff;
-$centered: true;
-$base-styles: true;
 
 #app-wrapper {
-	width: 100%;
-	height: 100%;
 	overflow: hidden;
-}
-#app {
-	-webkit-transition: -webkit-transform 0s;
-	-webkit-backface-visibility: hidden;
-	background: #fff;
-	z-index: 2;
 	width: 100%;
 	height: 100%;
 }
 
-// iScroll-styles. Need to be fixed soon
+#app {
+	@include transition(transform 0s linear);
+	@include backface-visibility(hidden);
+	z-index: 2;
+	width: 100%;
+	height: 100%;
+	background: #fff;
+}
+
 #header {
 	@include stretch-x;
-	z-index: 2;
 	top: 0;
-	//width: 100%;
+	z-index: 2;
 	height: $topbar-height;
 	line-height: $topbar-height;
 }
 
 #footer {
 	@include stretch-x;
-
 	bottom: 0;
-	//width: 100%;
 	height: $navigation-bar-height;
-
 	background-color: #828282;
+	@include background-image(linear-gradient(top, darken(#828282, 5%), darken(#828282, 5%) 2px, #828282 2px, #828282));
 	padding: 0;
-	border-top: 2px solid darken(#828282, 5%);
 	color: #fff;
+	overflow: hidden;
 
-	.action-bar {
-
-		@include pagination($centered, $base-styles);
-
+	ul.action-bar {
+		display: block;
+		//width: 100%;
 		line-height: $navigation-bar-height;
 
 		li {
-			float: none;
 			display: inline-block;
-			width: 20%;
-			font-size: 190%;
+			float: left;
+			margin: 0;
+			text-align: center;
+			font-size: 32px;
+
+			&:first-child {
+				padding-left: $column-gutter / 2 ;
+				text-align: left;
+			}
+			&:last-child {
+				padding-right: $column-gutter / 2 ;
+				text-align: right;
+			}
+		}
+		@for $i from 2 through 5 {
+			li:nth-child(1):nth-last-child(#{$i}) {
+				&, & ~ li { width: (100% / $i); }
+			}
 		}
 	}
 }
 
 #main {
-	background-color: white;
 	@include stretch-y($topbar-height, $navigation-bar-height);
-	z-index: 2;
 	left: 0;
-	width: 100%;
+	z-index: 2;
 	overflow: auto;
+	width: 100%;
+	background-color: #fff;
 	-webkit-overflow-scrolling: touch;
-	-webkit-transition: -webkit-transform 0s;
-	-webkit-backface-visibility: hidden;
+	@include transition(transform 0s linear);
+	@include backface-visibility(hidden);
 }
 
 #menu {
-	background-color: black;
 	@include stretch-y(0, 0);
+	background-color: #000;
 	z-index: 0;
 	left: 0;
 }
@@ -80,8 +87,8 @@ $base-styles: true;
 #content {
 	position: absolute;
 	z-index: 1;
-	width: 100%;
 	padding: 0;
+	width: 100%;
 	-webkit-touch-callout: none;
 	//-webkit-tap-highlight-color:rgba(#000, 0);
 }
