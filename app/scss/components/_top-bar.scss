@@ -35,6 +35,7 @@ $topbar-breakpoint: emCalc(1px);
 
 	.title-area {
 		padding: 0 10px;
+		-webkit-transition: all 0.2s;
 	}
 	.title-area:active {
 		background-color: $primary-color;
