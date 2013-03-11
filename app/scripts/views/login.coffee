@@ -7,9 +7,8 @@ define (require) ->
 	class LoginView extends Backbone.View
 		template : swig.compile(require("text!templates/login.html"), { filename: "login" })
 
-
 		events:
-			'submit form#loginform': 'login' 
+			'submit form#loginform': 'login'
 
 		initialize: (options) ->
 			@render

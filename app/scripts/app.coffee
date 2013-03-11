@@ -17,22 +17,18 @@ define ["models/user",
 
 			@user = new User({API_URL:@API_URL})
 
-
 			# Setup App Events
 			@on "alert", (msg) =>
 				console.log(msg)
 				r = confirm("UNAUTHORIZED")
 				if r is true
-  					@router.navigate('!/start', {trigger: true})
+					@router.navigate('!/start', {trigger: true})
 				else
-  					console.log('try again')
-				
+					console.log('try again')
 
 			$(document).ajaxError (event, jqxhr, settings, exception) =>
 				if exception is "UNAUTHORIZED"
 					@trigger("alert", exception)
-					
-
 
 			# set authentication stuff now and when user changed
 			@setup_tastypie()

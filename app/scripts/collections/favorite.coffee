@@ -1,7 +1,7 @@
 define (require) ->
 	app      = require("app")
 	Backbone = require("backbone")
-	Favorite     = require("models/favorite")
+	Favorite = require("models/favorite")
 
 	class FavoriteCollection extends Backbone.Collection
 		initialize: ->

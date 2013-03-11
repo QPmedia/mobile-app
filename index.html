@@ -31,6 +31,24 @@
 </head>
 
 <body>
+	<div id="menu">
+		<ul class="side-nav">
+			<li class="headline">Konto</li>
+			<li class="divider"></li>
+			<li><a href="#"><span class="icon icon-social-person"></span>Accountname</a></li>
+			<li><a href="#"><span class="icon icon-rating-important"></span>Favoriten</a></li>
+
+			<li class="headline">Kategorien</li>
+			<li class="divider"></li>
+			<li><a href="#"><span class="icon icon-collections-sort-by-size"></span>Alle Kategorien</a></li>
+			<li><a href="#"><span class="icon icon-content-picture"></span>Kategorie </a></li>
+			<li><a href="#"><span class="icon icon-content-picture"></span>Kategorie </a></li>
+			<li><a href="#"><span class="icon icon-content-picture"></span>Kategorie </a></li>
+			<li><a href="#"><span class="icon icon-content-picture"></span>Kategorie </a></li>
+		</ul>
+	</div>
+
+	<div id="app-wrapper">
 	<div id="app">
 		<header id="header" class="contain-to-grid">
 			<nav class="top-bar">
@@ -73,24 +91,10 @@
 		</header>
 
 		<div id="main" role="main">
-			<div id="wrapper">
-				<div id="scroller">
-					<div id="content"></div>
-				</div>
-			</div>
-			<div id="menu" style="background-color:black;width:150px">
-				<ul class="side-nav">
-					<li class="active"><a href="#">Lidgsdhg<ydfhnk 1</a></li>
-					<li><a href="#">Link 2</a></li>
-					<li class="divider"></li>
-					<li><a href="#">Linkdfhfdhydfh 3</a></li>
-					<li><a href="#">Link 4</a></li>
-				</ul>
-			</div>
+			<div id="content"></div>
 		</div>
 
-		<footer>
-			<div id="footer">
+		<footer id="footer">
 				<div class="row">
 					<div class="small-12 columns">
 						<ul class="action-bar">
@@ -100,14 +104,14 @@
 							<li><span class="icon-social-share"></span></li>
 						</ul>
 					</div>
-				</div>
 			</div>
 		</footer>
+	</div>
 	</div>
 
 	<!--script type="text/javascript" src="cordova.js"></script>
 	<script type="text/javascript" src="barcodescanner.js"></script-->
-	<!-- Application source -->
-	<script data-main="app/scripts/bootstrap" src="app.js"></script>
-</body>
-</html>
+		<!-- Application source -->
+		<script data-main="app/scripts/bootstrap" src="app.js"></script>
+	</body>
+	</html>

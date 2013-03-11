@@ -5,14 +5,13 @@ define (require) ->
 	Qpon = require("models/qpon")
 	Hammer = require("hammer")
 	require("backbone-zombienation")
-	
 
 	class StartView extends Backbone.View
 		#swig.compile(require("text!templates/login.html"), { filename: "login" })
 
 		template : swig.compile(require("text!templates/start.html"), { filename: "start" })
 		events:
-			'click #scan': 'scan' 
+			'click #scan': 'scan'
 
 		position : 0
 		initialize: (options) ->
@@ -21,7 +20,7 @@ define (require) ->
 			
 
 			@position = 0
-			@max_pos = 150
+			@max_pos = 200
 			@swiping = false
 			@render
 
@@ -62,17 +61,19 @@ define (require) ->
 			# 		@translate_to = 0
 			# 	@swiping = true
 			# 	#return
+			container = '#app'
+
 			switch ev.type
 				when "dragstart"
-					$('#wrapper').css("-webkit-transition", "-webkit-transform 0s")
+					$(container).css("-webkit-transition", "-webkit-transform 0s")
 
 				when "dragend"
 					threshold = @max_pos*0.5
-					$('#wrapper').css("-webkit-transition", "-webkit-transform 0.8s")
+					$(container).css("-webkit-transition", "-webkit-transform 0.8s")
 					
 					#go fast if user went fast as well
 					if ev.gesture.velocityX > 1.2
-						$('#wrapper').css("-webkit-transition", "-webkit-transform 0.01s")
+						$(container).css("-webkit-transition", "-webkit-transform 0.01s")
 						if ev.gesture.direction is "right"
 							threshold = -1#200*0.15
 
@@ -100,7 +101,7 @@ define (require) ->
 					else
 						@translate_to = 0
 
-					$('#wrapper').css('-webkit-transform', 'translate3d(' + @translate_to + 'px,0,0) scale3d(1,1,1)')
+					$(container).css('-webkit-transform', 'translate3d(' + @translate_to + 'px,0,0) scale3d(1,1,1)')
 					@position = @translate_to
 
 				when "drag"# and not @swiping
@@ -108,6 +109,6 @@ define (require) ->
 					# youtube uses 1:1 drag -> move...
 					dx = ev.gesture.deltaX #* 0.4
 					@translate_to = Math.min(Math.max(0, @position + dx), @max_pos)
-					$('#wrapper').css('-webkit-transform', 'translate3d(' + @translate_to + 'px,0,0) scale3d(1,1,1)')
+					$(container).css('-webkit-transform', 'translate3d(' + @translate_to + 'px,0,0) scale3d(1,1,1)')
 
 			return
