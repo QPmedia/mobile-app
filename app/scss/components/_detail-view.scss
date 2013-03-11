@@ -1,0 +1,21 @@
+$header-bg-color: #7eba22;
+
+.row.box {
+	background: #fff;
+	border-bottom: 1px solid #ccc;
+	padding: emCalc(20px) 0;
+
+	h4 {
+		margin: 0;
+	}
+}
+
+.row.box:first-child {
+	background: $header-bg-color;
+	border-bottom: 2px solid darken($header-bg-color,4%);
+	color: #fff;
+
+	h4{
+		color: #fff;
+	}
+}

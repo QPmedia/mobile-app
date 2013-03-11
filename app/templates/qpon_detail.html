@@ -1,21 +1,34 @@
-<div class="row">
-	<div class="large-12 columns">
-		<h1>{{qpon.headline}}</h1>
-		<hr>
+<div class="row box">
+	<div class="small-5 large-5 columns">
+		<img src="http://static.qpondo.de/media/thumbnails/qpons/der-schwan-zweimal-kaffee-und-kuchen-zu-einem-prei_1_400.png?v=618120" />
+	</div>
+	<div class="small-7 large-7 columns">
+		<h4>{{qpon.headline}}</h4>
+		<h4 class="subheader">{{qpon.retailer}}</h4>
+		<a href="#" class="small button">Einlösen</a>
+		<p>Noch 42 Stück verfügbar</p>
 	</div>
 </div>
-<div class="row">
-	<div class="large-12 columns">
-		<div class="panel callout radius">
-          <h5>{{qpon.retailer}}</h5>
-          <p>{{qpon.desc}}</p>
-          <p>{{qpon.validity_text}}</p>
-        </div>
+
+<div class="row box">
+	<div class="small-12 large-12 columns">
+		<h4>Bewertung</h4>
+        <p>42 Leuten finden diesen Coupon gut.</p>
 	</div>
 </div>
-<div class="row">
-<div class="small-6 columns">
-		<div class="panel callout radius js-add-favorite" data-id="{{qpon.id}}" data-uri="{{qpon.resource_uri}}">
+
+<div class="row box">
+	<div class="small-12 large-12 columns">
+		<h4>Beschreibung</h4>
+        <p>{{qpon.desc}}</p>
+        <h4 class="subheader">Bitte beachten</h4>
+        <p>{{qpon.validity_text}}</p>
+	</div>
+</div>
+
+<div class="row box">
+	<div class="small-12 large-12 columns">
+		<div class="js-add-favorite" data-id="{{qpon.id}}" data-uri="{{qpon.resource_uri}}">
           <h5>Add Favorite</h5>
           <p>id: {{qpon.id}}</p>
         </div>
