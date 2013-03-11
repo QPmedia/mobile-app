@@ -3,7 +3,7 @@ require.config
 	paths:
 
 		# Libraries
-		jquery:                    "../../vendor/js/libs/jquery"
+		jquery:                   "../../vendor/js/libs/jquery"
 		lodash:                   "../../vendor/js/libs/lodash-1.0.1"
 		underscore:               "../../vendor/js/libs/lodash-1.0.1"
 		backbone:                 "../../vendor/js/libs/backbone-0.9.2"

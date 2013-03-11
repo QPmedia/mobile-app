@@ -1,24 +1,23 @@
 define (require) ->
-  #TODO: mboehme: remove this
-  $ = require("jquery")
-  app = require("app")
-  namespace = "network"
-  _status = (if window.navigator and window.navigator.onLine then "online" else "offline")
-  _onChanged = (stat) ->
-    _status = stat
-    app.trigger namespace + ":" + stat
-    app.trigger namespace + ":change", stat
+	#TODO: mboehme: remove this
+	$ = require("jquery")
+	app = require("app")
+	namespace = "network"
+	_status = (if window.navigator and window.navigator.onLine then "online" else "offline")
 
-  withNetwork = (options) ->
-    options[_status].apply()  if _.isFunction(options[_status])
+	_onChanged = (stat) ->
+		_status = stat
+		app.trigger namespace + ":" + stat
+		app.trigger namespace + ":change", stat
 
-  
-  # Hook into the browser's 'online' and 'offline' events and subsequently fire app:events!
-  _.each ["online", "offline"], (status) ->
-    $(window).on status, (evt) ->
-      _onChanged status
+	withNetwork = (options) ->
+		options[_status].apply()  if _.isFunction(options[_status])
 
+	# Hook into the browser's 'online' and 'offline' events and subsequently fire app:events!
+	_.each ["online", "offline"], (status) ->
+		$(window).on status, (evt) ->
+			_onChanged status
 
-  exports = with: withNetwork
-  app.registerModule namespace, exports
-  exports
+	exports = with: withNetwork
+	app.registerModule namespace, exports
+	exports

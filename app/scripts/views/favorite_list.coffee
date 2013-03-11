@@ -1,8 +1,8 @@
 define (require) ->
-	$              = require("jquery")
-	app            = require("app")
-	Backbone       = require("backbone")
-	Hammer         = require("hammer")
+	$                  = require("jquery")
+	app                = require("app")
+	Backbone           = require("backbone")
+	Hammer             = require("hammer")
 	Favorite           = require("models/favorite")
 	FavoriteCollection = require("collections/favorite")
 	#require("backbone-fetch-cache")

@@ -5,14 +5,13 @@ define (require) ->
 	Qpon = require("models/qpon")
 	Hammer = require("hammer")
 	require("backbone-zombienation")
-	
 
 	class StartView extends Backbone.View
 		#swig.compile(require("text!templates/login.html"), { filename: "login" })
 
 		template : swig.compile(require("text!templates/start.html"), { filename: "start" })
 		events:
-			'click #scan': 'scan' 
+			'click #scan': 'scan'
 
 		position : 0
 		initialize: (options) ->
