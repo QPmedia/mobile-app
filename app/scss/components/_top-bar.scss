@@ -89,14 +89,3 @@ a.menu-icon {
 		@include box-shadow(0 18px 0 1px #fff, 0 24px 0 1px #fff, 0 30px 0 1px #fff);
 	}
 }
-
-#footer {
-	background-color: #828282;
-	padding: 0;
-	border-top: 2px solid darken(#828282, 5%);
-	color: #fff;
-
-	.inline-list {
-		font-size: 28px;
-	}
-}
