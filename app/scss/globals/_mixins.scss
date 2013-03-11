@@ -33,3 +33,15 @@
 @mixin clearfix() {
 	@include pie-clearfix;
 }
+
+@mixin overflow-scroll($ios-fix-selector: "& > *") {
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+
+	// Fix for iOS, see http://cantina.co/2012/03/06/ios-5-native-scrolling-grins-and-gothcas/
+	@if $ios-fix-selector {
+		#{$ios-fix-selector} {
+			-webkit-transform: translate3d(0, 0, 0);
+		}
+	}
+}

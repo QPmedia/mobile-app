@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<widget xmlns     = "http://www.w3.org/ns/widgets"
-		xmlns:gap = "http://phonegap.com/ns/1.0"
-		id        = "com.phonegap.hello-world"
-		version   = "2.0.0">
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.phonegap.hello-world" version="2.0.0">
 	<name>QP Demo/Prototype</name>
 
 	<description>
@@ -12,6 +9,9 @@
 	<author href="https://qpmedia.de/" email="support@qpmedia.de">
 		QP media
 	</author>
+
+	<!-- Disable bouncing for iOS (no idea why the default is true) -->
+	<preference name="UIWebViewBounce" value="false" />
 
 	<gap:plugin name="BarcodeScanner"/>
 </widget>

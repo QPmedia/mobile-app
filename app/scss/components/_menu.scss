@@ -2,14 +2,15 @@ $menu-bg-color: #303030;
 $headline-color: #8F8F8F;
 $link-color: $body-bg;
 $link-font-size: emCalc(22px) !default;
-$spacing: 10px; 
+$spacing: 10px;
 
 #menu {
-	background-color: $menu-bg-color;
 	@include stretch-y(0, 0);
-	z-index: 0;
 	left: 0;
+	z-index: 0;
 	width: 200px;
+	background-color: $menu-bg-color;
+	@include overflow-scroll();
 
 	.side-nav {
 		li > a {
@@ -17,32 +18,27 @@ $spacing: 10px;
 			color: $link-color;
 			font-size: $link-font-size;
 		}
-
 		li > a:active {
 			padding-left: $spacing;
-			background-color: darken($menu-bg-color, 10%);
 			border-left: 5px solid $primary-color;
+			background-color: darken($menu-bg-color, 10%);
 			font-weight: normal !important;
 		}
-
-
-		li.divider {	
+		li.divider {
 			margin: 0 $spacing $spacing $spacing;
 			border-top: 2px solid;
 			border-top-color: $headline-color;
 		}
-
 		li.headline{
-			color: $headline-color;
-			text-transform:uppercase;
-			padding: $spacing 0 0 $spacing;
 			margin-bottom: 0;
+			padding: $spacing 0 0 $spacing;
+			color: $headline-color;
+			text-transform: uppercase;
 		}
-		
-	}
 
+	}
 	.icon {
-		font-size: $link-font-size;
 		vertical-align: middle;
+		font-size: $link-font-size;
 	}
 }
