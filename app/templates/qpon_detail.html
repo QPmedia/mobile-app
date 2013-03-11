@@ -1,15 +1,23 @@
 <div class="row">
 	<div class="large-12 columns">
-		<h1>{{data.headline}}</h1>
+		<h1>{{qpon.headline}}</h1>
 		<hr>
 	</div>
 </div>
 <div class="row">
 	<div class="large-12 columns">
 		<div class="panel callout radius">
-          <h5>{{data.retailer}}</h5>
-          <p>{{data.desc}}</p>
-          <p>{{data.validity_text}}</p>
+          <h5>{{qpon.retailer}}</h5>
+          <p>{{qpon.desc}}</p>
+          <p>{{qpon.validity_text}}</p>
+        </div>
+	</div>
+</div>
+<div class="row">
+<div class="small-6 columns">
+		<div class="panel callout radius js-add-favorite" data-id="{{qpon.id}}" data-uri="{{qpon.resource_uri}}">
+          <h5>Add Favorite</h5>
+          <p>id: {{qpon.id}}</p>
         </div>
 	</div>
 </div>
