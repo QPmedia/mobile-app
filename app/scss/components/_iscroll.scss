@@ -32,10 +32,10 @@ $navigation-bar-height: 48px;
 	bottom: 0;
 	//width: 100%;
 	height: $navigation-bar-height;
-	background-color: #828282;
-	@include background-image(linear-gradient(top, darken(#828282, 5%), darken(#828282, 5%) 2px, #828282 2px, #828282));
+	background-color: #DDDDDD;
+	@include background-image(linear-gradient(top, darken(#DDDDDD, 5%), darken(#DDDDDD, 5%) 2px, #DDDDDD 2px, #DDDDDD));
 	padding: 0;
-	color: #fff;
+	color: #757575;
 	overflow: hidden;
 
 	ul.action-bar {
