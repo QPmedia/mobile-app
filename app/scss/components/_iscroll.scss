@@ -22,6 +22,7 @@ $navigation-bar-height: 48px;
 	@include stretch-x;
 	top: 0;
 	z-index: 2;
+	//width: 100%;
 	height: $topbar-height;
 	line-height: $topbar-height;
 }
@@ -29,6 +30,7 @@ $navigation-bar-height: 48px;
 #footer {
 	@include stretch-x;
 	bottom: 0;
+	//width: 100%;
 	height: $navigation-bar-height;
 	background-color: #828282;
 	@include background-image(linear-gradient(top, darken(#828282, 5%), darken(#828282, 5%) 2px, #828282 2px, #828282));
@@ -75,13 +77,6 @@ $navigation-bar-height: 48px;
 	-webkit-overflow-scrolling: touch;
 	@include transition(transform 0s linear);
 	@include backface-visibility(hidden);
-}
-
-#menu {
-	@include stretch-y(0, 0);
-	background-color: #000;
-	z-index: 0;
-	left: 0;
 }
 
 #content {

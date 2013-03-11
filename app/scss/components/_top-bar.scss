@@ -1,5 +1,6 @@
 $topbar-height: 48px;
-$topbar-bg: #222 !default;
+$topbar-bg: $primary-color !default;
+//$topbar-bg: #222 !default;
 $topbar-bg-gradient: linear-gradient(top, $topbar-bg, $topbar-bg 46px, darken($topbar-bg, 2.6%) 46px) !default;
 $topbar-dropdown-bg: $topbar-bg !default;
 $topbar-title-weight: normal !default;
@@ -35,9 +36,10 @@ $topbar-breakpoint: emCalc(1px);
 
 	.title-area {
 		padding: 0 10px;
+		-webkit-transition: all 0.2s;
 	}
 	.title-area:active {
-		background-color: $primary-color;
+		background-color: darken($primary-color,25%);
 	}
 
 	.name {

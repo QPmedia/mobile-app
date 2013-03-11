@@ -1,8 +1,10 @@
-<h5>{{ favorites.meta.limit }}</h5>
 <ul class="list-view">
-	{% for qpon in favorites %}
+	{% for fav in favorites %}
 		<li>
-			
+			<a href="#!/coupons/{{ fav.id }}">
+				<h5>{{ fav.user}} : {{ fav.qpon.headline }}</h5>
+				<p>{{ fav.resource_uri}}</p>
+			</a>
 		</li>
 	{% endfor %}
 </ul>

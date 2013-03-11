@@ -20,7 +20,7 @@ define (require) ->
 			
 
 			@position = 0
-			@max_pos = 150
+			@max_pos = 200
 			@swiping = false
 			@render
 
@@ -48,6 +48,7 @@ define (require) ->
 			# FIXME: in qpon_list, start dragging right and then bot.
 			# menu will be left half open
 			return unless ev.gesture.direction in ["right", "left"]
+			ev.preventDefault()
 			console.log ev.type
 			console.log ev.gesture.velocityX
 			# too bad the swipe event if fired after all drag events...
