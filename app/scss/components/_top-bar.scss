@@ -1,5 +1,6 @@
 $topbar-height: 48px;
 $topbar-bg: #222 !default;
+$topbar-bg-gradient: linear-gradient(top, $topbar-bg, $topbar-bg 46px, darken($topbar-bg, 2.6%) 46px) !default;
 $topbar-dropdown-bg: $topbar-bg !default;
 $topbar-title-weight: normal !default;
 $topbar-title-font-size: emCalc(16px) !default;
@@ -10,12 +11,13 @@ $topbar-breakpoint: emCalc(1px);
 
 @import "foundation/components/top-bar";
 
-.top-bar {
-	//border-top: 1px solid lighten($topbar-bg, 4.2%);
-	//border-top-color: rgba(#fff, 0.042);
-	border-bottom: 2px solid darken($topbar-bg, 2.6%);
-	//border-bottom-color: rgba(#000, 0.26);
+#header.contain-to-grid {
+	@include background($topbar-bg-gradient);
 	@include box-shadow(0 0 6px rgba(#000, 0.1));
+}
+
+.top-bar {
+	@include background($topbar-bg-gradient);
 
 	img {
 		width: 32px;
