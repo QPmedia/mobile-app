@@ -23,7 +23,7 @@ $navigation-bar-height: 48px;
 	left: 0;
 	z-index: 2;
 	width: 100%;
-	background-color: #fff;
+	//background-color: #fff;
 	@include transition(transform 0s linear);
 	@include backface-visibility(hidden);
 	@include overflow-scroll("#content");
