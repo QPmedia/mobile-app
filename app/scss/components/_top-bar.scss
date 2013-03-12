@@ -11,6 +11,16 @@ $topbar-menu-link-weight: normal !default;
 $topbar-breakpoint: emCalc(1px);
 
 @import "foundation/components/top-bar";
+@import "compass/layout/stretching";
+
+#header {
+	@include stretch-x;
+	top: 0;
+	z-index: 2;
+	//width: 100%;
+	height: $topbar-height;
+	line-height: $topbar-height;
+}
 
 #header.contain-to-grid {
 	@include background($topbar-bg-gradient);
