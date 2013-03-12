@@ -2,8 +2,9 @@
 # configuration file, which you can learn more about here:
 # https://github.com/cowboy/grunt/blob/master/docs/configuring.md
 #
-path = require('path')
-lrSnippet = require('grunt-contrib-livereload/lib/utils').livereloadSnippet
+path       = require('path')
+lrSnippet  = require('grunt-contrib-livereload/lib/utils').livereloadSnippet
+modRewrite = require('connect-modrewrite');
 folderMount = (connect, point)->
 	connect.static(path.resolve(point))
 
@@ -36,7 +37,16 @@ module.exports = (grunt) ->
 					base: 'build/dev'
 					port: 8001
 					hostname: '0.0.0.0'
-					middleware: (connect, options) -> [lrSnippet, folderMount(connect, options.base)]
+					middleware: (connect, options) ->
+						[	modRewrite(['^/cordova.js$ /vendor/phonegap-desktop/phonegap-desktop.js',
+										'^/debugdata.json$ /vendor/phonegap-desktop/debugdata.json',
+										'^/barcodescanner.js$ /vendor/phonegap-desktop/barcodescanner.js',
+										'^/plugins/barcodescanner.json$ /vendor/phonegap-desktop/barcodescanner.json',
+										]),
+							lrSnippet,
+							folderMount(connect, options.base),
+							connect.static(options.base)
+						]
 			release:
 				options:
 					port: 8002

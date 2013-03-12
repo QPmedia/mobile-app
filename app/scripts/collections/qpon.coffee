@@ -6,4 +6,7 @@ define (require) ->
 	class QponCollection extends Backbone.Collection
 		initialize: ->
 			@model = Qpon
-			@urlRoot = app.API_URL+"qpon/"
+			@url   = "#{app.API_URL}qpon/"
+
+		parse: (data) ->
+			return data.results

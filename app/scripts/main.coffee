@@ -8,7 +8,7 @@ define ["jquery","app","router"], ($, app, Router) ->
 
 		# Trigger the initial route
 		Backbone.history.start()
-		app.router.navigate("!/start", {trigger: false, replace: true});
+		#app.router.navigate("!/start", {trigger: false, replace: true});
 
 	# All navigation that is relative should be passed through the navigate
 	# method, to be processed by the router.  If the link has a data-bypass

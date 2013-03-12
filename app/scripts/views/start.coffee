@@ -69,7 +69,7 @@ define (require) ->
 
 				when "dragend"
 					threshold = @max_pos*0.5
-					$(container).css("-webkit-transition", "-webkit-transform 0.8s")
+					$(container).css("-webkit-transition", "-webkit-transform 0.2s")
 					
 					#go fast if user went fast as well
 					if ev.gesture.velocityX > 1.2

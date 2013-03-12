@@ -1,9 +1,9 @@
-define (require) ->
-	app      = require("app")
-	Backbone = require("backbone")
-	Favorite = require("models/favorite")
+define ["app","backbone-pageable","models/favorite"]
+		,(app, PageableCollection, Favorite) ->
+	class FavoriteCollection extends PageableCollection
+		model: Favorite
 
-	class FavoriteCollection extends Backbone.Collection
 		initialize: ->
-			@model = Favorite
-			@urlRoot = app.API_URL+"favorite/"
+			@url = app.API_URL+"favorite/"
+		parse: (data) ->
+			return data.results
