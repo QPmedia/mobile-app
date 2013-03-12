@@ -7,7 +7,7 @@ $icon-size: $navigation-bar-height - 10;
 #footer {
 	@include stretch-x;
 	bottom: 0;
-	//width: 100%;
+	z-index: 3;
 	height: $actionbar-height;
 	background-color: $actionbar-bg-color;
 	@include background-image(linear-gradient(top, darken($actionbar-bg-color, 5%), darken($actionbar-bg-color, 5%) 2px, $actionbar-bg-color 2px, $actionbar-bg-color));
@@ -17,7 +17,6 @@ $icon-size: $navigation-bar-height - 10;
 
 	ul.action-bar {
 		display: block;
-		//width: 100%;
 		line-height: $actionbar-height;
 
 		li {

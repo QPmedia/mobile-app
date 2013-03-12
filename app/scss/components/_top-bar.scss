@@ -16,8 +16,7 @@ $topbar-breakpoint: emCalc(1px);
 #header {
 	@include stretch-x;
 	top: 0;
-	z-index: 2;
-	//width: 100%;
+	z-index: 3;
 	height: $topbar-height;
 	line-height: $topbar-height;
 }
