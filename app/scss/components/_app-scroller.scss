@@ -1,0 +1,37 @@
+@import "compass/layout/stretching";
+
+$navigation-bar-height: 48px;
+
+#app-wrapper {
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+}
+
+#app {
+	@include transition(transform 0s linear);
+	@include backface-visibility(hidden);
+	z-index: 2;
+	width: 100%;
+	height: 100%;
+	background: #fff;
+}
+
+
+#main {
+	@include stretch-y($topbar-height, $navigation-bar-height);
+	left: 0;
+	z-index: 2;
+	width: 100%;
+	background-color: #fff;
+	@include transition(transform 0s linear);
+	@include backface-visibility(hidden);
+	@include overflow-scroll("#content");
+}
+
+#content {
+	position: relative;
+	z-index: 1;
+	padding: 0;
+	width: 100%;
+}

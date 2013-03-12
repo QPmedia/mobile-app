@@ -1,0 +1,45 @@
+$actionbar-height: $navigation-bar-height; //48px
+$actionbar-bg-color: #DDDDDD;
+$actionbar-icon-color: #777777;
+$icon-size: $navigation-bar-height - 10;
+
+
+#footer {
+	@include stretch-x;
+	bottom: 0;
+	//width: 100%;
+	height: $actionbar-height;
+	background-color: $actionbar-bg-color;
+	@include background-image(linear-gradient(top, darken($actionbar-bg-color, 5%), darken($actionbar-bg-color, 5%) 2px, $actionbar-bg-color 2px, $actionbar-bg-color));
+	padding: 0;
+	color: $actionbar-icon-color;
+	overflow: hidden;
+
+	ul.action-bar {
+		display: block;
+		//width: 100%;
+		line-height: $actionbar-height;
+
+		li {
+			display: inline-block;
+			float: left;
+			margin: 0;
+			text-align: center;
+			font-size: $icon-size;
+
+			&:first-child {
+				padding-left: $column-gutter / 2 ;
+				text-align: left;
+			}
+			&:last-child {
+				padding-right: $column-gutter / 2 ;
+				text-align: right;
+			}
+		}
+		@for $i from 2 through 5 {
+			li:nth-child(1):nth-last-child(#{$i}) {
+				&, & ~ li { width: (100% / $i); }
+			}
+		}
+	}
+}
