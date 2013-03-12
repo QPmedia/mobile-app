@@ -1,3 +1,14 @@
+$form-spacing: emCalc(4px) !default;
+
+$input-font-color: $body-font-color;
+$input-font-size: 16px;
+$input-bg-color: transparent !default;
+$input-focus-bg-color: transparent !default;
+$input-border-color: #ccc !default;
+$input-focus-border-color: #0099cc !default;
+$input-border-width: 0px !default;
+$input-box-shadow: none !default;
+
 @import "foundation/components/forms";
 
 // Disable long tap to copy/paste, except on input fields.
@@ -8,4 +19,25 @@
 
 input, textarea, select {
 	@include user-select(auto);
+}
+
+input[type="text"], input[type="password"], input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="month"], input[type="week"], input[type="email"], input[type="number"], input[type="search"], input[type="tel"], input[type="time"], input[type="url"], textarea {
+	margin: 4px 0;
+	padding: $form-spacing 12px;
+	height: 40px;
+	border-bottom-width: 2px;
+	@include background-image(linear-gradient(bottom, $input-border-color 6px, transparent 6px),
+		linear-gradient(bottom, $input-border-color 6px, transparent 6px));
+	@include background-size(2px 100%);
+	background-position: 0 0, 100% 0;
+	background-repeat: no-repeat;
+	@include transition(all 0s);
+
+	&:focus {
+		@include background-image(linear-gradient(bottom, $input-focus-border-color 6px, transparent 6px),
+			linear-gradient(bottom, $input-focus-border-color 6px, transparent 6px));
+		@include background-size(2px 100%);
+		background-position: 0 0, 100% 0;
+		background-repeat: no-repeat;
+	}
 }
