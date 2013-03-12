@@ -39,10 +39,6 @@ $topbar-breakpoint: emCalc(1px);
 		line-height: 48px;
 	}
 
-	li.name:target span.icon {
-		display: none;
-	}
-
 	.title-area {
 		padding: 0 10px;
 		-webkit-transition: all 0.2s;
