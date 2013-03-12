@@ -14,7 +14,6 @@
 @import "normalize";
 
 // Include all of the global elements that are needed by Foundation.
-// FIXME: SOON TO BECOME _foundation-global.scss
 @import "foundation/foundation-global";
 @import "globals/mixins";
 
@@ -25,8 +24,8 @@
 @import "foundation/components/block-grid";
 //@import "foundation/components/type";
 @import "components/type";
-@import "foundation/components/buttons";
-@import "foundation/components/forms";
+@import "components/buttons";
+@import "components/forms";
 @import "foundation/components/custom-forms";
 @import "foundation/components/button-groups";
 @import "foundation/components/dropdown-buttons";
@@ -59,7 +58,6 @@
 
 // Import custom components.
 @import "components/app-scroller";
-@import "components/forms";
 @import "components/list-view";
 @import "components/actionbar";
 @import "components/actionbar-icons";

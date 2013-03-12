@@ -1,9 +1,11 @@
+@import "foundation/components/forms";
+
 // Disable long tap to copy/paste, except on input fields.
 * {
 	-webkit-touch-callout: none;
-	-webkit-user-select: none;
+	@include user-select(none);
 }
 
 input, textarea, select {
-	-webkit-user-select: auto;
+	@include user-select(auto);
 }
