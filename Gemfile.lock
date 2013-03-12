@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: git://github.com/zurb/foundation.git
-  revision: 0865884bd91bdee85792aed37e740ce2d1463089
+  revision: 02fb6c8254d31edad1f160e88d3175196858c91a
   branch: master
   specs:
     zurb-foundation (4.0.5)
