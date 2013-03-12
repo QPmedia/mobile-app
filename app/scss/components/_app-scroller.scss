@@ -17,7 +17,6 @@ $navigation-bar-height: 48px;
 	background: #fff;
 }
 
-
 #main {
 	@include stretch-y($topbar-height, $navigation-bar-height);
 	left: 0;
@@ -31,7 +30,6 @@ $navigation-bar-height: 48px;
 
 #content {
 	position: relative;
-	z-index: 1;
 	padding: 0;
 	width: 100%;
 }

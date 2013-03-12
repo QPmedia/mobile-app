@@ -6,6 +6,8 @@ define (require) ->
 	Favorite = require("models/favorite")
 
 	class QponDetailView extends Backbone.View
+		title: 'Detail'
+		
 		events:
 			'click .js-add-favorite': 'add_favorite' 
 
@@ -24,6 +26,7 @@ define (require) ->
 			fav.save()
 			console.log fav
 		render: ->
+			app.header.setTitle(@title)
 			@model.fetch()
 			return this
 

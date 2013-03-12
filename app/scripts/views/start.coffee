@@ -7,6 +7,7 @@ define (require) ->
 	require("backbone-zombienation")
 
 	class StartView extends Backbone.View
+		title: 'Start'
 		#swig.compile(require("text!templates/login.html"), { filename: "login" })
 
 		template : swig.compile(require("text!templates/start.html"), { filename: "start" })
@@ -41,6 +42,7 @@ define (require) ->
 				console.log(ex.message);
 
 		render: ->
+			app.header.setTitle(@title)
 			@$el.html @template()
 			return this
 
