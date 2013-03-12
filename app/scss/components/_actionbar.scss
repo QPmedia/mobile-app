@@ -1,6 +1,7 @@
 $actionbar-height: $navigation-bar-height; //48px
 $actionbar-bg-color: #DDDDDD;
 $actionbar-icon-color: #777777;
+$icon-size: $navigation-bar-height - 10;
 
 
 #footer {
@@ -24,7 +25,7 @@ $actionbar-icon-color: #777777;
 			float: left;
 			margin: 0;
 			text-align: center;
-			font-size: 32px;
+			font-size: $icon-size;
 
 			&:first-child {
 				padding-left: $column-gutter / 2 ;
