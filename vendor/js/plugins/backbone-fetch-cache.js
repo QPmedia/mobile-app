@@ -8,7 +8,7 @@
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module and set browser global
-    define(['lodash', 'backbone'], function (_, Backbone) {
+    define(['underscore', 'backbone'], function (_, Backbone) {
       return (root.Backbone = factory(_, Backbone));
     });
   } else {

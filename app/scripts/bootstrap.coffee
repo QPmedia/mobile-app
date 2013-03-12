@@ -4,7 +4,6 @@ require.config
 
 		# Libraries
 		jquery:                   "../../vendor/js/libs/jquery"
-		lodash:                   "../../vendor/js/libs/lodash-1.0.1"
 		underscore:               "../../vendor/js/libs/lodash-1.0.1"
 		backbone:                 "../../vendor/js/libs/backbone-0.9.2"
 		fastclick:                "../../vendor/js/libs/fastclick"
@@ -13,10 +12,9 @@ require.config
 		foundation:               "../../vendor/js/libs/foundation"
 		# Plugins
 		text:                     "../../vendor/js/plugins/text-1.0.7"
-		"backbone-deepmodel":     "../../vendor/js/plugins/backbone-deepmodel-0.7.3"
+		"backbone-pageable":      "../../vendor/js/plugins/backbone-pageable"
 		"backbone-zombienation":  "../../vendor/js/plugins/backbone-zombienation"
 		"backbone-fetch-cache":   "../../vendor/js/plugins/backbone-fetch-cache"
-		"backbone-tastypie":      "../../vendor/js/plugins/backbone-tastypie"
 		templates:                "../templates"
 		navigator:                "utils/navigator"
 		"foundation-alerts":      "../../vendor/js/plugins/foundation.alerts"
@@ -34,26 +32,20 @@ require.config
 			exports: "Hammer"
 
 		backbone:
-			deps: ["lodash", "jquery"]
+			deps: ["underscore", "jquery"]
 			exports: "Backbone"
 
 		swig:
-			deps: ["lodash", "utils/filter"]
+			deps: ["underscore", "utils/filter"]
 			exports: "swig"
 
 		"backbone-deepmodel":
 			deps: ["backbone"]
 
-		"backbone-super":
+		"backbone-pageable":
 			deps: ["backbone"]
 
 		"backbone-zombienation":
-			deps: ["backbone"]
-
-		"backbone-fetch-cache":
-			deps: ["backbone"]
-
-		"backbone-tastypie":
 			deps: ["backbone"]
 
 		"jquery-hammer":
