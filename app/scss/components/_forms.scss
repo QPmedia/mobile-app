@@ -9,6 +9,12 @@ $input-focus-border-color: #0099cc !default;
 $input-border-width: 0px !default;
 $input-box-shadow: none !default;
 
+$fieldset-border-width: 0px !default;
+$fieldset-padding: 0 !default;
+
+$legend-bg: transparent;
+$legend-padding: 14px 12px 8px !default;
+
 @import "foundation/components/forms";
 
 // Disable long tap to copy/paste, except on input fields.
@@ -39,5 +45,19 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
 		@include background-size(2px 100%);
 		background-position: 0 0, 100% 0;
 		background-repeat: no-repeat;
+	}
+}
+
+fieldset {
+	position: relative;
+
+	legend {
+		margin: 4px 0 !important;
+		width: 100%;
+		border-bottom: 2px solid $primary-color;
+		color: $primary-color;
+		text-transform: uppercase;
+		font-size: 14px;
+		line-height: $em-base;
 	}
 }
