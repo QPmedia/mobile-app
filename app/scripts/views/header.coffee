@@ -30,10 +30,7 @@ define (require) ->
 		#setMenu
 
 		goback: ->
-			if Backbone.history.fragment is '!/start'
-				alert 'open menu here'
-				#translate_to = 200
-				#$('#app').css('-webkit-transform', 'translate3d(' + translate_to + 'px,0,0) scale3d(1,1,1)')
+			if Backbone.history.fragment is '!/start' or Backbone.history.fragment is ''
+				console.log 'open menu here'
 			else
 				window.history.back()
-
