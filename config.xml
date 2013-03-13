@@ -10,8 +10,13 @@
 		QP media
 	</author>
 
+	<icon src="app/images/icon.png" />
+
 	<!-- Disable bouncing for iOS (no idea why the default is true) -->
 	<preference name="UIWebViewBounce" value="false" />
+
+	<!-- Android 4.0 is required -->
+	<preference name="android-minSdkVersion" value="14" />
 
 	<gap:plugin name="BarcodeScanner"/>
 </widget>
