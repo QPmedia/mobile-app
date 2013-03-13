@@ -5,6 +5,7 @@ $topbar-bg-gradient: linear-gradient(top, $topbar-bg, $topbar-bg 46px, darken($t
 $topbar-dropdown-bg: $topbar-bg !default;
 $topbar-title-weight: normal !default;
 $topbar-title-font-size: emCalc(16px) !default;
+$topbar-pagetitle-font-size: emCalc(20px) !default;
 $topbar-link-color: #eee !default;
 $topbar-link-weight: normal !default;
 $topbar-menu-link-weight: normal !default;
@@ -37,10 +38,13 @@ $topbar-breakpoint: emCalc(1px);
 
 	ul {
 		line-height: 48px;
+		font-size: $topbar-pagetitle-font-size;
+		color: $topbar-link-color;
 	}
 
 	.title-area {
-		padding: 0 10px;
+		padding: 0 8px;
+		margin-right: 5px;
 		-webkit-transition: all 0.2s;
 	}
 	.title-area:active {
