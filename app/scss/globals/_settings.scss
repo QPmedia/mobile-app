@@ -10,9 +10,14 @@ $support-for-original-webkit-gradients: false;
 
 $em-base: 16px;
 
+// Configure vertical rhythmn for Compass, that is needed by Foundation too.
+$base-font-size: $em-base;
+$base-line-height: 48px;
+
 // Global Foundation settings
 $include-print-styles: false;
 
+// Grid settings
 $column-gutter: 20px;
 
 // Configurables
@@ -23,6 +28,7 @@ $body-font-family: "Roboto-Regular", "Droid Sans", Arial, Helvetica, sans-serif;
 $body-font-weight: normal;
 $body-font-style: normal;
 
+// Color settings
 $primary-color: #33b5e5;
 $secondary-color: #fbfbfb;
 $alert-color: #ff4444;
