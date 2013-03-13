@@ -35,6 +35,10 @@ $button-lrg: $button-med;
 	@include transition(background-color 0s);
 	-webkit-tap-highlight-color: transparent !important;
 
+	& + .button {
+		margin-left: 4px;
+	}
+
 	&:hover {
 		// Reset background-color as we don't need any hover effects.
 		background-color: #d6d6d6;
