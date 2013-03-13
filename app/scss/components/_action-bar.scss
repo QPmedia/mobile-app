@@ -24,20 +24,45 @@ $actionbar-icon-size: 38px !default;
 			float: left;
 			margin: 0;
 			text-align: center;
-			font-size: $actionbar-icon-size;
 
-			&:first-child {
-				padding-left: $column-gutter / 2 ;
-				text-align: left;
-			}
-			&:last-child {
-				padding-right: $column-gutter / 2 ;
-				text-align: right;
+			&:first-child { text-align: left; }
+			&:last-child { text-align: right; }
+			span[class*="icon-"] {
+				font-size: $actionbar-icon-size;
+				display: inline-block;
+				width: $actionbar-height;
+				height: $actionbar-height;
+				text-align: center;
 			}
 		}
-		@for $i from 2 through 5 {
+		@for $i from 2 through 6 {
+			$li-width: 100% / $i;
+			@if $i > 3 {
+				$li-width: 100% / ($i - 1);
+			}
+
 			li:nth-child(1):nth-last-child(#{$i}) {
-				&, & ~ li { width: (100% / $i); }
+				@if $i > 3 {
+					margin-right: ($actionbar-height / 4);
+					width: $li-width / 2;
+				} @else {
+					width: $li-width;
+				}
+
+				& ~ li {
+					width: $li-width;
+					@if $i > 3 {
+						margin-right: -($actionbar-height / 2 / ($i - 2));
+					}
+				}
+			}
+			li:nth-child(#{$i}):nth-last-child(1) {
+				@if $i > 3 {
+					margin-left: ($actionbar-height / 4) !important;
+					width: $li-width / 2 !important;
+				} @else {
+					width: $li-width !important;
+				}
 			}
 		}
 	}
