@@ -30,7 +30,14 @@ define (require) ->
 		#setMenu
 
 		goback: ->
+			#toDo: refactoring
+			position = new WebKitCSSMatrix(window.getComputedStyle(document.getElementById("app")).webkitTransform)
+			container = '#app'
+
 			if Backbone.history.fragment is '!/start' or Backbone.history.fragment is ''
-				console.log 'open menu here'
+				if position.m41 > 0
+					$(container).css('-webkit-transform', 'translate3d(' + 0 + 'px,0,0) scale3d(1,1,1)')
+				else
+					$(container).css('-webkit-transform', 'translate3d(' + 200 + 'px,0,0) scale3d(1,1,1)')
 			else
 				window.history.back()

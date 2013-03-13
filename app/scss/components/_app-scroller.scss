@@ -21,6 +21,7 @@
 	z-index: 2;
 	width: 100%;
 	//background-color: #fff;
+	-webkit-transform: translate3d(0, 0, 0);
 	@include transition(transform 0s linear);
 	@include backface-visibility(hidden);
 	@include overflow-scroll("#content");
