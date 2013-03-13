@@ -6,12 +6,13 @@
   Foundation.libs.topbar = {
     name : 'topbar',
 
-    version : '4.0.4',
+    version : '4.0.0',
 
     settings : {
       index : 0,
       stickyClass : 'sticky',
-      back_text: '&laquo; Back',
+      custom_back_text: true,
+      back_text: 'Back',
       init : false
     },
 
@@ -65,7 +66,7 @@
               section = topbar.find('section, .section'),
               titlebar = topbar.children('ul').first();
 
-          if (!self.settings.$topbar.data('height')) self.largestUL();
+          if (!topbar.data('height')) self.largestUL();
 
           e.preventDefault();
 
@@ -150,8 +151,14 @@
       this.settings.$section.find('.has-dropdown>a').each(function () {
         var $link = $(this),
             $dropdown = $link.siblings('.dropdown'),
-            $titleLi = $('<li class="title back js-generated"><h5><a href="#">' + self.settings.back_text + '</a></h5></li>');
+            $titleLi = $('<li class="title back js-generated"><h5><a href="#"></a></h5></li>');
+
         // Copy link to subnav
+        if (self.settings.custom_back_text == true) {
+          $titleLi.find('h5>a').html('&laquo; ' + self.settings.back_text);
+        } else {
+          $titleLi.find('h5>a').html('&laquo; ' + $link.html());
+        }
         $dropdown.prepend($titleLi);
       });
 
