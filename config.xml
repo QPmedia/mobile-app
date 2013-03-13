@@ -10,7 +10,7 @@
 		QP media
 	</author>
 
-	<icon src="app/images/icon.png" />
+	<icon src="icon.png" />
 
 	<!-- Disable bouncing for iOS (no idea why the default is true) -->
 	<preference name="UIWebViewBounce" value="false" />
