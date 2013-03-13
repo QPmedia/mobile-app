@@ -24,6 +24,7 @@ window.addEventListener('load', function() {
 	setTimeout(function() {
 
 		// Map mouse events to touch events
+		/* mboehme: this causes too much performance problems and we don't really need it right now
 		document.onmousedown = function(e) {
 			phonegapdesktop.internal.dispatchTouchEvent(e, "touchstart");
 			phonegapdesktop.internal.touchActive = true;
@@ -39,7 +40,7 @@ window.addEventListener('load', function() {
 			phonegapdesktop.internal.touchActive = false;
 			phonegapdesktop.internal.dispatchTouchEvent(e, "touchend");
 		};
-
+		*/
 		// Map Ctrl+Alt+{Key} to fire events
 		document.onkeydown = function(e) {
 			e = e || window.event;
