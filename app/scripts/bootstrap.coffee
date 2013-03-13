@@ -48,9 +48,6 @@ require.config
 		"backbone-zombienation":
 			deps: ["backbone"]
 
-		"jquery-hammer":
-			deps: ["jquery", "hammer"]
-
 		foundation:
 			deps: ["jquery"]
 
