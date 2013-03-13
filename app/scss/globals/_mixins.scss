@@ -29,11 +29,6 @@
 	}
 }
 
-// Override Foundation's "clearfix" mixin to use Compass.
-@mixin clearfix() {
-	@include pie-clearfix;
-}
-
 @mixin overflow-scroll($ios-fix-selector: "& > *") {
 	overflow-y: auto;
 	-webkit-overflow-scrolling: touch;

@@ -1,10 +1,9 @@
-$actionbar-height: $navigation-bar-height; //48px
-$actionbar-bg-color: #DDDDDD;
-$actionbar-icon-color: #777777;
-$icon-size: $navigation-bar-height - 10;
+$actionbar-height: 48px !default;
+$actionbar-bg-color: #dddddd !default;
+$actionbar-icon-color: #777777 !default;
+$actionbar-icon-size: 38px !default;
 
-
-#footer {
+.action-bar {
 	@include stretch-x;
 	bottom: 0;
 	z-index: 3;
@@ -15,16 +14,17 @@ $icon-size: $navigation-bar-height - 10;
 	color: $actionbar-icon-color;
 	overflow: hidden;
 
-	ul.action-bar {
+	ul {
 		display: block;
 		line-height: $actionbar-height;
 
+		// TODO: Icons should be borderless buttons, see Android styleguides
 		li {
 			display: inline-block;
 			float: left;
 			margin: 0;
 			text-align: center;
-			font-size: $icon-size;
+			font-size: $actionbar-icon-size;
 
 			&:first-child {
 				padding-left: $column-gutter / 2 ;

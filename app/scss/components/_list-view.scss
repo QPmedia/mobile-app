@@ -17,6 +17,7 @@ ul.list-view {
 		padding: 0;
 
 		a {
+			@include clearfix;
 			display: block;
 			padding: $list-item-padding;
 			-webkit-tap-highlight-color: rgba($primary-color, 0.9) !important;
@@ -30,6 +31,12 @@ ul.list-view {
 			color: lighten($body-font-color, 35%);
 			font-size: remCalc(14px);
 			line-height: 18px;
+		}
+		img {
+			float: left;
+			width: 100px;
+			//margin: (nth($list-item-padding, 1) * -1) (nth($list-item-padding, 2) * -1);
+			margin-right: nth($list-item-padding, 2);
 		}
 	}
 }

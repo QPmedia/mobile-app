@@ -3,20 +3,21 @@
 $button-margin-top: 4px;
 $button-margin-bottom: $button-margin-top;
 
-$button-font-color: $body-font-color !default;
-$button-font-color-alt: $button-font-color !default;
+$button-font-color: #000 !default;
+$button-font-color-alt: #000 !default;
 $button-font-weight: normal;
 $button-font-med: 16px;
 $button-font-sml: 14px;
 
-$button-border-width: 1px;
+$button-border-width: 0;
 $button-border-style: solid;
 $button-border-color: transparent;
 
-$button-radius: 1px;
+$button-radius: 2px;
 
 $button-med: 1em / $button-font-med * 12px;
 $button-sml: 1em / $button-font-sml * 12px;
+
 // Disable tiny and large buttons.
 $button-tny: $button-sml;
 $button-lrg: $button-med;
@@ -27,27 +28,27 @@ $button-lrg: $button-med;
 	outline-width: 0px;
 	outline-style: none;
 	margin-top: $button-margin-bottom;
-	border-color: lighten(#cecece, 6.5%) darken(#cecece, 2.2%) darken(#cecece, 21.4%);
 	@include border-radius($button-radius);
-	background-color: #cecece;
-	@include box-shadow(0 1px 1px rgba(#000, 0.2));
+	background-color: #d6d6d6;
+	@include box-shadow(0 1px 1px rgba(#000, 0.2),
+		inset 0 1px rgba(#fff, 0.1), inset 0 -1px 1px rgba(#000, 0.426));
 	@include transition(background-color 0s);
 	-webkit-tap-highlight-color: transparent !important;
 
 	&:hover {
 		// Reset background-color as we don't need any hover effects.
-		background-color: #cecece;
+		background-color: #d6d6d6;
 	}
-	// TODO: Calculate all colors based on $primary-color or so.
+	// See http://developer.android.com/design/style/touch-feedback.html for
+	// details about button states.
 	&:focus {
-		border-color: #59bbdc #30aad2 #2b98bc;
-		background-color: #a6daed;
-		@include box-shadow(0 1px 1px rgba(#000, 0.2), inset 0 0 0 1px #30abd4);
+		background-color: mix(#5ac2e9, #fff, 50%);
+		@include box-shadow(0 1px 1px rgba(#000, 0.2), inset 0 0 0 2px $primary-color);
 	}
 	// The "active" class is used to force the appearance of the active/pressed state.
 	&:active, &.active {
-		border-color: #85d2ee #57bce2 #4597b5;
-		background-color: #59c1e8;
-		@include box-shadow(0 0 0 4px rgba($primary-color, 0.4));
+		background-color: #5ac2e9;
+		@include box-shadow(0 0 0 4px rgba($primary-color, 0.4),
+			inset 0 1px rgba(#fff, 0.1), inset 0 -1px 1px rgba(#000, 0.426));
 	}
 }
