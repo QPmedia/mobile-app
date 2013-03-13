@@ -6,8 +6,6 @@ $experimental-support-for-opera: false;
 $experimental-support-for-microsoft: false;
 $support-for-original-webkit-gradients: false;
 
-@import "compass";
-
 $em-base: 16px;
 
 // Configure vertical rhythmn for Compass, that is needed by Foundation too.
@@ -33,3 +31,6 @@ $primary-color: #33b5e5;
 $secondary-color: #fbfbfb;
 $alert-color: #ff4444;
 $success-color: #99cc00;
+
+// Import Compass and maybe some plugins
+@import "compass";
