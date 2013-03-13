@@ -1,11 +1,12 @@
 define ["models/user",
+		"utils/filter"
 		"swig",
 		"backbone",
 		"backbone-zombienation",
 		"backbone-fetch-cache"]
-		,(User, swig, Backbone) ->
+		,(User, swig_filter, swig, Backbone) ->
 	swig.init
-		filters: require("utils/filter")
+		filters: swig_filter
 
 	class App
 		API_URL: "http://192.168.2.12:8000/m/api/"

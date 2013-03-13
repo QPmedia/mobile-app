@@ -2,7 +2,6 @@ define (require) ->
 	$                  = require("jquery")
 	app                = require("app")
 	Backbone           = require("backbone")
-	Hammer             = require("hammer")
 	Favorite           = require("models/favorite")
 	FavoriteCollection = require("collections/favorite")
 	#require("backbone-fetch-cache")
@@ -24,7 +23,5 @@ define (require) ->
 		modelFetched: ->
 			@$el.html @template({favorites : @favorites.toJSON()})
 			console.log @favorites
-
-			hammertime = $(".list-view").hammer()
 
 			return this
