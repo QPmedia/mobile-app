@@ -1,15 +1,16 @@
-define ["jquery","app","router","views/header", "views/menu"]
-, ($, app, Router, Header, Menu) ->
+define ["app","router","views/header", "views/menu"]
+, (app, Router, Header, Menu) ->
 
 	# Treat the jQuery ready function as the entry point to the application.
 	# Inside this function, kick-off all initialization, everything up to this
 	# point should be definitions.
 	$ ->
-		app.router = new Router(container: $("#content"))
+		
 
 		#init Top-Bar
-		app.header = new Header()
-		app.menu = new Menu({el:"#menu"})
+		app.header = new Header(el: "#header")
+		app.menu = new Menu(el: "#menu", container: "#app")
+		app.router = new Router(container: $("#content"), menu: app.menu)
 		# Trigger the initial route
 		Backbone.history.start()
 		#app.router.navigate("!/start", {trigger: false, replace: true});

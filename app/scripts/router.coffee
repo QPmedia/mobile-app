@@ -1,15 +1,15 @@
-define ["jquery",
-		"views/qpon_list",
+define ["views/qpon_list",
 		"views/qpon_detail",
 		"views/start",
 		"views/login",
 		"views/favorite_list"]
-		, ($, QponListView, QponDetailView, StartView, LoginView, FavoriteListView) ->
+		, (QponListView, QponDetailView, StartView, LoginView, FavoriteListView) ->
 
 	# Defining the application router, you can attach sub routers here.
 	class Router extends Backbone.Router
 		initialize: (options) ->
 			@container = options.container
+			@menu = options.menu
 
 		routes:
 			"!/start": "start"
@@ -40,6 +40,7 @@ define ["jquery",
 		# destroying the old view in the process.
 		# TODO look into how to handle a page transition here!
 		changeView: (newView) ->
+			@menu.hide()
 			@currentView.dispose()  if @currentView and @currentView.dispose
 			@currentView = newView
 

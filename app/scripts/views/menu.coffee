@@ -7,6 +7,8 @@ define ["app", "hammer", "text!templates/menu.html"]
 
 		position:     0
 		translate_to: 0
+		events:
+			'click #scan': 'scan'
 
 		initialize: (options) ->
 			hammertime = Hammer("#main, #menu").on "drag dragend dragstart", (ev) =>
@@ -19,13 +21,46 @@ define ["app", "hammer", "text!templates/menu.html"]
 			@$el.html @template()
 			return this
 
+		animate: (pos) ->
+			$(@options.container).css('-webkit-transform', "translate3d(#{pos}px,0,0) scale3d(1,1,1)")
+		set_speed: (seconds) ->
+			$(@options.container).css("-webkit-transition", "-webkit-transform #{seconds}s")
+		show: ->
+			@position = @options.width
+			@animate @options.width
+		hide: ->
+			@position = 0
+			@animate 0
+
+		toggle: ->
+			if @position is 0
+				@show()
+			else
+				@hide()
+
+		scan: (event) ->
+			event.preventDefault()
+			console.log('scanning');
+
+			try
+				window.plugins.barcodeScanner.scan (args) ->
+					console.log """
+								Scanner result: 
+									text: #{args.text}
+									format: #{args.format}
+									cancelled: #{args.cancelled}
+								"""
+					app.router.navigate("!/coupons/#{args.text}", {trigger:true})
+			catch ex
+				console.log(ex.message)
+
 		handleHammer: (ev) ->
 			# FIXME: in qpon_list, start dragging right and then bot.
 			# menu will be left half open
 			#console.log ev
 			#return unless ev.gesture.direction in ["right", "left"]
 			#ev.preventDefault()
-			#console.log ev.type
+			console.log ev.type
 			#console.log ev.gesture.velocityX
 			# too bad the swipe event if fired after all drag events...
 			# kind of useless, maybe a second Hammer instance...
@@ -41,15 +76,15 @@ define ["app", "hammer", "text!templates/menu.html"]
 		
 			switch ev.type
 				when "dragstart"
-					$(container).css("-webkit-transition", "-webkit-transform 0s")
+					@set_speed(0)
 
 				when "dragend"
 					threshold = @options.width*0.5
-					$(container).css("-webkit-transition", "-webkit-transform 0.2s")
+					@set_speed(0.2)
 					
 					#go fast if user went fast as well
 					if ev.gesture and ev.gesture.velocityX > 1.2
-						$(container).css("-webkit-transition", "-webkit-transform 0.01s")
+						@set_speed(0.01)
 						if ev.gesture.direction is "right"
 							threshold = -1#200*0.15
 
@@ -77,7 +112,8 @@ define ["app", "hammer", "text!templates/menu.html"]
 					else
 						@translate_to = 0
 
-					$(container).css('-webkit-transform', 'translate3d(' + @translate_to + 'px,0,0) scale3d(1,1,1)')
+					@animate(@translate_to)
+					
 					@position = @translate_to
 
 				when "drag"
@@ -89,5 +125,5 @@ define ["app", "hammer", "text!templates/menu.html"]
 					dx = ev.gesture.deltaX #* 0.4
 					@translate_to = Math.min(Math.max(0, @position + dx), @options.width)
 					#console.log @translate_to
-					$(container).css('-webkit-transform', 'translate3d(' + @translate_to + 'px,0,0) scale3d(1,1,1)')
+					@animate(@translate_to)
 					#ev.preventDefault()

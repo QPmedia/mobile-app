@@ -6,7 +6,8 @@ define ["app", "text!templates/start.html"], (app, template) ->
 		events:
 			'click #scan': 'scan'
 
-		scan: ->
+		scan: (event) ->
+			event.preventDefault()
 			console.log('scanning');
 
 			try
