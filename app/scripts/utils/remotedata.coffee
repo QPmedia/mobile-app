@@ -2,7 +2,7 @@
 ###
 define (require) ->
 	$ = require("jquery")
-	app = require("app")
+	#app = require("app")
 	noop = ->
 
 
@@ -94,6 +94,6 @@ define (require) ->
 		get: get
 		post: post
 
-	app.registerModule "data", exports
+	#app.registerModule "data", exports
 	exports
 

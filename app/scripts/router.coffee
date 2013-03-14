@@ -4,7 +4,6 @@ define ["views/qpon_list",
 		"views/login",
 		"views/favorite_list"]
 		, (QponListView, QponDetailView, StartView, LoginView, FavoriteListView) ->
-
 	# Defining the application router, you can attach sub routers here.
 	class Router extends Backbone.Router
 		initialize: (options) ->

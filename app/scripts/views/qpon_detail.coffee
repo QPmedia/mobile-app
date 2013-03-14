@@ -7,9 +7,9 @@ define (require) ->
 
 	class QponDetailView extends Backbone.View
 		title: 'Detail'
-		
+
 		events:
-			'click .js-add-favorite': 'add_favorite' 
+			'click .js-add-favorite': 'add_favorite'
 
 		initialize: (options) ->
 			@model = new Qpon(id: options.id)
@@ -22,7 +22,7 @@ define (require) ->
 			qpon_id = $(ev.currentTarget).data("id")
 			qpon_uri = $(ev.currentTarget).data("uri")
 			console.log qpon_uri
-			fav = new Favorite({qpon:qpon_id,user:1})
+			fav = new Favorite({qpon_id:qpon_id,user:1})
 			fav.save()
 			console.log fav
 		render: ->

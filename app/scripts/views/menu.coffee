@@ -60,7 +60,7 @@ define ["app", "hammer", "text!templates/menu.html"]
 			#console.log ev
 			#return unless ev.gesture.direction in ["right", "left"]
 			#ev.preventDefault()
-			console.log ev.type
+			#console.log ev.type
 			#console.log ev.gesture.velocityX
 			# too bad the swipe event if fired after all drag events...
 			# kind of useless, maybe a second Hammer instance...

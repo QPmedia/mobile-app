@@ -1,17 +1,10 @@
-define (require) ->
-	$                  = require("jquery")
-	app                = require("app")
-	Backbone           = require("backbone")
-	Favorite           = require("models/favorite")
-	FavoriteCollection = require("collections/favorite")
-	#require("backbone-fetch-cache")
-
+define ["collections/favorite", "text!templates/favorite_list.html"]
+,(FavoriteCollection, template) ->
 	class FavoriteListView extends Backbone.View
+		template: swig.compile(template, { filename: "favorite_list" })
 
 		initialize: (options) ->
-			@template = swig.compile(require("text!templates/favorite_list.html"), { filename: "favorite_list" })
 			@favorites = new FavoriteCollection()
-
 			#fires when updating collenction
 			@bindTo @favorites, "reset", @modelFetched
 
@@ -21,7 +14,7 @@ define (require) ->
 			return this
 
 		modelFetched: ->
-			@$el.html @template({favorites : @favorites.toJSON()})
+			@$el.html @template({objects : @favorites.toJSON()})
 			console.log @favorites
 
 			return this

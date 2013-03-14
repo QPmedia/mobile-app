@@ -1,11 +1,6 @@
-define (require) ->
-	$        = require("jquery")
-	app      = require("app")
-	Backbone = require("backbone")
-	Qpon     = require("models/qpon")
-
+define ["app","text!templates/login.html","utils/remotedata"], (app, template, remote) ->
 	class LoginView extends Backbone.View
-		template : swig.compile(require("text!templates/login.html"), { filename: "login" })
+		template : swig.compile(template, { filename: "login" })
 
 		events:
 			'submit form#loginform': 'login'
@@ -13,7 +8,7 @@ define (require) ->
 		initialize: (options) ->
 			@render
 
-		render: =>
+		render: ->
 			@$el.append @template({user:app.user.toJSON()})
 			return this
 
@@ -22,4 +17,15 @@ define (require) ->
 			pw = @$('#password').val()
 			console.log(username)
 			# make auth accept a callback with status etc.
-			app.user.authenticate username, pw
+			remote.post "#{app.API_URL}token/"
+				,
+					username: username
+					password: pw
+				,
+					success: (data)->
+						app.user.set("username", username)
+						app.user.set("token", data.token)
+						app.router.navigate('!/start', {trigger: true})
+					error: (xhr) ->
+						alert "fehler: " + xhr.status
+			#app.user.authenticate username, pw

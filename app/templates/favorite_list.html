@@ -1,9 +1,10 @@
 <ul class="list-view">
-	{% for fav in favorites %}
+	{% for fav in objects %}
 		<li>
-			<a href="#!/coupons/{{ fav.id }}">
-				<h5>{{ fav.user}} : {{ fav.qpon.headline }}</h5>
-				<p>{{ fav.resource_uri}}</p>
+			<a href="#!/coupons/{{ fav.qpon.id }}">
+				<img src="{{fav.qpon.img}}" alt="{{ fav.qpon.headline }}">
+				<h5>{{ fav.qpon.headline }}</h5>
+				<p>{{ fav.qpon.retailer.name }}</p>
 			</a>
 		</li>
 	{% endfor %}
