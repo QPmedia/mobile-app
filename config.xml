@@ -14,6 +14,7 @@
 
 	<!-- Disable bouncing for iOS (no idea why the default is true) -->
 	<preference name="UIWebViewBounce" value="false" />
+	<preference name="webviewbounce" value="false" />
 
 	<!-- Android 4.0 is required -->
 	<preference name="android-minSdkVersion" value="14" />
