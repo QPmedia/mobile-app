@@ -1,0 +1,7 @@
+<li class="headline">Kategorien</li>
+	<li class="divider"></li>
+	<li><a href="#!/coupons"><span class="icon icon-collections-sort-by-size"></span>Alle Kategorien</a></li>
+	<!--<li><a href="#"><span class="icon icon-content-picture"></span>Kategorie </a></li>-->
+	{% for c in categories %}
+    	<li><a href="#!/coupons"><span class="icon icon-content-picture" style="color: {{ c.color }}"></span>{{ c.name }}</a></li>
+	{% endfor %}

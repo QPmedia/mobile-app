@@ -1,7 +1,9 @@
-define ["app", "hammer", "text!templates/menu.html"]
-, (app, Hammer, template) ->
+define ["app", "hammer", "collections/category", "text!templates/menu.html", "text!templates/_categories.html"]
+, (app, Hammer, CategoryCollection, template, categories_template) ->
 	class Menu extends Backbone.View
 		template: swig.compile(template, { filename: "menu" })
+		categories_template: swig.compile(categories_template, { filename: "categories_template" })
+
 		options:
 			width: null
 
@@ -11,6 +13,15 @@ define ["app", "hammer", "text!templates/menu.html"]
 			'click #scan': 'scan'
 
 		initialize: (options) ->
+
+			@categories = new CategoryCollection()
+			
+			#fires when updating collenction
+			@bindTo @categories, "reset", @update_categories
+
+			@categories.fetch
+				cache: false
+
 			hammertime = Hammer("#main, #menu").on "drag dragend dragstart", (ev) =>
 				@handleHammer ev
 
@@ -20,6 +31,14 @@ define ["app", "hammer", "text!templates/menu.html"]
 		render: ->
 			@$el.html @template()
 			return this
+
+		update_categories: ->
+			$('ul#categories').html(@categories_template({categories : @categories.toJSON()}))
+			console.log @categories
+			
+
+
+
 
 		animate: (pos) ->
 			$(@options.container).css('-webkit-transform', "translate3d(#{pos}px,0,0) scale3d(1,1,1)")
