@@ -55,4 +55,12 @@ $button-lrg: $button-med;
 		@include box-shadow(0 0 0 4px rgba($primary-color, 0.4),
 			inset 0 1px rgba(#fff, 0.1), inset 0 -1px 1px rgba(#000, 0.426));
 	}
+
+	// Borderless buttons, see http://developer.android.com/design/building-blocks/buttons.html#borderless
+	&.borderless {
+		outline: 0;
+		border: 0;
+		background: transparent;
+		@include box-shadow(none);
+	}
 }
