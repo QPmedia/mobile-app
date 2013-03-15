@@ -24,19 +24,19 @@ $topbar-media-query: "only screen";
 	height: $topbar-height;
 	line-height: $topbar-height;
 
-	#title {
-		font-size: $topbar-pagetitle-font-size;
+	&.contain-to-grid {
+		background-color: $topbar-bg;
+		@include background-image($topbar-bg-gradient);
 	}
 }
 
-#header.contain-to-grid {
-	background-color: $topbar-bg;
-	@include background-image($topbar-bg-gradient);
+#title {
+	font-size: $topbar-pagetitle-font-size;
 }
 
 .top-bar {
 	background: transparent;
-	@include box-shadow(inset 0 1px rgba(#fff, 0.106));
+	//@include box-shadow(inset 0 1px rgba(#fff, 0.106));
 
 	img {
 		display: inline;
@@ -88,11 +88,11 @@ $topbar-media-query: "only screen";
 			&[class*="icon-"] {
 				display: block;
 				overflow: hidden;
-				width: 48px;
-				height: 48px;
+				width: $topbar-height;
+				height: $topbar-height;
 				text-align: center;
 				text-indent: $topbar-height;
-				line-height: 48px;
+				line-height: $topbar-height;
 			}
 		}
 	}
