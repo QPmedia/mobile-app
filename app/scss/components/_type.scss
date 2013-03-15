@@ -17,8 +17,3 @@ $paragraph-line-height: emCalc(19px) !default;
 $paragraph-margin-bottom: 0;
 
 @import "foundation/components/type";
-
-html, body {
-	height: 100%;
-	overflow: hidden;
-}

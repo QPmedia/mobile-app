@@ -35,12 +35,12 @@ $actionbar-icon-size: 38px !default;
 				text-align: center;
 			}
 		}
+		// TODO: Code optimization
 		@for $i from 2 through 6 {
 			$li-width: 100% / $i;
 			@if $i > 3 {
 				$li-width: 100% / ($i - 1);
 			}
-
 			li:nth-child(1):nth-last-child(#{$i}) {
 				@if $i > 3 {
 					margin-right: ($actionbar-height / 4);
