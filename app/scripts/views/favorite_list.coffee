@@ -17,8 +17,8 @@ define ["collections/favorite", "models/favorite", "text!templates/favorite_list
 			fav.destroy({wait: true})
 			#@render()
 		render: ->
-			@favorites.fetch()
-			#	cache: false
+			@favorites.fetch
+				cache: false
 			return this
 
 		modelFetched: ->

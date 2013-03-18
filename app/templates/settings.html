@@ -8,7 +8,7 @@
 					<div class="large-12 columns">
 						<select name="api_url">
 							<option value="http://qpmedia:qpmediaolsw911@nwc.tripondo.de/m/api/">tripondo</option>
-							<option value="http://192.168.2.12:8000/m/api/">mboehme</option>
+							<option {% if api_url == 'http://192.168.2.12:8000/m/api/' %}selected="selected" {% endif %}value="http://192.168.2.12:8000/m/api/">mboehme</option>
 						</select>
 					</div>
 

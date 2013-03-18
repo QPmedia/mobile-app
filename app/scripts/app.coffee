@@ -18,7 +18,9 @@ define ["models/user",
 			_.extend @, Backbone.Events
 
 			@user = new User()
-
+			url = localStorage.getItem("API_URL")
+			if not (url is null)
+				@API_URL = url
 			# Setup App Events
 			@on "alert", (msg) =>
 				console.log(msg)
