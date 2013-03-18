@@ -2,8 +2,10 @@ define ["views/qpon_list",
 		"views/qpon_detail",
 		"views/start",
 		"views/login",
-		"views/favorite_list"]
-		, (QponListView, QponDetailView, StartView, LoginView, FavoriteListView) ->
+		"views/favorite_list",
+		"views/settings"]
+		, (QponListView, QponDetailView, StartView, LoginView, FavoriteListView,
+			SettingsView) ->
 	# Defining the application router, you can attach sub routers here.
 	class Router extends Backbone.Router
 		initialize: (options) ->
@@ -12,6 +14,7 @@ define ["views/qpon_list",
 
 		routes:
 			"!/start": "start"
+			"!/settings": "settings"
 			"!/login": "login"
 			"!/coupons": "qpon_list"
 			"!/coupons/:id": "qpon_detail"
@@ -20,6 +23,9 @@ define ["views/qpon_list",
 
 		start: ->
 			@changeView new StartView()
+
+		settings: ->
+			@changeView new SettingsView()
 
 		login: ->
 			@changeView new LoginView()

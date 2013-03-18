@@ -1,0 +1,29 @@
+<div class="row">
+	<div class="small-12 columns">
+		<h1>{% block title %}settings{% endblock %}</h1>
+		<form>
+			<fieldset>
+				<legend>Einstellungen</legend>
+				<div class="row">
+					<div class="large-12 columns">
+						<select name="api_url">
+							<option value="http://qpmedia:qpmediaolsw911@nwc.tripondo.de/m/api/">tripondo</option>
+							<option value="http://192.168.2.12:8000/m/api/">mboehme</option>
+						</select>
+					</div>
+
+				</div>
+				<div class="row">
+					<div class="large-12 columns">
+						<select name="foobar">
+							<option value="1">1</option>
+							<option value="2">2</option>
+						</select>
+					</div>
+
+				</div>
+				<button type="submit" class="button">Speichern</button>
+			</fieldset>
+		</form>
+	</div>
+</div>

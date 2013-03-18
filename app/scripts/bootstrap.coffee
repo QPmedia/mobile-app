@@ -22,6 +22,7 @@ require.config
 		"foundation-placeholder": "../../vendor/js/plugins/foundation.placeholder"
 		"foundation-section":     "../../vendor/js/plugins/foundation.section"
 		"foundation-topbar":      "../../vendor/js/plugins/foundation.topbar"
+		"jquery-serialize-object":"../../vendor/js/plugins/jquery.serialize-object.compiled"
 
 	shim:
 		jquery:

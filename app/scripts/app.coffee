@@ -3,8 +3,10 @@ define ["models/user",
 		"swig",
 		"backbone",
 		"backbone-zombienation",
-		"backbone-fetch-cache"]
+		"backbone-fetch-cache",
+		"jquery-serialize-object"]
 		,(User, swig_filter, swig, Backbone) ->
+
 	swig.init
 		filters: swig_filter
 
