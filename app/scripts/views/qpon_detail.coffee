@@ -24,7 +24,7 @@ define (require) ->
 			console.log qpon_uri
 			fav = new Favorite({qpon_id:qpon_id})
 			fav.save()
-			console.log fav
+			app.router.navigate("!/favorites", {trigger: true});
 		render: ->
 			app.header.setTitle(@title)
 			@model.fetch()

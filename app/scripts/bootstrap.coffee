@@ -28,6 +28,9 @@ require.config
 		jquery:
 			exports: "jQuery"
 
+		"jquery-serialize-object":
+			deps: ["jquery"]
+
 		hammer:
 			deps: ["jquery"]
 			exports: "Hammer"
