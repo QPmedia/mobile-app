@@ -1,0 +1,47 @@
+$button-font-color: #000 !default;
+$bg-color: #dddddd;
+$stacked-tabs-bg-gradient: linear-gradient(bottom, rgba($primary-color, 1) 2px, rgba(#000, 0) 2px) !default;
+$stacked-tabs-bg-gradient-active: linear-gradient(bottom, rgba($primary-color, 1) 5px, rgba(#000, 0) 0) !default;
+
+
+
+.stacked-tabs {
+	background-color: $bg-color;
+	//@include background-image($stacked-tabs-bg-gradient);
+
+
+	&.button-group li {
+		margin: 0;
+		position: relative;
+	}
+
+	.button {
+		outline: 0;
+		border: 0;
+		text-transform:uppercase;
+		margin-bottom: 0;
+		border-radius: 0; 
+		@include box-shadow(none);
+		color: $button-font-color;
+		background-color: $bg-color;
+		@include background-image($stacked-tabs-bg-gradient);
+
+		&.active {
+			@include background-image($stacked-tabs-bg-gradient-active);
+		}
+
+		&:active {
+			@include background-image($stacked-tabs-bg-gradient-active);
+		}
+	}
+
+	li:not(:first-child):after {
+		content: '';
+		background-color: darken($bg-color, 10%);
+		width: 1px;
+		height: 20px;
+		display: block;
+		bottom: 14px;
+		position: absolute;
+	}
+}

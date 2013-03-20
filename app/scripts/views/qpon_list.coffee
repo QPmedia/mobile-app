@@ -8,7 +8,8 @@ define (require) ->
 
 		template : swig.compile(require("text!templates/qpon_list.html"), { filename: "qpon_list" })
 
-		#template : swig.compile(require("text!templates/qpon_list.html"), { filename: "qpon_list" })
+		stackedTabs : swig.compile(require("text!templates/_stacked_tabs.html"), { filename: "stacked_tabs" })
+		
 		title: 'List'
 
 		initialize: (options) ->
@@ -25,4 +26,7 @@ define (require) ->
 
 		modelFetched: ->
 			@$el.html @template({qpons : @qpons.toJSON()})
+
+			$('#stacked-tabs').html(@stackedTabs)
+
 			return this
