@@ -95,15 +95,9 @@ define ["app", "hammer", "collections/category", "text!templates/menu.html", "te
 		
 			switch ev.type
 				when "dragstart"
-					$('#main').css('overflow-y', "hidden")
-					$('#menu').css('overflow-y', "hidden")
-
 					@set_speed(0)
 
-				when "dragend"
-					$('#main').css('overflow-y', "auto")
-					$('#menu').css('overflow-y', "auto")
-					
+				when "dragend"		
 					threshold = @options.width*0.5
 					@set_speed(0.2)
 					
