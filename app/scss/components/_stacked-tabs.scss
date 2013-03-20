@@ -7,24 +7,25 @@ $stacked-tabs-bg-gradient-active: linear-gradient(bottom, rgba($primary-color, 1
 
 .stacked-tabs {
 	background-color: $bg-color;
-	//@include background-image($stacked-tabs-bg-gradient);
 
 
 	&.button-group li {
-		margin: 0;
 		position: relative;
+		margin: 0;
 	}
 
-	.button {
+	.button { 
+		background-color: $bg-color;
+		@include box-shadow(none);
+		@include background-image($stacked-tabs-bg-gradient);
+		margin: 0;
+		padding: 17px 0;
 		outline: 0;
 		border: 0;
-		text-transform:uppercase;
-		margin-bottom: 0;
-		border-radius: 0; 
-		@include box-shadow(none);
+		border-radius: 0;
 		color: $button-font-color;
-		background-color: $bg-color;
-		@include background-image($stacked-tabs-bg-gradient);
+		text-transform:uppercase;
+		font-size: emCalc(14px);
 
 		&.active {
 			@include background-image($stacked-tabs-bg-gradient-active);
@@ -36,12 +37,16 @@ $stacked-tabs-bg-gradient-active: linear-gradient(bottom, rgba($primary-color, 1
 	}
 
 	li:not(:first-child):after {
-		content: '';
-		background-color: darken($bg-color, 10%);
-		width: 1px;
-		height: 20px;
-		display: block;
-		bottom: 14px;
 		position: absolute;
+		bottom: 12px;
+		display: block;
+		width: 1px;
+		height: 24px;
+		background-color: darken($bg-color, 10%);
+		content: '';
+	}
+
+	li:not(:last-child) {
+		padding-right: 1px;
 	}
 }
