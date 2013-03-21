@@ -24,6 +24,19 @@ $button-lrg: $button-med;
 
 @import "foundation/components/buttons";
 
+// Buttons
+//
+// :hover - Highlight the button when hovering.
+// :active - foo
+// :focus - blahfocus
+// .active - .active
+//
+// Markup:
+// <a href="#" class="button {$modifiers}">Link</a>
+// <button class="button {$modifiers}">Button</button>
+// <input type="submit" value="Submit" class="button {$modifiers}">
+//
+// Styleguide 1.
 .button {
 	outline-width: 0px;
 	outline-style: none;
@@ -41,7 +54,7 @@ $button-lrg: $button-med;
 
 	&:hover {
 		// Reset background-color as we don't need any hover effects.
-		background-color: #d6d6d6;
+		background-color: #fff;
 	}
 	// See http://developer.android.com/design/style/touch-feedback.html for
 	// details about button states.
