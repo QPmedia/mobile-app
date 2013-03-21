@@ -24,19 +24,25 @@ $button-lrg: $button-med;
 
 @import "foundation/components/buttons";
 
-// Buttons
+// Basic buttons
 //
-// :hover - Highlight the button when hovering.
-// :active - foo
-// :focus - blahfocus
-// .active - .active
+// Basic buttons are traditional buttons with borders and background. Android
+// supports two styles for basic buttons: default and small. Default buttons
+// have slightly larger font size and are optimized for display outside of form
+// content. Small buttons are intended for display alongside other content.
+// They have a smaller font and smaller minimum height. Use small buttons in
+// forms where they need to align with other UI elements.
+//
+// :focus          - Focused state.
+// :active         - Pressed state.
+// .disabled       - Disabled state.
+// .disabled:focus - Disabled and focused state.
 //
 // Markup:
-// <a href="#" class="button {$modifiers}">Link</a>
-// <button class="button {$modifiers}">Button</button>
-// <input type="submit" value="Submit" class="button {$modifiers}">
+// <a href="#" class="button {$modifiers}">Button (a.button)</a>
+// <button class="button {$modifiers}">Button (button.button)</button>
 //
-// Styleguide 1.
+// Styleguide 1.1.
 .button {
 	outline-width: 0px;
 	outline-style: none;
@@ -54,7 +60,7 @@ $button-lrg: $button-med;
 
 	&:hover {
 		// Reset background-color as we don't need any hover effects.
-		background-color: #fff;
+		background-color: #d6d6d6;
 	}
 	// See http://developer.android.com/design/style/touch-feedback.html for
 	// details about button states.
@@ -68,12 +74,22 @@ $button-lrg: $button-med;
 		@include box-shadow(0 0 0 4px rgba($primary-color, 0.4),
 			inset 0 1px rgba(#fff, 0.1), inset 0 -1px 1px rgba(#000, 0.426));
 	}
+}
 
-	// Borderless buttons, see http://developer.android.com/design/building-blocks/buttons.html#borderless
-	&.borderless {
-		outline: 0;
-		border: 0;
-		background: transparent;
-		@include box-shadow(none);
-	}
+// Borderless Buttons
+//
+// Borderless buttons resemble basic buttons except that they have no borders
+// or background. You can use borderless buttons with both icons and text.
+// Borderless buttons are visually more lightweight than basic buttons and
+// integrate nicely with other content.
+//
+// Markup:
+// <a href="#" class="button borderless">Button (a.button.borderless)</a>
+//
+// Styleguide 1.2.
+.button.borderless {
+	outline: 0;
+	border: 0;
+	background: transparent;
+	@include box-shadow(none);
 }

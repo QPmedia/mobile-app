@@ -1,6 +1,5 @@
 <h1 class="kss-title kss-title-main"> Overview </h1>
 
-<h2>to generate: kss-node app/scss/ test -s build/dev/css/styleguide.css</h2>
 This is a demo of [kss-node](http://github.com/hughsk/kss-node)'s built-in styleguide generator. The module is essentially a reimplementation of the [KSS](http://github.com/kneath/kss) Ruby parser, in Node:
 
 > Inspired by TomDoc, KSS attempts to provide a methodology for writing maintainable, documented CSS within a team.
