@@ -9,8 +9,6 @@ define (require) ->
 
 		template : swig.compile(require("text!templates/qpon_list.html"), { filename: "qpon_list" })
 
-		stackedTabs : swig.compile(require("text!templates/_stacked_tabs.html"), { filename: "stacked_tabs" })
-
 		title: 'List'
 
 		initialize: (options) ->
@@ -38,6 +36,6 @@ define (require) ->
 			@$el.html @template({qpons : @qpons.toJSON()})
 			return this
 
-		#remove UI Elements here - 'onDestroy' 
+		#remove UI Elements here - 'onDestroy'
 		remove: ->
 			@tabs.remove()
