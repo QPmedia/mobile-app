@@ -4,6 +4,7 @@ define (require) ->
 	Backbone = require("backbone")
 	Qpon     = require("models/qpon")
 	Favorite = require("models/favorite")
+	Actionbar = require("views/footer")
 
 	class QponDetailView extends Backbone.View
 		title: 'Detail'
@@ -12,6 +13,8 @@ define (require) ->
 			'click .js-add-favorite': 'add_favorite'
 
 		initialize: (options) ->
+			@actionbar = new Actionbar()
+
 			@model = new Qpon(id: options.id)
 			@template = swig.compile(require("text!templates/qpon_detail.html"), { filename: "qpon_detail" })
 			@bindTo @model, "change", @model_fetched
@@ -33,3 +36,7 @@ define (require) ->
 		model_fetched: ->
 			@$el.html @template({qpon: @model.toJSON()})
 			return this
+
+		#remove UI Elements here - 'onDestroy' 
+		remove: ->
+			@actionbar.remove()

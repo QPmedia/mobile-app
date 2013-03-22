@@ -5,22 +5,23 @@ define (require) ->
 	require("backbone-zombienation")
 
 	class FooterView extends Backbone.View
-		el: $('#footer')
+		el: $('#actionbar')
 
 		initialize: (options) ->
-			@template = swig.compile(require("text!templates/footer.html"), { filename: "footer" })
-			@message = 'mymsg'
+			#FixMe
+			$('#main').css('bottom', 48) 
 
-			app.registerModule("footer", {
-					'update': @show_msg
-			});
+			@template = swig.compile(require("text!templates/footer.html"), { filename: "footer" })
 
 			@render()
 
 		render: ->
-			@$el.html @template({message: @message})
+			@$el.html @template
 			return this
 
-		show_msg: (msg) ->
-			@message = msg
-			@render()
+		#remove UI Elements here - 'onDestroy' 
+		remove: ->
+			#FixMe
+			$('#main').css('bottom', 0) 
+			
+			@$el.html ''
