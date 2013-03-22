@@ -1,10 +1,10 @@
-/*! Hammer.JS - v1.0.4dev - 2013-03-07
+/*! Hammer.JS - v1.0.3dev - 2013-02-27
  * http://eightmedia.github.com/hammer.js
  *
  * Copyright (c) 2013 Jorik Tangelder <j.tangelder@gmail.com>;
  * Licensed under the MIT license */
 
-(function(window, undefined) {
+(function(window) {
     'use strict';
 
 /**
@@ -38,7 +38,7 @@ Hammer.defaults = {
 };
 
 // detect touchevents
-Hammer.HAS_POINTEREVENTS = navigator.pointerEnabled || navigator.msPointerEnabled;
+Hammer.HAS_POINTEREVENTS = navigator.msPointerEnabled;
 Hammer.HAS_TOUCHEVENTS = ('ontouchstart' in window);
 
 // eventtypes per touchevent (start, move, end)
@@ -54,15 +54,16 @@ Hammer.DIRECTION_RIGHT = 'right';
 // pointer type
 Hammer.POINTER_MOUSE = 'mouse';
 Hammer.POINTER_TOUCH = 'touch';
-Hammer.POINTER_PEN = 'pen';
 
 // touch event defines
 Hammer.EVENT_START = 'start';
 Hammer.EVENT_MOVE = 'move';
 Hammer.EVENT_END = 'end';
 
-// hammer document where the base events are added at
-Hammer.DOCUMENT = document;
+// stop mouse events on ios and android
+var ua = navigator.userAgent;
+Hammer.STOP_MOUSEEVENTS = Hammer.HAS_TOUCHEVENTS &&
+    ua.match(/(like mac os x.*mobile.*safari)|android|blackberry/i);
 
 // plugins namespace
 Hammer.plugins = {};
@@ -89,8 +90,8 @@ function setup() {
     }
 
     // Add touch events on the document
-    Hammer.event.onTouch(Hammer.DOCUMENT, Hammer.EVENT_MOVE, Hammer.detection.detect);
-    Hammer.event.onTouch(Hammer.DOCUMENT, Hammer.EVENT_END, Hammer.detection.detect);
+    Hammer.event.onTouch(document, Hammer.EVENT_MOVE, Hammer.detection.detect);
+    Hammer.event.onTouch(document, Hammer.EVENT_END, Hammer.detection.endDetect);
 
     // Hammer is ready...!
     Hammer.READY = true;
@@ -176,19 +177,11 @@ Hammer.Instance.prototype = {
      * @returns {Hammer.Instance}
      */
     trigger: function triggerEvent(gesture, eventData){
-        // create DOM event
-        var event = Hammer.DOCUMENT.createEvent('Event');
+        // trigger DOM event
+        var event = document.createEvent('Event');
 		event.initEvent(gesture, true, true);
 		event.gesture = eventData;
-
-        // trigger on the target if it is in the instance element,
-        // this is for event delegation tricks
-        var element = this.element;
-        if(Hammer.utils.hasParent(eventData.target, element)) {
-            element = eventData.target;
-        }
-
-        element.dispatchEvent(event);
+		this.element.dispatchEvent(event);
         return this;
     },
 
@@ -250,21 +243,20 @@ Hammer.event = {
      */
     onTouch: function onTouch(element, eventType, handler) {
 		var self = this;
-
-        this.bindDom(element, Hammer.EVENT_TYPES[eventType], function bindDomOnTouch(ev) {
+        this.bindDom(element, Hammer.EVENT_TYPES[eventType], function(ev) {
             var sourceEventType = ev.type.toLowerCase();
 
-            // onmouseup, but when touchend has been fired we do nothing.
-            // this is for touchdevices which also fire a mouseup on touchend
-            if(sourceEventType.match(/mouse/) && touch_triggered) {
+            // stop mouseevents on ios and android
+            if(sourceEventType.match(/mouse/) && Hammer.STOP_MOUSEEVENTS) {
                 return;
             }
 
             // mousebutton must be down or a touch event
-            else if( sourceEventType.match(/touch/) ||   // touch events are always on screen
-                sourceEventType.match(/pointerdown/) || // pointerevents touch
-                (sourceEventType.match(/mouse/) && ev.which === 1)   // mouse is pressed
-            ){
+            if(sourceEventType.match(/start|down|move/) &&
+                (   ev.which === 1 ||   // mousedown
+                    sourceEventType.match(/touch/) ||   // touch events are always on screen
+                    (ev.pointerType && ev.pointerType == ev.MSPOINTER_TYPE_TOUCH)  // pointerevents touch
+                )) {
                 enable_detect = true;
             }
 
@@ -274,38 +266,17 @@ Hammer.event = {
                 touch_triggered = true;
             }
 
-            // count the total touches on the screen
-            var count_touches = 0;
-
             // when touch has been triggered in this detection session
             // and we are now handling a mouse event, we stop that to prevent conflicts
-            if(enable_detect) {
-                // update pointerevent
+            if(enable_detect && !(touch_triggered && sourceEventType.match(/mouse/))) {
+                // update pointer
                 if(Hammer.HAS_POINTEREVENTS && eventType != Hammer.EVENT_END) {
-                    count_touches = Hammer.PointerEvent.updatePointer(eventType, ev);
-                }
-                // touch
-                else if(sourceEventType.match(/touch/)) {
-                    count_touches = ev.touches.length;
-                }
-                // mouse
-                else if(!touch_triggered) {
-                    count_touches = sourceEventType.match(/up/) ? 0 : 1;
-                }
-
-                // if we are in a end event, but when we remove one touch and
-                // we still have enough, set eventType to move
-                if(count_touches > 0 && eventType == Hammer.EVENT_END) {
-                    eventType = Hammer.EVENT_MOVE;
-                }
-                // no touches, force the end event
-                else if(!count_touches) {
-                    eventType = Hammer.EVENT_END;
+                    Hammer.PointerEvent.updatePointer(eventType, ev);
                 }
 
                 // because touchend has no touches, and we often want to use these in our gestures,
                 // we send the last move event as our eventData in touchend
-                if(!count_touches && last_move_event !== null) {
+                if(eventType === Hammer.EVENT_END && last_move_event !== null) {
                     ev = last_move_event;
                 }
                 // store the last move event
@@ -316,19 +287,17 @@ Hammer.event = {
                 // trigger the handler
                 handler.call(Hammer.detection, self.collectEventData(element, eventType, ev));
 
-                // remove pointerevent from list
+                // remove pointer after the handler is done
                 if(Hammer.HAS_POINTEREVENTS && eventType == Hammer.EVENT_END) {
-                    count_touches = Hammer.PointerEvent.updatePointer(eventType, ev);
+                    Hammer.PointerEvent.updatePointer(eventType, ev);
                 }
             }
 
-            //debug(sourceEventType +" "+ eventType);
-
             // on the end we reset everything
-            if(!count_touches) {
-                last_move_event = null;
+            if(sourceEventType.match(/up|cancel|end/)) {
                 enable_detect = false;
                 touch_triggered = false;
+                last_move_event = null;
                 Hammer.PointerEvent.reset();
             }
         });
@@ -343,7 +312,11 @@ Hammer.event = {
         // determine the eventtype we want to set
         var types;
         if(Hammer.HAS_POINTEREVENTS) {
-            types = Hammer.PointerEvent.getEvents();
+            types = [
+                'MSPointerDown',
+                'MSPointerMove',
+                'MSPointerUp MSPointerCancel'
+            ];
         }
         // for non pointer events browsers
         else {
@@ -396,13 +369,13 @@ Hammer.event = {
 
         // find out pointerType
         var pointerType = Hammer.POINTER_TOUCH;
-        if(ev.type.match(/mouse/) || Hammer.PointerEvent.matchType(Hammer.POINTER_MOUSE, ev)) {
+        if(ev.type.match(/mouse/) || (ev.poinerType && ev.pointerType === ev.MSPOINTER_TYPE_MOUSE)) {
             pointerType = Hammer.POINTER_MOUSE;
         }
 
         return {
             center      : Hammer.utils.getCenter(touches),
-            timeStamp   : new Date().getTime(),
+            timestamp   : ev.timestamp || new Date().getTime(), // for IE
             target      : ev.target,
             touches     : touches,
             eventType   : eventType,
@@ -454,60 +427,29 @@ Hammer.PointerEvent = {
      * @returns {Array}     touchlist
      */
     getTouchList: function() {
-        var self = this;
+        var pointers = this.pointers;
         var touchlist = [];
 
         // we can use forEach since pointerEvents only is in IE10
-        Object.keys(self.pointers).sort().forEach(function(id) {
-            touchlist.push(self.pointers[id]);
+        Object.keys(pointers).sort().forEach(function(id) {
+            touchlist.push(pointers[id]);
         });
         return touchlist;
     },
 
     /**
      * update the position of a pointer
-     * @param   {String}   type             Hammer.EVENT_END
+     * @param   {String}   type
      * @param   {Object}   pointerEvent
      */
     updatePointer: function(type, pointerEvent) {
         if(type == Hammer.EVENT_END) {
-            this.pointers = {};
+            delete this.pointers[pointerEvent.pointerId];
         }
         else {
             pointerEvent.identifier = pointerEvent.pointerId;
             this.pointers[pointerEvent.pointerId] = pointerEvent;
         }
-
-        return Object.keys(this.pointers).length;
-    },
-
-    /**
-     * check if ev matches pointertype
-     * @param   {String}        pointerType     Hammer.POINTER_MOUSE
-     * @param   {PointerEvent}  ev
-     */
-    matchType: function(pointerType, ev) {
-        if(!ev.pointerType) {
-            return false;
-        }
-
-        var types = {};
-        types[Hammer.POINTER_MOUSE] = (ev.pointerType == ev.MSPOINTER_TYPE_MOUSE || ev.pointerType == Hammer.POINTER_MOUSE);
-        types[Hammer.POINTER_TOUCH] = (ev.pointerType == ev.MSPOINTER_TYPE_TOUCH || ev.pointerType == Hammer.POINTER_TOUCH);
-        types[Hammer.POINTER_PEN] = (ev.pointerType == ev.MSPOINTER_TYPE_PEN || ev.pointerType == Hammer.POINTER_PEN);
-        return types[pointerType];
-    },
-
-
-    /**
-     * get events
-     */
-    getEvents: function() {
-        return [
-            'pointerdown MSPointerDown',
-            'pointermove MSPointerMove',
-            'pointerup pointercancel MSPointerUp MSPointerCancel'
-        ];
     },
 
     /**
@@ -530,25 +472,8 @@ Hammer.utils = {
         for (var key in src) {
             dest[key] = src[key];
         }
+
         return dest;
-    },
-
-
-    /**
-     * find if a node is in the given parent
-     * used for event delegation tricks
-     * @param   {HTMLElement}   node
-     * @param   {HTMLElement}   parent
-     * @returns {boolean}       has_parent
-     */
-    hasParent: function(node, parent) {
-        while(node){
-            if(node == parent) {
-                return true;
-            }
-            node = node.parentNode;
-        }
-        return false;
     },
 
 
@@ -579,7 +504,7 @@ Hammer.utils = {
      * @param   {Number}    delta_y
      * @returns {Object}    velocity
      */
-    getVelocity: function getVelocity(delta_time, delta_x, delta_y) {
+    getVelocity: function getSimpleDistance(delta_time, delta_x, delta_y) {
         return {
             x: Math.abs(delta_x / delta_time) || 0,
             y: Math.abs(delta_y / delta_time) || 0
@@ -756,7 +681,6 @@ Hammer.detection = {
     /**
      * Hammer.gesture detection
      * @param   {Object}    eventData
-     * @param   {Object}    eventData
      */
     detect: function detect(eventData) {
         if(!this.current || this.stopped) {
@@ -787,13 +711,16 @@ Hammer.detection = {
         if(this.current) {
             this.current.lastEvent = eventData;
         }
+    },
 
-        // endevent, but not the last touch, so dont stop
-        if(eventData.eventType == Hammer.EVENT_END && !eventData.touches.length-1) {
-            this.stopDetect();
-        }
 
-        return eventData;
+    /**
+     * end Hammer.gesture detection
+     * @param   {Object}    eventData
+     */
+    endDetect: function endDetect(eventData) {
+        this.detect(eventData);
+        this.stopDetect();
     },
 
 
@@ -835,7 +762,7 @@ Hammer.detection = {
             }
         }
 
-        var delta_time = ev.timeStamp - startEv.timeStamp,
+        var delta_time = ev.timestamp - startEv.timestamp,
             delta_x = ev.center.pageX - startEv.center.pageX,
             delta_y = ev.center.pageY - startEv.center.pageY,
             velocity = Hammer.utils.getVelocity(delta_time, delta_x, delta_y);
@@ -871,7 +798,7 @@ Hammer.detection = {
     register: function register(gesture) {
         // add an enable gesture options if there is no given
         var options = gesture.defaults || {};
-        if(options[gesture.name] === undefined) {
+        if(typeof(options[gesture.name]) == 'undefined') {
             options[gesture.name] = true;
         }
 
@@ -941,7 +868,7 @@ Hammer.gestures = Hammer.gestures || {};
  *
  *      @param  {Object}    eventData
  *      event data containing the following properties:
- *          timeStamp   {Number}        time the event occurred
+ *          timestamp   {Number}        time the event occurred
  *          target      {HTMLElement}   target element
  *          touches     {Array}         touches (fingers, pointers, mouse) on the screen
  *          pointerType {String}        kind of pointer that was used. matches Hammer.POINTER_MOUSE|TOUCH
@@ -1083,7 +1010,7 @@ Hammer.gestures.Tap = {
 
             // check if double tap
             if(prev && prev.name == 'tap' &&
-                (ev.timeStamp - prev.lastEvent.timeStamp) < inst.options.doubletap_interval &&
+                (ev.timestamp - prev.lastEvent.timestamp) < inst.options.doubletap_interval &&
                 ev.distance < inst.options.doubletap_distance) {
                 Hammer.detection.current.name = 'doubletap';
             }
@@ -1334,17 +1261,9 @@ Hammer.gestures.Touch = {
         // transforming and dragging.
         // be careful with using this, it can be very annoying for users to be stuck
         // on the page
-        prevent_default: false,
-
-        // disable mouse events, so only touch (or pen!) input triggers events
-        prevent_mouseevents: false
+        prevent_default: false
     },
     handler: function touchGesture(ev, inst) {
-        if(inst.options.prevent_mouseevents && ev.pointerType == Hammer.POINTER_MOUSE) {
-            ev.stopDetect();
-            return;
-        }
-
         if(inst.options.prevent_default) {
             ev.preventDefault();
         }
@@ -1371,19 +1290,109 @@ Hammer.gestures.Release = {
     }
 };
 
-// node export
-if(typeof module === 'object' && typeof module.exports === 'object'){
-    module.exports = Hammer;
-}
-// just window export
-else {
-    window.Hammer = Hammer;
+// Expose Hammer to the global object
+window.Hammer = Hammer;
 
-    // requireJS module definition
-    if(typeof window.define === 'function' && window.define.amd) {
-        window.define('hammer', [], function() {
-            return Hammer;
-        });
-    }
+// requireJS module definition
+if(typeof window.define === 'function' && window.define.amd) {
+	window.define('hammer', [], function() {
+        return Hammer;
+    });
 }
-})(this);
+
+})(window);
+
+(function($) {
+    /**
+     * bind dom events
+     * this overwrites addEventListener
+     * @param   {HTMLElement}   element
+     * @param   {String}        eventTypes
+     * @param   {Function}      handler
+     */
+    Hammer.event.bindDom = function(element, eventTypes, handler) {
+        $(element).on(eventTypes, function(ev) {
+            var data = ev.originalEvent;
+
+            // IE pageX fix
+            if(!data.pageX) {
+                data.pageX = ev.pageX;
+                data.pageY = ev.pageY;
+            }
+
+            // IE target fix
+            if(!data.target) {
+                data.target = ev.target;
+            }
+
+            // IE button fix
+            if(data.button) {
+                data.which = data.button;
+            }
+
+            // IE preventDefault
+            if(!data.preventDefault) {
+                data.preventDefault = ev.preventDefault;
+            }
+
+            // IE stopPropagation
+            if(!data.stopPropagation) {
+                data.stopPropagation = ev.stopPropagation;
+            }
+
+            handler.call(this, data);
+        });
+    };
+
+    /**
+     * the methods are called by the instance, but with the jquery plugin
+     * we use the jquery event methods instead.
+     * @this    {Hammer.Instance}
+     * @return  {jQuery}
+     */
+    Hammer.Instance.prototype.on = function(types, handler) {
+        return $(this.element).on(types, handler);
+    };
+    Hammer.Instance.prototype.off = function(types, handler) {
+        return $(this.element).off(types, handler);
+    };
+
+
+    /**
+     * trigger events
+     * this is called by the gestures to trigger an event like 'tap'
+     * @this    {Hammer.Instance}
+     * @param   {String}    gesture
+     * @param   {Object}    eventData
+     * @return  {jQuery}
+     */
+    Hammer.Instance.prototype.trigger = function(gesture, eventData){
+        return $(eventData.srcEvent.target).trigger({
+            type: gesture,
+            gesture: eventData
+        });
+    };
+
+
+    /**
+     * jQuery plugin
+     * create instance of Hammer and watch for gestures,
+     * and when called again you can change the options
+     * @param   {Object}    [options={}]
+     * @return  {jQuery}
+     */
+    $.fn.hammer = function(options) {
+        return this.each(function() {
+            var el = $(this);
+            var inst = el.data('hammer');
+            // start new hammer instance
+            if(!inst) {
+                el.data('hammer', Hammer(this, options || {}));
+            }
+            // change the options
+            else if(inst && options) {
+                Hammer.utils.extend(inst.options, options);
+            }
+        });
+    };
+})(jQuery);

@@ -8,6 +8,7 @@ require.config
 		backbone:                 "../../vendor/js/libs/backbone-0.9.2"
 		fastclick:                "../../vendor/js/libs/fastclick"
 		hammer:                   "../../vendor/js/libs/hammer"
+		"hammer-jquery":                   "../../vendor/js/libs/hammer-jquery"
 		swig:                     "../../vendor/js/libs/swig"
 		foundation:               "../../vendor/js/libs/foundation"
 		# Plugins
@@ -32,6 +33,10 @@ require.config
 			deps: ["jquery"]
 
 		hammer:
+			deps: ["jquery"]
+			exports: "Hammer"
+
+		"hammer-jquery":
 			deps: ["jquery"]
 			exports: "Hammer"
 
