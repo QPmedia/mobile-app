@@ -12,8 +12,6 @@ define (require) ->
 		initialize: (options) ->
 			#FixMe
 			$('#main').css('top', 96) 
-
-			console.log @options.items
 			
 		render: ->
 			#why is only 'append' working here?

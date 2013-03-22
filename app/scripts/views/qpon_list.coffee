@@ -16,8 +16,8 @@ define (require) ->
 
 			#Stacked Tabs
 			@items = {
-				'Neueste':'#',
-				'Beliebsteste':'#',
+				'Neu':'#',
+				'Angesagt':'#',
 				'Entfernung':'#',
 			}
 			@tabs = new StackedTabs({items : @items})
