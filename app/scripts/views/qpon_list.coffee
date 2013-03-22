@@ -3,17 +3,25 @@ define (require) ->
 	app            = require("app")
 	Backbone       = require("backbone")
 	QponCollection = require("collections/qpon")
+	StackedTabs    = require("views/stacked_tabs")
 	
 	class QponListView extends Backbone.View
 
 		template : swig.compile(require("text!templates/qpon_list.html"), { filename: "qpon_list" })
-
-		stackedTabs : swig.compile(require("text!templates/_stacked_tabs.html"), { filename: "stacked_tabs" })
 		
 		title: 'List'
 
 		initialize: (options) ->
 			@qpons = new QponCollection()
+
+			#Stacked Tabs
+			@items = {
+				'Neueste':'#',
+				'Beliebsteste':'#',
+				'Entfernung':'#',
+			}
+			@tabs = new StackedTabs({items : @items})
+			@tabs.render()
 
 			#fires when updating collenction
 			@bindTo @qpons, "reset", @modelFetched
@@ -26,7 +34,8 @@ define (require) ->
 
 		modelFetched: ->
 			@$el.html @template({qpons : @qpons.toJSON()})
-
-			$('#stacked-tabs').html(@stackedTabs)
-
 			return this
+
+		#remove UI Elements here - 'onDestroy' 
+		remove: ->
+			@tabs.remove()

@@ -1,5 +1,7 @@
-<ul class="button-group even-3 stacked-tabs">
-  <li><a href="#" class="button active">Neueste</a></li>
-  <li><a href="#" class="button">Beliebsteste</a></li>
-  <li><a href="#" class="button">Entfernung</a></li>
-</ul>
+<div id="tabs">
+{% for i in items %}
+{% if loop.first %}<ul class="button-group even-{{loop.revindex}} stacked-tabs">{% endif %}
+	<li><a href="{{i}}" class="button active">{{loop.key}}</a></li>
+	{% if loop.last %}</ul>{% endif %}
+{% endfor %}
+</div>

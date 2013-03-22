@@ -3,9 +3,10 @@ $bg-color: #dddddd;
 $stacked-tabs-bg-gradient: linear-gradient(bottom, rgba($primary-color, 1) 2px, rgba(#000, 0) 2px) !default;
 $stacked-tabs-bg-gradient-active: linear-gradient(bottom, rgba($primary-color, 1) 5px, rgba(#000, 0) 0) !default;
 
-
-
 .stacked-tabs {
+	top: 48px;
+	position: absolute;
+	width: 100%;
 	background-color: $bg-color;
 
 
