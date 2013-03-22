@@ -3,6 +3,21 @@ $actionbar-bg-color: #dddddd !default;
 $actionbar-icon-color: #777777 !default;
 $actionbar-icon-size: 38px !default;
 
+// Action Bar
+//
+// The *action bar* is a dedicated piece of real estate at the top of each
+// screen that is generally persistent throughout the app.
+//
+// Markup:
+// <footer class="action-bar">
+//     <ul>
+//         <li><span class="icon-rating-favorite"></span></li>
+//         <li><span class="icon-rating-bad"></span></li>
+//         <li><span class="icon-rating-good"></span></li>
+//     </ul>
+// </footer>
+//
+// Styleguide 2.
 .action-bar {
 	@include stretch-x;
 	bottom: 0;

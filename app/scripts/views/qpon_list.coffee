@@ -4,11 +4,13 @@ define (require) ->
 	Backbone       = require("backbone")
 	QponCollection = require("collections/qpon")
 	StackedTabs    = require("views/stacked_tabs")
-	
+
 	class QponListView extends Backbone.View
 
 		template : swig.compile(require("text!templates/qpon_list.html"), { filename: "qpon_list" })
-		
+
+		stackedTabs : swig.compile(require("text!templates/_stacked_tabs.html"), { filename: "stacked_tabs" })
+
 		title: 'List'
 
 		initialize: (options) ->

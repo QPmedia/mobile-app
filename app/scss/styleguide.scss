@@ -1,9 +1,57 @@
-// Buttons
-//
-// Styleguide 1.
-.button {
+@import "index";
+
+* {
+	@include user-select(auto);
 }
 
-.kss-mod-example td {
-	@import "index";
+html, body {
+	overflow: visible;
+}
+
+#kss-content {
+	p {
+		margin-bottom: emCalc(20px);
+	}
+	h1, h2, h3, h4, h5, h6 {
+		line-height: 1.4;
+	}
+}
+
+.kss-mod-name {
+	float: right;
+	font-weight: bold;
+	font-size: 0.75em;
+}
+
+.kss-description {
+	margin-bottom: $column-gutter;
+}
+
+.kss-element {
+	@include pie-clearfix;
+	position: relative;
+}
+
+.kss-markup {
+	position: relative;
+	margin: $column-gutter 0;
+	padding: emCalc(10px) 0 emCalc(10px) emCalc(10px);
+	border: 1px solid #ccc;
+	background-color: darken($secondary-color, 5%);
+	color: #000;
+	font-family: $code-font-family;
+	overflow: auto;
+}
+
+.prettyprint:before {
+	position: absolute;
+	top: 6px;
+	right: 6px;
+	display: block;
+	font-size: 0.75em;
+	color: rgba(#000, 0.3);
+}
+
+.lang-html:before {
+	content: "HTML";
 }
