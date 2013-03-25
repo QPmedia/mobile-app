@@ -108,9 +108,13 @@ define (require) ->
 
 			switch ev.type
 				when "dragstart"
+					#if ev.gestrue.direction is "rigth" or "left"
+					#	$(ev.target).css("overflow-y","hidden")
 					@set_speed(0)
 
 				when "dragend"
+					#if ev.gestrue.direction is "rigth" or "left"
+					#	$(ev.target).css("overflow-y","auto")
 					threshold = @options.width*0.5
 					@set_speed(0.2)
 
@@ -145,7 +149,10 @@ define (require) ->
 						@translate_to = 0
 
 					@animate(@translate_to)
-
+					if @position is 0
+						$(ev.target).css("overflow-y","auto")
+					else
+						$(ev.target).css("overflow-y","hidden")
 					@position = @translate_to
 
 				when "drag"
