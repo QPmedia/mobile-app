@@ -45,7 +45,7 @@ require.config
 			exports: "Backbone"
 
 		swig:
-			deps: ["underscore", "utils/filter"]
+			deps: ["underscore", "utils/filter", "utils/tags"]
 			exports: "swig"
 
 		"backbone-deepmodel":

@@ -4,11 +4,11 @@ define (require) ->
 	Backbone       = require("backbone")
 	QponCollection = require("collections/qpon")
 	StackedTabs    = require("views/stacked_tabs")
-	
+
 	class QponListView extends Backbone.View
 
 		template : swig.compile(require("text!templates/qpon_list.html"), { filename: "qpon_list" })
-		
+
 		title: 'List'
 
 		initialize: (options) ->
@@ -36,6 +36,6 @@ define (require) ->
 			@$el.html @template({qpons : @qpons.toJSON()})
 			return this
 
-		#remove UI Elements here - 'onDestroy' 
+		#remove UI Elements here - 'onDestroy'
 		remove: ->
 			@tabs.remove()
