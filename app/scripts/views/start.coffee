@@ -1,10 +1,12 @@
-define ["app", "text!templates/start.html"], (app, template) ->
+define ["app", "text!templates/start.html", "views/notification"], (app, template, Notification) ->
 
 	class StartView extends Backbone.View
 		title: 'Start'
 		template : swig.compile(template, { filename: "start" })
 		events:
 			'click #scan': 'scan'
+			'click #notify-page': 'notifyPage'
+			'click #notify-pop': 'notifyPop'
 
 		scan: (event) ->
 			event.preventDefault()
@@ -29,3 +31,11 @@ define ["app", "text!templates/start.html"], (app, template) ->
 			app.header.setTitle(@title)
 			@$el.html @template()
 			return this
+
+		notifyPage: ->
+			foo = new Notification({title:'mytitle', msg:'foo'})
+			@$el.html foo.el
+
+		notifyPop: ->
+			foo = new Notification({title:'mytitle', msg:'foo'})
+			@$el.prepend foo.el
