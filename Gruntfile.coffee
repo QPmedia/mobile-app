@@ -187,20 +187,38 @@ module.exports = (grunt) ->
 					src: 'vendor/js/libs/require.js'
 					dest: 'build/dev/app.js'
 				]
+			android:
+				files: [
+					src: 'android/assets/cordova.js'
+					dest: 'build/release/cordova.js'
+				,
+					src: 'android/assets/barcodescanner.js'
+					dest: 'build/release/barcodescanner.js'
+				]
+		shell:
+			android:
+				command: 'ant -f android debug'
+				options:
+					stdout: true
+			androidinstall:
+				command: 'ant -f android debug install'
+				options:
+					stdout: true
 
 	# load all required plugins the coffee-way
 	for plugin in [
-		'grunt-contrib-concat',
 		'grunt-contrib-clean',
+		'grunt-contrib-coffee',
+		'grunt-contrib-compass',
+		'grunt-contrib-concat',
+		'grunt-contrib-connect',
+		'grunt-contrib-copy',
+		'grunt-contrib-cssmin'
+		'grunt-contrib-livereload',
 		'grunt-contrib-requirejs',
 		'grunt-contrib-uglify',
-		'grunt-contrib-coffee',
-		'grunt-contrib-connect',
 		'grunt-regarde',
-		'grunt-contrib-livereload',
-		'grunt-contrib-copy',
-		'grunt-contrib-compass',
-		'grunt-contrib-cssmin'
+		'grunt-shell'
 		]
 		grunt.loadNpmTasks plugin
 
@@ -210,4 +228,5 @@ module.exports = (grunt) ->
 		'livereload-start', 'connect:livereload','connect:release', 'regarde'
 		]
 
-	grunt.registerTask "release", ['clean', 'copy', 'coffee', 'compass', 'cssmin', 'requirejs:release', 'concat', 'uglify']
+	grunt.registerTask "release", ['clean', 'copy', 'coffee', 'compass', 'cssmin',
+		'requirejs:release', 'concat', 'uglify', 'shell:androidinstall']
