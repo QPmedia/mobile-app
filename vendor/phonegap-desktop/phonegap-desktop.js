@@ -1,5 +1,5 @@
 /* PhoneGap simulator (shim) for desktop debugging
-* 
+*
 Copyright 2012 Jonathan Prince
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,6 +16,12 @@ limitations under the License.
 *
 */
 
+// mboehme: quick noop for splashscreen.
+// should send this upstream
+navigator.splashscreen = {
+	show : function() {return;},
+	hide : function() {return; }
+};
 //
 // Window.onload should be the last event in the load process, wait 200ms for any other code to finish
 window.addEventListener('load', function() {
@@ -321,7 +327,7 @@ phonegapdesktop.internal = {
 		}
 
 	},
-	
+
 	eventFactory : function(name, eventTarget) {
 		var returnEvt = {};
 		returnEvt.target = eventTarget;
@@ -476,7 +482,7 @@ navigator.camera = {
 			}
 		}
 	},
-	
+
 	// Constants used for camera options
 	DestinationType : {
 		DATA_URL : 0, // Return base64 encoded string
@@ -568,7 +574,7 @@ navigator.network = {
 
 navigator.connection = navigator.connection || {};
 
-// Connection information has moved to navigator.connection, leave previous network interface in 
+// Connection information has moved to navigator.connection, leave previous network interface in
 //	for now.
 phonegapdesktop.internal.setDynamicProperty(navigator.network.connection, "connection", "type");
 phonegapdesktop.internal.setDynamicProperty(navigator.connection, "connection", "type");
@@ -942,27 +948,27 @@ if(!window.requestFileSystem) {
 		} else {
 			this.position += newText.length;
 			this.length = Math.max(this.length, this.position);
-			
+
 			if (this.onwrite) {
 				this.onwrite();
 			}
 		}
-		
+
 		if (this.onwriteend){
 			this.onwriteend();
 		}
 	};
-	
-	
+
+
 	function FileReader() {
 	}
-	
+
 	FileReader.prototype.abort = function() {
 		if (this.onabort){
 			this.onabort();
 		}
 	};
-	
+
 	FileReader.prototype.readAsDataURL = function(file) {
 		if (this.onloadstart){
 			this.onloadstart(phonegapdesktop.internal.eventFactory('onloadstart', this));
@@ -979,12 +985,12 @@ if(!window.requestFileSystem) {
 				this.onload(phonegapdesktop.internal.eventFactory('onload', this));
 			}
 		}
-		
+
 		if (this.onloadend){
 			this.onloadend(phonegapdesktop.internal.eventFactory('onloadend', this));
 		}
 	};
-	
+
 	FileReader.prototype.readAsText = function(file, encoding) {
 		if (this.onloadstart){
 			this.onloadstart(phonegapdesktop.internal.eventFactory('onloadstart', this));
@@ -1001,21 +1007,21 @@ if(!window.requestFileSystem) {
 				this.onload(phonegapdesktop.internal.eventFactory('onload', this));
 			}
 		}
-		
+
 		if (this.onloadend){
 			this.onloadend(phonegapdesktop.internal.eventFactory('onloadend', this));
-		}		
+		}
 	};
-	
+
 	function FileTransferError(){};
-	
+
 	FileTransferError.FILE_NOT_FOUND_ERR = 1;
 	FileTransferError.INVALID_URL_ERR = 2;
 	FileTransferError.CONNECTION_ERR = 3;
 
 	function FileTransfer() {
 	}
-	
+
 	FileTransfer.prototype.upload = function(filePath, server, successCallback, errorCallback, options) {
 		if(phonegapdesktop.internal.randomException("fileSystem")) {
 			errorCallback(phonegapdesktop.internal.getDebugValue("fileSystem", "transferError"));
@@ -1023,7 +1029,7 @@ if(!window.requestFileSystem) {
 			successCallback(phonegapdesktop.internal.getDebugValue("fileSystem", "uploadResult"))
 		}
 	};
-	
+
 	FileTransfer.prototype.download = function(source, target, successCallback, errorCallback) {
 		if(phonegapdesktop.internal.randomException("fileSystem")) {
 			errorCallback(phonegapdesktop.internal.getDebugValue("fileSystem", "transferError"));
@@ -1031,7 +1037,7 @@ if(!window.requestFileSystem) {
 			successCallback(phonegapdesktop.internal.getDebugValue("fileSystem", "file"));
 		}
 	};
-	
+
 	function FileUploadOptions() {
 	}
 
@@ -1164,7 +1170,7 @@ if(!window.requestFileSystem) {
 // Geolocation API - http://docs.phonegap.com/cordova_geolocation_geolocation.md.html
 // Geolocation object may already be defined by the browser, need to make sure we can override the functions if so
 navigator.geolocation = navigator.geolocation || {};
-
+/*
 // NOTE This only works occasionally in Firefox
 navigator.geolocation.getCurrentPosition = function(geolocationSuccess, geolocationError, geolocationOptions) {
 	if(phonegapdesktop.internal.randomException("geolocation")) {
@@ -1181,7 +1187,7 @@ navigator.geolocation.watchPosition = function(geolocationSuccess, geolocationEr
 navigator.geolocation.clearWatch = function(watchID) {
 	phonegapdesktop.internal.cancelIntervalFunction(watchID);
 };
-
+*/
 var PositionError = {};
 PositionError.PERMISSION_DENIED = 1;
 PositionError.POSITION_UNAVAILABLE = 2;

@@ -16,7 +16,9 @@ define ["app","router","views/header", "views/menu"]
 
 		#device is ready already (no need for "deviceready"-event)
 		# since we load after cordova has been loaded
-		navigator.splashscreen.hide()
+		setTimeout ->
+			navigator.splashscreen.hide()
+		, 800
 	# All navigation that is relative should be passed through the navigate
 	# method, to be processed by the router.  If the link has a data-bypass
 	# attribute, bypass the delegation completely.

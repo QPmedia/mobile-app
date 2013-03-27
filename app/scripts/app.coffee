@@ -13,10 +13,17 @@ define ["models/user",
 	class App
 		API_URL: "http://192.168.2.12:8000/m/api/"
 
+		geolocation_watcher: null
+		location: null
+
 		constructor: ->
 			# events mix-in; not a real class so we can't use 'extends'
 			_.extend @, Backbone.Events
-
+			@geolocation_watcher = navigator.geolocation.watchPosition(
+				@new_loc,
+				@loc_err,
+				timeout: 30000)
+			navigator.geolocation.getCurrentPosition(@new_loc,@loc_err)
 			@user = new User()
 			url = localStorage.getItem("API_URL")
 			if not (url is null)
@@ -36,7 +43,13 @@ define ["models/user",
 
 
 			console.log("app initialized")
-
+		new_loc: (position) =>
+			#alert "loc: #{position.coords.latitude},#{position.coords.longitude}"
+			console.log( position.coords.latitude + "," + position.coords.longitude)
+			@location = position
+			@trigger "location_changed", position
+		loc_err: =>
+			alert "loc_err"
 		sync_with_token: (method, model, options) =>
 			token = "Token #{@user.get('token')}"
 			options.beforeSend = (jqXHR) ->

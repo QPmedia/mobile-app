@@ -18,8 +18,12 @@ define (require) ->
 			@model = new Qpon(id: options.id)
 			@template = swig.compile(require("text!templates/qpon_detail.html"), { filename: "qpon_detail" })
 			@bindTo @model, "change", @model_fetched
+
 			console.log(app)
 
+		update_distance: (loc) ->
+			$(".js-add-favorite").append("<p>dist/loc: #{@model.distance()} #{loc.coords.latitude},#{loc.coords.longitude}</p>")
+			#alert(loc)
 		add_favorite: (ev) ->
 			console.log ev
 			qpon_id = $(ev.currentTarget).data("id")
@@ -34,9 +38,10 @@ define (require) ->
 			return this
 
 		model_fetched: ->
-			@$el.html @template({qpon: @model.toJSON()})
+			@bindTo app, "location_changed", @update_distance
+			@$el.html @template({qpon: @model.toJSON(), distance:@model.distance()})
 			return this
 
-		#remove UI Elements here - 'onDestroy' 
+		#remove UI Elements here - 'onDestroy'
 		remove: ->
 			@actionbar.remove()
