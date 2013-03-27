@@ -1,20 +1,22 @@
 define ["app","router","views/header", "views/menu"]
 , (app, Router, Header, Menu) ->
-
+	#document.addEventListener("deviceready", ->
+	#	navigator.splashscreen.hide()
 	# Treat the jQuery ready function as the entry point to the application.
 	# Inside this function, kick-off all initialization, everything up to this
 	# point should be definitions.
 	$ ->
-		
 
-		#init Top-Bar
 		app.header = new Header(el: "#header")
-		app.menu = new Menu(el: "#menu", container: "#app")
+		app.menu   = new Menu  (el: "#menu", container: "#app")
 		app.router = new Router(container: $("#content"), menu: app.menu)
 		# Trigger the initial route
 		Backbone.history.start()
 		#app.router.navigate("!/start", {trigger: false, replace: true});
 
+		#device is ready already (no need for "deviceready"-event)
+		# since we load after cordova has been loaded
+		navigator.splashscreen.hide()
 	# All navigation that is relative should be passed through the navigate
 	# method, to be processed by the router.  If the link has a data-bypass
 	# attribute, bypass the delegation completely.

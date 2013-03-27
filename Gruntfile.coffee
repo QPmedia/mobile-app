@@ -188,12 +188,13 @@ module.exports = (grunt) ->
 					dest: 'build/dev/app.js'
 				]
 			android:
+				# www is a symlink
 				files: [
 					src: 'android/assets/cordova.js'
-					dest: 'build/release/cordova.js'
+					dest: 'android/assets/www/cordova.js'
 				,
 					src: 'android/assets/barcodescanner.js'
-					dest: 'build/release/barcodescanner.js'
+					dest: 'android/assets/www/barcodescanner.js'
 				]
 		shell:
 			android:
