@@ -4,10 +4,12 @@ define ["app", "text!templates/notification.html"], (app, template) ->
 
 		template : swig.compile(template, { filename: "notification" })
 
+		type : 'pop'
 		title : "Title"
 		msg : "Msg"
 
 		initialize:(options) ->
+			@type = @options.type if @options.type?
 			@title = @options.title if @options.title?
 			@msg = @options.msg if @options.msg?
 				
@@ -15,5 +17,6 @@ define ["app", "text!templates/notification.html"], (app, template) ->
 
 
 		render: ->
-			@$el.html @template({title:@title, msg:@msg})
+			#TODO use foundation reveal here
+			@$el.html @template({type: @type, title:@title, msg:@msg})
 			return this

@@ -33,9 +33,9 @@ define ["app", "text!templates/start.html", "views/notification"], (app, templat
 			return this
 
 		notifyPage: ->
-			foo = new Notification({title:'mytitle', msg:'foo'})
+			foo = new Notification({type:'page', title:'mytitle', msg:'foo'})
 			@$el.html foo.el
 
 		notifyPop: ->
-			foo = new Notification({title:'mytitle', msg:'foo'})
+			foo = new Notification({type:'pop', title:'mytitle', msg:'foo'})
 			@$el.prepend foo.el
