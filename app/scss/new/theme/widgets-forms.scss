@@ -1,0 +1,30 @@
+@import "compass/css3", "theme-globals";
+
+label {
+	color: #aaa;
+	font-weight: normal;
+}
+
+input[type="text"], input[type="password"], input[type="date"], input[type="datetime"], input[type="email"], input[type="number"], input[type="search"], input[type="tel"], input[type="time"], input[type="url"], select, textarea {
+	background-color: #fff;
+	color: rgba(#000, 0.75);
+
+	&.error, &:required:invalid {
+		color: $danger-color !important;
+		border-color: $danger-color !important;
+	}
+	&:focus, &:active, &:hover {
+		color: $theme-color;
+		border-color: $theme-color;
+	}
+	&.disabled, &[disabled], &:disabled {
+		background: $form-color;
+		border-color: $form-color;
+		color: darken($form-color, 25%);
+	}
+}
+
+.form-row {
+	background: #fff;
+	border-bottom: 1px solid $background-color;
+}

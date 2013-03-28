@@ -1,19 +1,19 @@
 GIT
   remote: git://github.com/chriseppstein/compass.git
-  revision: b868089aaf97a9a9b9db52946f86330bde003a80
+  revision: 5eab7fceb1b0c26fddb4b11e98a9a870ab26affa
   branch: master
   specs:
-    compass (0.13.alpha.2.b868089)
+    compass (0.13.alpha.2.5eab7fc)
       chunky_png (~> 1.2)
       listen (<= 0.9.9)
       sass (~> 3.2.5)
 
 GIT
   remote: git://github.com/zurb/foundation.git
-  revision: 3322f9375d5e48868b81e3bbe6bef08ab483cd4e
+  revision: a86fd3c84b99d6d4a0bce4be5891af6c3569f406
   branch: master
   specs:
-    zurb-foundation (4.0.5)
+    zurb-foundation (4.0.9)
       sass (>= 3.2.0)
 
 GEM
@@ -30,6 +30,6 @@ PLATFORMS
 
 DEPENDENCIES
   compass!
-  compass-normalize
+  compass-normalize (= 1.4.2)
   sass
   zurb-foundation!

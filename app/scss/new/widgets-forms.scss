@@ -1,0 +1,66 @@
+@import "compass/css3", "globals/variables";
+
+label {
+	display: inline-block;
+	text-indent: 8px;
+	line-height: $form-height;
+}
+
+input:not([type="checkbox"]), textarea, select {
+	margin-bottom: 8px;
+	font-size: $font-size-big;
+
+	&.large {
+		font-size: $font-size-large;
+	}
+}
+
+input[type="text"], input[type="password"], input[type="date"], input[type="datetime"], input[type="email"], input[type="number"], input[type="search"], input[type="tel"], input[type="time"], input[type="url"], textarea, select {
+	display: block;
+	padding: 0px 6px;
+	height: $form-height;
+	border: 0;
+	font-family: inherit;
+	@include transition(all 0.15s linear);
+	-webkit-font-smoothing: antialiased;
+	@include user-select(text);
+	@include appearance(none);
+
+	&:focus {
+		outline: 0;
+	}
+	&.border {
+		height: $form-border-height;
+	}
+}
+
+input[type="range"] {
+}
+
+textarea {
+	min-height: ($form-height * 2);
+	resize: vertical;
+}
+
+.form-row {
+	position: relative;
+	padding: 8px 8px 0;
+
+	 & > label {
+		float: left;
+		width: 20%;
+
+		& + input {
+			width: 80%;
+		}
+	}
+	input[type="text"], input[type="password"], input[type="date"], input[type="datetime"], input[type="email"], input[type="number"], input[type="search"], input[type="tel"], input[type="time"], input[type="url"], textarea {
+		@include box-shadow(none);
+		border: 0;
+		padding: 0;
+
+		&, &:focus {
+			background: none;
+		}
+	}
+}

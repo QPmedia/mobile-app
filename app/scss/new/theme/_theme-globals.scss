@@ -1,0 +1,19 @@
+// Colors
+$theme-color: #33b5e5;
+$text-color: #292929;
+$danger-color: #e74c3c;
+$success-color: #2ecc71;
+$warning-color: #edba22;
+$disabled-color: #acb8b9;
+$background-color: #eee;
+
+// Layout
+$list-border: lighten($text-color, 90%);
+
+// Border radius
+$border-radius: 2px;
+
+// Forms
+$form-color: darken(#e5e5e5, 5%);
+$form-border-width: 2px;
+$form-border-radius: ($border-radius * $form-border-width);

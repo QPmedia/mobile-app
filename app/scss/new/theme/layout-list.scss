@@ -1,0 +1,48 @@
+@import "theme-globals";
+
+// App list items.
+#app .list ul > li {
+	background: #fff;
+	border-bottom: inset 1px $list-border;
+
+	&, a {
+		small, .right:not(.bubble) {
+			color: lighten($text-color, 20%);
+		}
+	}
+	&.color   { @include box-shadow(inset 4px 0 0 $text-color); }
+	&.success { @include box-shadow(inset 4px 0 0 $success-color); }
+	&.danger  { @include box-shadow(inset 4px 0 0 $danger-color); }
+	&.warning { @include box-shadow(inset 4px 0 0 $warning-color); }
+}
+
+// Menu list items.
+#menu .list ul > li {
+	background: none;
+
+	&:not(:first-child) {
+		border-top: solid 1px  lighten($text-color, 5%);
+	}
+	&:not(:last-child) {
+		border-bottom: solid 1px darken($text-color, 20%);
+	}
+	&:active {
+		background: darken($text-color, 5%);
+	}
+	&.active {
+		background: $theme-color;
+	}
+	&.active, &:active {
+		border-color: transparent;
+
+		strong, small, [class^="icon-"] {
+			color: #fff;
+		}
+	}
+	strong {
+		color: lighten($text-color, 75%);
+	}
+	small, [class^="icon-"] {
+		color: lighten($text-color, 40%);
+	}
+}

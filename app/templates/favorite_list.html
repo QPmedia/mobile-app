@@ -1,12 +1,14 @@
-<ul class="list-view">
-	{% for fav in objects %}
-		<li>
-			<a href="#!/coupons/{{ fav.qpon.id }}">
-				<img src="{{fav.qpon.img}}" alt="{{ fav.qpon.headline }}">
-				<h5>{{ fav.qpon.headline }}</h5>
-				<p>{{ fav.qpon.retailer.name }}</p>
-				<button class="del" data-id="{{fav.id}}">del</button>
-			</a>
-		</li>
-	{% endfor %}
-</ul>
+<div class="indented list">
+	<ul>
+		{% for fav in objects %}
+			<li>
+				<a href="#!/coupons/{{ fav.qpon.id }}">
+					<img src="{{fav.qpon.img}}" alt="{{ fav.qpon.headline }}">
+					<h5>{{ fav.qpon.headline }}</h5>
+					<p>{{ fav.qpon.retailer.name }}</p>
+					<button class="tiny danger button" data-id="{{fav.id}}">Löschen</button>
+				</a>
+			</li>
+		{% endfor %}
+	</ul>
+</div>

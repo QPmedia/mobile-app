@@ -1,0 +1,31 @@
+// Header
+$header-height: 48px;
+
+// Slide menu
+$aside-width: 250px;
+
+// Global transition stuff
+$transition-time: 0.4s;
+
+// Fonts
+$font-size-tiny: 11px;
+$font-size-small: 0.9em;
+$font-size-normal: 1em;
+$font-size-big: 16px;
+$font-size-large: 1.4em;
+
+// Lists
+$list-padding: 14px;
+$list-padding-horizontal: ($list-padding / 1.25);
+
+// Indented lists
+$indent: 3%;
+
+// Forms
+$form-height: 30px;
+$form-border: 2px;
+$form-border-height: $form-height + ($form-border * 4);
+
+// Media queries
+$phone: "only screen and (max-width: 767px)";
+$tablet: "only screen and (min-width: 768px)";
