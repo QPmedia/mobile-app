@@ -2,3 +2,5 @@
 /proguard-project.txt
 /bin
 /gen
+plugins/barcode/LibraryProject/bin
+plugins/barcode/LibraryProject/gen
