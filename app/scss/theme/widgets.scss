@@ -1,0 +1,13 @@
+@import "bourbon/bourbon";
+@import "theme-globals";
+
+// Bubbles
+.bubble:not([class^="icon-"]) {
+	border-radius: $border-radius;
+	color: #fff;
+	font-weight: bold !important;
+
+	&.count {
+		background-color: $theme-color;
+	}
+}
