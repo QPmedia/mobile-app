@@ -1,7 +1,6 @@
-@import "compass/css3/font-face";
+@import "bourbon/bourbon";
 
-@include font-face("Actionbar-Icon",
-	font-files("Android-Action-Bar-Icon-Pack.ttf", "Android-Action-Bar-Icon-Pack.woff", "Android-Action-Bar-Icon-Pack.eot", "Android-Action-Bar-Icon-Pack.svg"));
+@include font-face("Actionbar-Icon", "../fonts/Android-Action-Bar-Icon-Pack");
 
 [class^="icon-"]:before, [class*=" icon-"]:before {
 	font-weight: normal;
