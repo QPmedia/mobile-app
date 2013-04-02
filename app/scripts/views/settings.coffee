@@ -1,6 +1,6 @@
 define (require) ->
 
-	class SettingsView extends Backbone.View
+	class SettingsView extends Spine.Controller
 		title: 'Settings'
 		template : swig.compile(require("text!templates/settings.html"), { filename: "settings" })
 		events:
@@ -17,5 +17,6 @@ define (require) ->
 
 		render: ->
 			#app.header.setTitle(@title)
+			@trigger "update_header", title:@title
 			@$el.html @template({api_url:app.API_URL})
 			return this

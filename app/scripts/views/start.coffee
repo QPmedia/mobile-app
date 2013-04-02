@@ -1,8 +1,9 @@
-define ["app", "text!templates/start.html", "views/notification"], (app, template, Notification) ->
+define (require) ->
 
-	class StartView extends Backbone.View
+	Notification = require("views/notification")
+	class StartView extends Spine.Controller
 		title: 'Start'
-		template : swig.compile(template, { filename: "start" })
+		template : swig.compile(require("text!templates/start.html"), { filename: "start" })
 		events:
 			'click #scan': 'scan'
 			'click #notify-page': 'notifyPage'
@@ -28,7 +29,7 @@ define ["app", "text!templates/start.html", "views/notification"], (app, templat
 				console.log(ex);
 
 		render: ->
-			app.header.setTitle(@title)
+			@trigger "update_header", title:@title
 			@$el.html @template()
 			return this
 

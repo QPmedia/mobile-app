@@ -12,7 +12,7 @@ define (require) ->
 		filters: require("utils/filter")
 
 
-	SettingsView      = require("views/settings")
+	#SettingsView      = require("views/settings")
 	#LoginView         = require("views/login")
 	#QponDetailView    = require("views/qpon_detail")
 	#LazyListView      = require("views/lazy_list")
@@ -28,7 +28,7 @@ define (require) ->
 
 		constructor: ->
 			# events mix-in; not a real class so we can't use 'extends'
-			_.extend @, Backbone.Events
+			#_.extend @, Backbone.Events
 			@geolocation_watcher = navigator.geolocation.watchPosition(
 				@new_loc,
 				@loc_err,
@@ -56,21 +56,26 @@ define (require) ->
 			@routes
 				"/": -> console.log "RPUTE!!"
 				"!/start":  -> console.log "start"
-				"!/login":  -> @changeView new SettingsView()
+				"!/login":  -> @changeView require("views/settings")
 				"!/settings":  -> console.log "settings"
 				"!/coupons":  -> console.log "qpon_list"
 				"!/lazylist":  -> console.log "lazy_list"
 				"!/coupons/:id":  -> console.log "qpon_detail"
 				"!/favorites":  -> console.log "favorite_list"
-				"*actions":  -> console.log "start"
+				"*actions":  -> @changeView require("views/start")
 
 
 
 			console.log("app initialized")
 
-		changeView: (newView) ->
+		changeView: (view) ->
+			newView = new view()
+			# nested function just to be compatible, data should be a dict, handled inside the header
+			newView.on("update_header", (data) => @header.setTitle(data.title))
 			@menu.hide()
-			@currentView.dispose()  if @currentView and @currentView.dispose
+			@currentView.release() if @currentView and @currentView.release
+			# backward compat for Backbone
+			@currentView.dispose() if @currentView and @currentView.dispose
 			@currentView = newView
 
 			# Render the new view into our main DOM element
