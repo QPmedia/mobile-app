@@ -112,6 +112,7 @@ body, html {
 		@include display-box;
 		@include box-ordinal-group(2);
 		@include transform(translateX(100%));
+		@include box-flex(1);
 	}
 }
 
