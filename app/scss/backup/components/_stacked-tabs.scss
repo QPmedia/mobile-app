@@ -1,3 +1,5 @@
+@import "compass/css3", "globals/settings";
+
 $button-font-color: #000 !default;
 $bg-color: #dddddd;
 $stacked-tabs-bg-gradient: linear-gradient(bottom, rgba($primary-color, 1) 2px, rgba(#000, 0) 2px) !default;
@@ -9,13 +11,12 @@ $stacked-tabs-bg-gradient-active: linear-gradient(bottom, rgba($primary-color, 1
 	width: 100%;
 	background-color: $bg-color;
 
-
 	&.button-group li {
 		position: relative;
 		margin: 0;
 	}
 
-	.button { 
+	.button {
 		background-color: $bg-color;
 		@include box-shadow(none);
 		@include background-image($stacked-tabs-bg-gradient);

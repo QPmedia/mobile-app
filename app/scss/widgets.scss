@@ -1,0 +1,73 @@
+@import "bourbon/bourbon";
+@import "globals/variables";
+
+// Define some useful helper classes.
+.left:not([class^="icon-"])  { float: left; }
+.right:not([class^="icon-"]) { float: right; }
+
+.indented > * { padding: $indent; }
+.margined > * { margin: $indent; }
+
+.margin-top    { margin-top: $indent; }
+.margin-right  { margin-right: $indent; }
+.margin-bottom { margin-bottom: $indent; }
+.margin-left   { margin-left: $indent; }
+
+// Scrolls
+//
+// Styleguide 2.1.
+.scroll {
+	overflow-x: hidden;
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+	@include box-flex(1);
+
+	& > * {
+		-webkit-transform: translate3d(0, 0, 0); // Fix for iOS
+	}
+	&.horizontal {
+		overflow-x: auto;
+		overflow-y: hidden;
+		white-space: nowrap;
+	}
+}
+
+// Grid layout
+//
+// Styleguide 2.2.
+.row {
+	@include display-box;
+	height: inherit !important;
+	@include box-orient(horizontal);
+
+	.column, .columns {
+		@include box-flex(1);
+
+		&.primary   { @include box-flex(3); }
+		&.secondary { @include box-flex(2); }
+	}
+	@media only screen {
+		@for $i from 1 through 8 {
+			.phone-#{$i} { width: percentage(($i / 8)); }
+		}
+	}
+	@media #{$tablet} {
+		@for $i from 1 through 8 {
+			.tablet-#{$i} { width: percentage(($i / 8)); }
+		}
+	}
+}
+
+// Bubbles
+//
+// Styleguide 2.3.
+.bubble {
+	z-index: 1;
+	display: inline-block;
+	padding: 0 3px;
+	min-width: 16px;
+	height: $font-size-large;
+	text-align: center;
+	font-size: $font-size-tiny;
+	line-height: ($font-size-large / 1.1);
+}

@@ -88,7 +88,7 @@ module.exports = (grunt) ->
 				tasks: ['coffee:everything']
 			scss:
 				files: 'app/scss/**/*.scss'
-				tasks: ['compass']
+				tasks: ['sass']
 			index:
 				files: 'index.html'
 				tasks: ['copy:index']
@@ -99,21 +99,28 @@ module.exports = (grunt) ->
 				files: ['app/templates/**']
 				tasks: ["copy:templates"]
 
-		compass:
-			dist:
+		sass:
+			dev:
 				options:
-					#bundleExec: true
-					#config: 'config.rb'
-					sassDir: "app/scss"
-					imagesDir: "build/dev/app/images"
-					fontsDir: "build/dev/app/fonts"
-					cssDir: "build/dev/css"
-					require: ["zurb-foundation","compass-normalize"]
-					outputStyle: "expanded"
-					relativeAssets: true
-					raw: '''fonts_dir = "build/dev/app/fonts"
-						sass_options = {:debug_info => true}
-						add_import_path "#{Gem.loaded_specs[\'zurb-foundation\'].full_gem_path}/scss"'''
+					debugInfo: true
+					style: "expanded"
+				files:
+					'build/dev/app/css/app.css': [
+						'app/scss/reset.scss'
+						'app/scss/base.scss'
+						'app/scss/icons.scss'
+						'app/scss/layout.scss'
+						'app/scss/layout-*.scss'
+						'app/scss/widgets.scss'
+						'app/scss/widgets-*.scss'
+					]
+					'build/dev/app/css/theme.css': [
+						'app/scss/theme/base.scss'
+						'app/scss/theme/layout.scss'
+						'app/scss/theme/layout-*.scss'
+						'app/scss/theme/widgets.scss'
+						'app/scss/theme/widgets-*.scss'
+					]
 
 		# the subtasks are seperated so we can update specific files such as index via regarde-watcher
 		# TODO: favicon, images
@@ -210,12 +217,12 @@ module.exports = (grunt) ->
 	for plugin in [
 		'grunt-contrib-clean',
 		'grunt-contrib-coffee',
-		'grunt-contrib-compass',
 		'grunt-contrib-concat',
 		'grunt-contrib-connect',
 		'grunt-contrib-copy',
 		'grunt-contrib-cssmin'
 		'grunt-contrib-livereload',
+		'grunt-contrib-sass',
 		'grunt-contrib-requirejs',
 		'grunt-contrib-uglify',
 		'grunt-regarde',
@@ -225,9 +232,9 @@ module.exports = (grunt) ->
 
 
 	grunt.registerTask 'default', [
-		'clean', 'copy', 'coffee', 'compass',
+		'clean', 'copy', 'coffee', 'sass',
 		'livereload-start', 'connect:livereload','connect:release', 'regarde'
 		]
 
-	grunt.registerTask "release", ['clean', 'copy', 'coffee', 'compass', 'cssmin',
+	grunt.registerTask "release", ['clean', 'copy', 'coffee', 'sass', 'cssmin',
 		'requirejs:release', 'concat', 'uglify', 'shell:androidinstall']

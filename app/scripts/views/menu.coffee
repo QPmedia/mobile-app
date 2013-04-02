@@ -54,7 +54,10 @@ define (require) ->
 
 
 		animate: (pos) ->
+			#$(@options.container).css('-webkit-transform', "translate3d(0px,0,0) scale3d(1,1,1)")
 			$(@options.container).css('-webkit-transform', "translate3d(#{pos}px,0,0) scale3d(1,1,1)")
+			#$("#menu").css("width", pos)
+			#$(@options.container).css("width", pos)
 		set_speed: (seconds) ->
 			$(@options.container).css("-webkit-transition", "-webkit-transform #{seconds}s")
 		show: ->

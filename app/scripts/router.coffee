@@ -1,10 +1,11 @@
 define ["views/qpon_list",
+		"views/lazy_list",
 		"views/qpon_detail",
 		"views/start",
 		"views/login",
 		"views/favorite_list",
 		"views/settings"]
-		, (QponListView, QponDetailView, StartView, LoginView, FavoriteListView,
+		, (QponListView, LazyListView, QponDetailView, StartView, LoginView, FavoriteListView,
 			SettingsView) ->
 	# Defining the application router, you can attach sub routers here.
 	class Router extends Backbone.Router
@@ -17,6 +18,7 @@ define ["views/qpon_list",
 			"!/settings": "settings"
 			"!/login": "login"
 			"!/coupons": "qpon_list"
+			"!/lazylist": "lazy_list"
 			"!/coupons/:id": "qpon_detail"
 			"!/favorites": "favorite_list"
 			"*actions": "start"
@@ -32,6 +34,9 @@ define ["views/qpon_list",
 
 		qpon_list: ->
 			@changeView new QponListView()
+
+		lazy_list: ->
+			@changeView new LazyListView()
 
 		qpon_detail: (id) ->
 			@changeView new QponDetailView(id: id)

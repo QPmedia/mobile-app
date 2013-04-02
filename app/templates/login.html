@@ -1,19 +1,12 @@
-<div class="row">
-	<div class="small-12 columns">
-		<h1>{% block title %}Bitte loggen Sie sich ein.{% endblock %}</h1>
-		<form id="loginform">
-			<fieldset>
-				<legend>Login</legend>
-				<div class="row">
-					<div class="large-12 columns">
-						<input type="text" id="username" value="{{user.username}}" placeholder="Benutzername">
-					</div>
-					<div class="large-12 columns">
-						<input type="password" id="password" placeholder="Passwort">
-					</div>
-				</div>
-				<button type="submit" class="button">Login</button>
-			</fieldset>
-		</form>
+<h1>{% block title %}Bitte loggen Sie sich ein.{% endblock %}</h1>
+<form id="loginform">
+	<div class="form-row">
+		<label for="username">Benutzername</label>
+		<input type="text" id="username" required value="{{ user.username }}">
 	</div>
-</div>
+	<div class="form-row">
+		<label for="password">Passwort</label>
+		<input type="password" id="password" required value="">
+	</div>
+	<button type="submit" class="button">Login</button>
+</form>

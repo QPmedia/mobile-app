@@ -1,0 +1,92 @@
+@import "bourbon/bourbon";
+@import "globals/variables";
+
+// Extend this for default button styling.
+%button-base {
+	display: inline-block;
+	border: none;
+	cursor: pointer;
+	font-family: inherit;
+	text-align: center;
+	text-decoration: none;
+	outline: none;
+}
+
+// Header buttons
+//
+// Styleguide 1.1.
+header .button {
+	@extend %button-base;
+	font-size: 1em;
+	height: 32px;
+	line-height: 32px;
+	padding: 0 8px;
+
+	[class^="icon-"] {
+		font-size: 1.3em;
+
+		& + em {
+			position: relative;
+			top: -2px;
+			left: 1px;
+			display: inline;
+		}
+	}
+}
+
+// Article buttons
+//
+// :active   - Pressed state.
+// .disabled - Disabled state.
+//
+// Markup:
+// <a href="#" class="button {$modifiers}">Button (a.button)</a>
+// <button class="button {$modifiers}">Button (button.button)</button>
+//
+// Styleguide 1.2.
+article .button {
+	@extend %button-base;
+	font-size: $font-size-big;
+	height: 40px;
+	line-height: 38px;
+	padding: 0 14px;
+
+	[class^="icon-"] {
+		line-height: 20px; // (height / 2)
+	}
+	[class^="icon-"] + em {
+		margin-left: 6px;
+	}
+
+	// Sizes
+	&.large {
+		height: 52px;
+		padding: 0 20px;
+		font-size: $font-size-large;
+		line-height: 50px;
+
+		[class^="icon-"] + em {
+			margin-left: 10px;
+		}
+	}
+	&.small {
+		height: 30px;
+		padding: 0 10px;
+		font-size: $font-size-small;
+		line-height: 28px;
+
+		[class^="icon-"] + em {
+			margin-left: 4px;
+		}
+	}
+	&.tiny {
+		height: 22px;
+		padding: 0 6px;
+		font-size: $font-size-tiny;
+		line-height: 20px;
+
+		[class^="icon-"] + em {
+			margin-left: 2px;
+		}
+	}
+}

@@ -1,0 +1,13 @@
+<div class="indented list">
+	<ul class="lazy-list">
+		{% for qpon in qpons %}
+			<li class="thumb waypoint">
+				<a href="#!/coupons/{{ qpon.id }}">
+					<img src="{{qpon.img}}" alt="{{ qpon.headline }}">
+					<h5>{{ qpon.headline }}</h5>
+					<p>{{ qpon.retailer.name }}</p>
+				</a>
+			</li>
+		{% endfor %}
+	</ul>
+</div>

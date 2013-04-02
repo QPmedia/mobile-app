@@ -24,12 +24,16 @@ require.config
 		"foundation-section":     "../../vendor/js/plugins/foundation.section"
 		"foundation-topbar":      "../../vendor/js/plugins/foundation.topbar"
 		"jquery-serialize-object":"../../vendor/js/plugins/jquery.serialize-object.compiled"
+		"waypoints":              "../../vendor/js/plugins/waypoints"
 
 	shim:
 		jquery:
 			exports: "jQuery"
 
 		"jquery-serialize-object":
+			deps: ["jquery"]
+
+		"waypoints":
 			deps: ["jquery"]
 
 		hammer:
