@@ -6,6 +6,8 @@ require.config
 		jquery:                   "../../vendor/js/libs/jquery"
 		underscore:               "../../vendor/js/libs/lodash-1.0.1"
 		backbone:                 "../../vendor/js/libs/backbone-0.9.2"
+		spine:                    "../../vendor/js/libs/spine/spine"
+		"spine/route":            "../../vendor/js/libs/spine/route"
 		fastclick:                "../../vendor/js/libs/fastclick"
 		hammer:                   "../../vendor/js/libs/hammer"
 		"hammer-jquery":                   "../../vendor/js/libs/hammer-jquery"
@@ -27,6 +29,12 @@ require.config
 		"waypoints":              "../../vendor/js/plugins/waypoints"
 
 	shim:
+		"spine":
+			deps: ["jquery"]
+			exports: "Spine"
+		"spine/route":
+			deps: ["spine"]
+			exports: "Spine.Route"
 		jquery:
 			exports: "jQuery"
 

@@ -1,5 +1,10 @@
-define ["app","router","views/header", "views/menu"]
-, (app, Router, Header, Menu) ->
+define (require) ->
+	app = require("app")
+	Router = require("router")
+	Header = require("views/header")
+	Menu = require("views/menu")
+	Spine             = require("spine")
+	require("spine/route")
 	#document.addEventListener("deviceready", ->
 	#	navigator.splashscreen.hide()
 	# Treat the jQuery ready function as the entry point to the application.
@@ -9,9 +14,13 @@ define ["app","router","views/header", "views/menu"]
 
 		app.header = new Header(el: "#header")
 		app.menu   = new Menu  (el: "#menu", container: "#app")
-		app.router = new Router(container: $("#content"), menu: app.menu)
+		#app.router = new Router(container: $("#content"), menu: app.menu)
+		#console.log app.router
+		Spine.Route.setup()
+		#Spine.Route.navigate("/foo")
+		#app.router.setup()
 		# Trigger the initial route
-		Backbone.history.start()
+		#Backbone.history.start()
 		#app.router.navigate("!/start", {trigger: false, replace: true});
 
 		#device is ready already (no need for "deviceready"-event)

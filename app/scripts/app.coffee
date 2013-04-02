@@ -1,16 +1,26 @@
-define ["models/user",
-		"utils/filter"
-		"swig",
-		"backbone",
-		"backbone-zombienation",
-		"backbone-fetch-cache",
-		"jquery-serialize-object"]
-		,(User, swig_filter, swig, Backbone) ->
+define (require) ->
 
+	User = require("models/user")
+	swig = require("swig")
+	Backbone = require("backbone")
+	Spine             = require("spine")
+	require("spine/route")
+	require("backbone-zombienation")
+	require("backbone-fetch-cache")
+	require("jquery-serialize-object")
 	swig.init
-		filters: swig_filter
+		filters: require("utils/filter")
 
-	class App
+
+	SettingsView      = require("views/settings")
+	#LoginView         = require("views/login")
+	#QponDetailView    = require("views/qpon_detail")
+	#LazyListView      = require("views/lazy_list")
+	#QponListView      = require("views/qpon_list")
+	#StartView         = require("views/start")
+	#Spine             = require("spine")
+
+	class App extends Spine.Controller
 		API_URL: "http://192.168.2.12:8000/m/api/"
 
 		geolocation_watcher: null
@@ -42,7 +52,36 @@ define ["models/user",
 					@trigger("alert", exception)
 
 
+
+			@routes
+				"/": -> console.log "RPUTE!!"
+				"!/start":  -> console.log "start"
+				"!/login":  -> @changeView new SettingsView()
+				"!/settings":  -> console.log "settings"
+				"!/coupons":  -> console.log "qpon_list"
+				"!/lazylist":  -> console.log "lazy_list"
+				"!/coupons/:id":  -> console.log "qpon_detail"
+				"!/favorites":  -> console.log "favorite_list"
+				"*actions":  -> console.log "start"
+
+
+
 			console.log("app initialized")
+
+		changeView: (newView) ->
+			@menu.hide()
+			@currentView.dispose()  if @currentView and @currentView.dispose
+			@currentView = newView
+
+			# Render the new view into our main DOM element
+			# Note this used to use .html() instead of .empty().append()
+			# But there is an issue with using .html():
+			# http://tbranyen.com/post/missing-jquery-events-while-rendering
+			@currentView.render()
+
+			#$(this.container).html(this.currentView.el);
+			$("#content").empty().append @currentView.el
+
 		new_loc: (position) =>
 			#alert "loc: #{position.coords.latitude},#{position.coords.longitude}"
 			console.log( position.coords.latitude + "," + position.coords.longitude)

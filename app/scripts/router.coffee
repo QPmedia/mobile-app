@@ -1,19 +1,31 @@
-define ["views/qpon_list",
-		"views/lazy_list",
-		"views/qpon_detail",
-		"views/start",
-		"views/login",
-		"views/favorite_list",
-		"views/settings"]
-		, (QponListView, LazyListView, QponDetailView, StartView, LoginView, FavoriteListView,
-			SettingsView) ->
+define (require) ->
 	# Defining the application router, you can attach sub routers here.
-	class Router extends Backbone.Router
-		initialize: (options) ->
+	FavoriteListView  = require("views/favorite_list")
+
+	SettingsView      = require("views/settings")
+	LoginView         = require("views/login")
+	QponDetailView    = require("views/qpon_detail")
+	LazyListView      = require("views/lazy_list")
+	QponListView      = require("views/qpon_list")
+	StartView         = require("views/start")
+	Spine             = require("spine")
+	require("spine/route")
+	#Spine.Route.setup()
+	#console.log Spine
+	class Router extends Spine.Controller
+		constructor: (options) ->
+			#super
 			@container = options.container
 			@menu = options.menu
 
-		routes:
+			@routes
+				"/favorites": -> console.log "FOFOFOFOFOFO"
+				"/foo": -> console.log "FOFOFshsghOFOFOFO"
+				"*default": -> console.log "default"
+			@navigate("/barfofo")
+
+		###routes:
+			"/": -> console.log "RPUTE!!"
 			"!/start": "start"
 			"!/settings": "settings"
 			"!/login": "login"
@@ -22,7 +34,7 @@ define ["views/qpon_list",
 			"!/coupons/:id": "qpon_detail"
 			"!/favorites": "favorite_list"
 			"*actions": "start"
-
+		###
 		start: ->
 			@changeView new StartView()
 

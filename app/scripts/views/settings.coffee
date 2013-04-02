@@ -1,12 +1,13 @@
-define ["app", "text!templates/settings.html"], (app, template) ->
+define (require) ->
 
 	class SettingsView extends Backbone.View
 		title: 'Settings'
-		template : swig.compile(template, { filename: "settings" })
+		template : swig.compile(require("text!templates/settings.html"), { filename: "settings" })
 		events:
 			'submit form': 'submit'
 
 		submit: (event) ->
+			app = require("app")
 			event.preventDefault()
 			settings = $(event.target).serializeObject()
 			# TODO: make this persistent (localstorage, maybe throug a settings model)
@@ -15,6 +16,6 @@ define ["app", "text!templates/settings.html"], (app, template) ->
 			app.router.navigate("!/start",trigger:true)
 
 		render: ->
-			app.header.setTitle(@title)
+			#app.header.setTitle(@title)
 			@$el.html @template({api_url:app.API_URL})
 			return this
