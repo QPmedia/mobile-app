@@ -29,3 +29,4 @@ $form-border-height: $form-height + ($form-border * 4);
 // Media queries
 $phone: "only screen and (max-width: 767px)";
 $tablet: "only screen and (min-width: 768px)";
+$retina: "only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi)";
