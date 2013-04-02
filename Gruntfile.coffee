@@ -105,8 +105,22 @@ module.exports = (grunt) ->
 					debugInfo: true
 					style: "expanded"
 				files:
-					'build/dev/app/css/app.css': ['app/scss/*.scss']
-					'build/dev/app/css/theme.css': ['app/scss/theme/*.scss']
+					'build/dev/app/css/app.css': [
+						'app/scss/reset.scss'
+						'app/scss/base.scss'
+						'app/scss/icons.scss'
+						'app/scss/layout.scss'
+						'app/scss/layout-*.scss'
+						'app/scss/widgets.scss'
+						'app/scss/widgets-*.scss'
+					]
+					'build/dev/app/css/theme.css': [
+						'app/scss/theme/base.scss'
+						'app/scss/theme/layout.scss'
+						'app/scss/theme/layout-*.scss'
+						'app/scss/theme/widgets.scss'
+						'app/scss/theme/widgets-*.scss'
+					]
 
 		# the subtasks are seperated so we can update specific files such as index via regarde-watcher
 		# TODO: favicon, images
