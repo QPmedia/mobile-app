@@ -7,8 +7,8 @@
 header nav {
 	// Position buttons in header.
 	.button {
-		margin-top: 6px;
 		float: left;
+		margin-top: 6px;
 	}
 	&.right .button {
 		margin-right: 5px;
@@ -19,8 +19,8 @@ header nav {
 
 	// Adapt non-button hyperlinks in header.
 	a:not(.button) {
-		padding: 0 11px !important;
 		float: left;
+		padding: 0 11px !important;
 		height: $header-height;
 
 		[class^="icon-"] {
@@ -28,11 +28,19 @@ header nav {
 		}
 	}
 
+	// Adapt notification bubbles in header.
+	.bubble {
+		position: relative;
+		top: -12px;
+		left: -12px;
+		margin-right: -20px;
+	}
+
 	// Resize icons in header.
 	em {
-		font-size: $font-size-small;
-		font-weight: bold;
 		display: block;
+		font-weight: bold;
+		font-size: $font-size-small;
 	}
 	[class^="icon-"] + em {
 		margin-left: 4px;
