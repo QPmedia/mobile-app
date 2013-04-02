@@ -18,9 +18,9 @@ input:not([type="checkbox"]), textarea, select {
 
 input[type="text"], input[type="password"], input[type="date"], input[type="datetime"], input[type="email"], input[type="number"], input[type="search"], input[type="tel"], input[type="time"], input[type="url"], textarea, select {
 	display: block;
-	padding: 0px 6px;
+	padding: 0 6px;
 	height: $form-height;
-	border: 0;
+	border: none;
 	font-family: inherit;
 	@include transition(all 0.15s linear);
 	-webkit-font-smoothing: antialiased;
@@ -28,7 +28,7 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
 	@include appearance(none);
 
 	&:focus {
-		outline: 0;
+		outline: none;
 	}
 	&.border {
 		height: $form-border-height;
@@ -47,21 +47,35 @@ textarea {
 	position: relative;
 	padding: 8px 8px 0;
 
-	 & > label {
+	& > label {
 		float: left;
 		width: 20%;
-
-		& + input {
-			width: 80%;
-		}
+	}
+	& > label + input {
+		width: 80%;
+	}
+	[class^="icon-"] {
+		position: absolute;
+		right: $indent;
+		font-size: $font-size-big;
+		line-height: $form-height;
 	}
 	input[type="text"], input[type="password"], input[type="date"], input[type="datetime"], input[type="email"], input[type="number"], input[type="search"], input[type="tel"], input[type="time"], input[type="url"], textarea {
 		padding: 0;
-		border: 0;
+		border: none;
 		box-shadow: none;
 
 		&, &:focus {
 			background: none;
 		}
+	}
+}
+
+.indented .form-row {
+	& > label {
+		width: 25%;
+	}
+	& > label + input {
+		width: 75%;
 	}
 }
