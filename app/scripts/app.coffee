@@ -24,6 +24,7 @@ define ["models/user",
 				@loc_err,
 				timeout: 30000)
 			navigator.geolocation.getCurrentPosition(@new_loc,@loc_err)
+
 			@user = new User()
 			url = localStorage.getItem("API_URL")
 			if not (url is null)
@@ -41,15 +42,17 @@ define ["models/user",
 				if exception is "UNAUTHORIZED"
 					@trigger("alert", exception)
 
-
 			console.log("app initialized")
+
 		new_loc: (position) =>
 			#alert "loc: #{position.coords.latitude},#{position.coords.longitude}"
 			console.log( position.coords.latitude + "," + position.coords.longitude)
 			@location = position
 			@trigger "location_changed", position
+
 		loc_err: =>
 			alert "loc_err"
+
 		sync_with_token: (method, model, options) =>
 			token = "Token #{@user.get('token')}"
 			options.beforeSend = (jqXHR) ->

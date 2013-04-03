@@ -46,3 +46,30 @@ header nav {
 		margin-left: 4px;
 	}
 }
+
+// Footer navigation.
+//
+// No styleguide reference.
+footer nav {
+	a {
+		display: block;
+		padding: 0;
+		height: $header-height;
+		text-align: center;
+	}
+	.bubble {
+		position: relative;
+		top: -12px;
+		left: -12px;
+		margin-right: -20px;
+	}
+	em {
+		display: none;
+	}
+	[class^="icon-"] {
+		display: inline-block;
+		width: 32px;
+		font-size: 2.0em;
+		line-height: $header-height;
+	}
+}

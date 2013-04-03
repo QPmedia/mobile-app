@@ -14,6 +14,10 @@ define ["app","router","views/header", "views/menu"]
 		Backbone.history.start()
 		#app.router.navigate("!/start", {trigger: false, replace: true});
 
+		app.device = if $(window).width() < 768 then "phone" else "tablet"
+		$("body").addClass app.device
+		$("body").addClass window.device.platform.toLowerCase()
+
 		#device is ready already (no need for "deviceready"-event)
 		# since we load after cordova has been loaded
 		setTimeout ->
