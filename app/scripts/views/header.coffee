@@ -3,8 +3,7 @@ define ["app", "text!templates/header.html"], (app, template) ->
 		template: swig.compile(template, { filename: "header" })
 
 		events:
-			'click #backbutton': 'goback'
-		
+			'click .js-back-button': 'goback'
 
 		initialize: (options) ->
 			@render()
