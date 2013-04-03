@@ -51,3 +51,19 @@ img {
 	font-size: 0;
 	-ms-interpolation-mode: bicubic;
 }
+
+// Apply some scrollbar styles for WebKit browsers, so we get more mobile-like
+// scrollbar thumbs on desktop.
+::-webkit-scrollbar {
+	width: 10px;
+}
+::-webkit-scrollbar-track {
+	background: transparent;
+}
+::-webkit-scrollbar-thumb {
+	border: 2px solid transparent;
+	border-radius: 5px;
+	background-color: rgba(#000, 0.6);
+	-webkit-background-clip: padding-box;
+	background-clip: padding-box;
+}
